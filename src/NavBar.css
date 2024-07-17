@@ -5,6 +5,7 @@
   z-index: 10000;
   position: fixed;
   background: #142653;
+  display: flex;
 }
 
 .tab-button {
@@ -26,11 +27,12 @@
 }
 
 ul {
+  width: 90%;
   list-style: none;
   display: flex;
   flex-direction: row;
   float: left;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -41,4 +43,8 @@ li .nav-link {
 
 .logo {
   display: inline;
+}
+
+.nav-links-list {
+  margin-left: auto;
 }
