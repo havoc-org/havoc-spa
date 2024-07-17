@@ -5,37 +5,40 @@
   z-index: 10000;
   position: fixed;
   background: #142653;
-  display: inline;
 }
 
 .tab-button {
-  padding: 1em;
+  padding: 0.5em;
   border-color: #73a5d3;
   background: #73a5d3;
   color: #142653;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
+  border-radius: 0.6em;
+  border-width: 0.2em;
+  border-style: solid;
+}
+
+.tab-button:active {
+  border-radius: 0.6em;
+  margin: 0.2em;
+  border-style: hidden;
+  transition: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 ul {
-  justify-content: space-around;
-  align-items: center;
   list-style: none;
-  display: inline-flex;
-  flex-direction: row;
-}
-
-.nav-link {
-  flex-grow: 1;
-  flex-basis: 0;
-}
-
-.login-buttons {
   display: flex;
   flex-direction: row;
+  float: left;
+  justify-content: center;
   align-items: center;
+}
+
+li .nav-link {
+  display: block;
+  padding-right: 0.5em;
 }
 
 .logo {
-  display: block;
+  display: inline;
 }

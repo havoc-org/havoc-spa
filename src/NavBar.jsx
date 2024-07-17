@@ -6,18 +6,22 @@ function NavBar() {
     <div className="outer">
       <ul className="nav-links-list">
         <li className="nav-link">
-          <p className="logo">HAVOC</p>
+          <spam className="logo">HAVOC</spam>
         </li>
         <li className="nav-link">
-          <button className="tab-button">
-            <img src={moon} />
-          </button>
-        </li>
-        <li className="nav-link">
-          <div className="login-buttons">
-            <button className="a-button">Sign In</button>
-            <button className="yes-button">Sign Up</button>
-          </div>
+          <ul className="nav-links-list">
+            <li className="nav-link">
+              <button className="tab-button">
+                <img src={moon} />
+              </button>
+            </li>
+            <li className="nav-link">
+              <button className="a-button">Sign In</button>
+            </li>
+            <li className="nav-link">
+              <button className="yes-button">Sign Up</button>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>
