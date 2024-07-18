@@ -2,10 +2,11 @@
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 10000;
+  z-index: 100;
   position: fixed;
   background: #142653;
   display: flex;
+  margin-bottom: 2em;
 }
 
 .tab-button {
@@ -27,7 +28,11 @@
 }
 
 ul {
-  width: 90%;
+  padding-inline-start: 1em;
+  padding-inline-end: 1em;
+  margin-top: 0;
+  margin-bottom: 0;
+  width: 100%;
   list-style: none;
   display: flex;
   flex-direction: row;
@@ -43,8 +48,14 @@ li .nav-link {
 
 .logo {
   display: inline;
+  font-family: Akronim;
+  font-size: 4em;
+  padding: 0;
 }
 
-.nav-links-list {
+.nav-links {
   margin-left: auto;
+}
+.nav-links-list {
+  padding-inline-end: 0;
 }
