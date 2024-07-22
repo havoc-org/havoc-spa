@@ -6,6 +6,7 @@ import profile from '../../assets/profile.svg';
 import bell from '../../assets/bell.svg';
 import home from '../../assets/home.svg';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function NavBar() {
   const [icon, setIcon] = useState(moon);
@@ -43,12 +44,16 @@ function ButtonsNotLoggedIn({ icon, onClickTheme, onLogin }) {
         </button>
       </li>
       <li className="nav-link">
-        <button className="a-button" onClick={onLogin}>
-          Sign In
-        </button>
+        <Link to="/login">
+          <button className="a-button" onClick={onLogin}>
+            Sign In
+          </button>
+        </Link>
       </li>
       <li className="nav-link">
-        <button className="yes-button">Sign Up</button>
+        <Link to="/register">
+          <button className="yes-button">Sign Up</button>
+        </Link>
       </li>
     </ul>
   );
@@ -63,9 +68,11 @@ function ButtonsLoggedIn({ icon, onClickTheme, onLogOut }) {
         </button>
       </li>
       <li className="nav-link">
-        <button className="tab-button">
-          <img src={home} />
-        </button>
+        <Link to="/home">
+          <button className="tab-button">
+            <img src={home} />
+          </button>
+        </Link>
       </li>
       <li className="nav-link">
         <button className="tab-button">
@@ -78,9 +85,11 @@ function ButtonsLoggedIn({ icon, onClickTheme, onLogOut }) {
         </button>
       </li>
       <li className="nav-link">
-        <button className="no-button tab-button" onClick={onLogOut}>
-          <img src={exit} />
-        </button>
+        <Link to="/">
+          <button className="no-button tab-button" onClick={onLogOut}>
+            <img src={exit} />
+          </button>
+        </Link>
       </li>
     </ul>
   );
