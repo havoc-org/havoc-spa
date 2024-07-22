@@ -1,57 +1,37 @@
 import './NavBar.css';
-import moon from './assets/moon.svg';
-import sun from './assets/sun.svg';
-import exit from './assets/exit.svg';
-import profile from './assets/profile.svg';
-import bell from './assets/bell.svg';
-import home from './assets/home.svg';
+import moon from '../../assets/moon.svg';
+import sun from '../../assets/sun.svg';
+import exit from '../../assets/exit.svg';
+import profile from '../../assets/profile.svg';
+import bell from '../../assets/bell.svg';
+import home from '../../assets/home.svg';
 import { useState } from 'react';
 
-function NavBar() {
+export default function NavBar() {
   const [icon, setIcon] = useState(moon);
   const [loggedIn, setCookie] = useState(false);
-  if (loggedIn)
-    return (
-      <div className="outer">
-        <link
-          href="https://fonts.googleapis.com/css?family=Akronim"
-          rel="stylesheet"
-        ></link>
-        <ul>
-          <li className="nav-link">
-            <spam className="logo">HAVOC</spam>
-          </li>
-          <li className="nav-links">
-            <ButtonsLoggedIn
-              icon={icon}
-              onClickTheme={() => (icon == moon ? setIcon(sun) : setIcon(moon))}
-              onLogOut={() => setCookie(false)}
-            />
-          </li>
-        </ul>
-      </div>
-    );
-  else
-    return (
-      <div className="outer">
-        <link
-          href="https://fonts.googleapis.com/css?family=Akronim"
-          rel="stylesheet"
-        ></link>
-        <ul>
-          <li className="nav-link">
-            <spam className="logo">HAVOC</spam>
-          </li>
-          <li className="nav-links">
-            <ButtonsNotLoggedIn
-              icon={icon}
-              onClickTheme={() => (icon == moon ? setIcon(sun) : setIcon(moon))}
-              onLogin={() => setCookie(!loggedIn)}
-            />
-          </li>
-        </ul>
-      </div>
-    );
+  const Buttons = loggedIn ? ButtonsLoggedIn : ButtonsNotLoggedIn;
+  return (
+    <nav className="outer">
+      <link
+        href="https://fonts.googleapis.com/css?family=Akronim"
+        rel="stylesheet"
+      ></link>
+      <ul>
+        <li className="nav-link">
+          <p className="logo">HAVOC</p>
+        </li>
+        <li className="nav-links">
+          <Buttons
+            icon={icon}
+            onClickTheme={() => (icon == moon ? setIcon(sun) : setIcon(moon))}
+            onLogOut={() => setCookie(false)}
+            onLogin={() => setCookie(!loggedIn)}
+          />
+        </li>
+      </ul>
+    </nav>
+  );
 }
 
 function ButtonsNotLoggedIn({ icon, onClickTheme, onLogin }) {
@@ -105,5 +85,3 @@ function ButtonsLoggedIn({ icon, onClickTheme, onLogOut }) {
     </ul>
   );
 }
-
-export default NavBar;
