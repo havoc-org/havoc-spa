@@ -2,7 +2,7 @@ import './App.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import ErrorPage from './pages/ErrorPage';
-import Start from './pages/Start';
+import About from './pages/About';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import MainLayout from './layouts/MainLayout';
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Start />,
+        element: <About />,
       },
       {
         path: 'home',

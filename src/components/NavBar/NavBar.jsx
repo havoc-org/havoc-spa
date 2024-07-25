@@ -20,7 +20,9 @@ export default function NavBar() {
       ></link>
       <ul>
         <li className="nav-link">
-          <p className="logo">HAVOC</p>
+          <Link to="/">
+            <p className="logo">HAVOC</p>
+          </Link>
         </li>
         <li className="nav-links">
           <Buttons

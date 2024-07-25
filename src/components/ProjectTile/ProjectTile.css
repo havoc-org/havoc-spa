@@ -1,0 +1,28 @@
+.project-tile {
+  border-radius: 2em;
+  background-color: #283a7b;
+  display: flex;
+  flex-direction: row;
+  padding: 0.25em 1.25em 0.25em 1.25em;
+  align-items: center;
+  width: 85%;
+  margin-top: 1em;
+}
+
+.date-name {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 2;
+  margin-right: 1em;
+}
+
+.project-tile p {
+  margin: 0;
+}
+
+.icon {
+  flex-grow: 0.2;
+  height: 2.5em;
+}

@@ -83,3 +83,17 @@ button img {
   background: #142653;
   color: #73a5d3;
 }
+
+input[type='text'] {
+  background-color: #142653;
+  font-size: 1em;
+  padding: 0.6em 2em 0.6em 2em;
+  border-style: none;
+  border-radius: 1.875em;
+}
+
+input[type='text']::placeholder {
+  color: #283a7b;
+  font-size: 1em;
+  font-weight: 550;
+}
