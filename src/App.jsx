@@ -1,11 +1,12 @@
 import './App.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Home from './pages/Home';
+import Home from './pages/Home/Home.jsx';
 import ErrorPage from './pages/ErrorPage';
 import About from './pages/About';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import MainLayout from './layouts/MainLayout';
+import KanbanView from './pages/KanbanView.jsx';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: 'register',
         element: <Register />,
+      },
+      {
+        path: 'project',
+        element: <KanbanView />,
       },
     ],
   },

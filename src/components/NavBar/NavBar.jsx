@@ -20,7 +20,7 @@ export default function NavBar() {
       ></link>
       <ul>
         <li className="nav-link">
-          <Link to="/">
+          <Link to="/" style={{ textDecoration: 'none', color: '#BBD8EB' }}>
             <p className="logo">HAVOC</p>
           </Link>
         </li>

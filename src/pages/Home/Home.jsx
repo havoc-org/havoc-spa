@@ -1,5 +1,5 @@
-import Tile from '../components/Tile/Tile';
-import ProjectTile from '../components/ProjectTile/ProjectTile';
+import Tile from '../../components/Tile/Tile';
+import ProjectTile from '../../components/ProjectTile/ProjectTile';
 
 export default function Home() {
   return (
