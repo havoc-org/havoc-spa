@@ -5,6 +5,7 @@
   align-items: center;
   border-radius: 0.8em;
   padding: 0.5em;
+  flex-grow: 1;
 }
 
 .column-names {

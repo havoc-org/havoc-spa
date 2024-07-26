@@ -70,7 +70,7 @@ function ButtonsLoggedIn({ icon, onClickTheme, onLogOut }) {
         </button>
       </li>
       <li className="nav-link">
-        <Link to="/home">
+        <Link to="/projects">
           <button className="tab-button">
             <img src={home} />
           </button>

@@ -6,7 +6,7 @@ import About from './pages/About';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import MainLayout from './layouts/MainLayout';
-import KanbanView from './pages/KanbanView.jsx';
+import CreateProject from './pages/CreateProject/CreateProject.jsx';
 
 const router = createBrowserRouter([
   {
@@ -19,8 +19,17 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
-        path: 'home',
-        element: <Home />,
+        path: 'projects',
+        children: [
+          {
+            index: true,
+            element: <Home />,
+          },
+          {
+            path: 'create',
+            element: <CreateProject />,
+          },
+        ],
       },
       {
         path: 'login',
@@ -29,10 +38,6 @@ const router = createBrowserRouter([
       {
         path: 'register',
         element: <Register />,
-      },
-      {
-        path: 'project',
-        element: <KanbanView />,
       },
     ],
   },

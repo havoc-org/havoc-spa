@@ -1,4 +1,8 @@
 import './Tile.css';
-export default function Tile({ children }) {
-  return <div className="tile">{children}</div>;
+export default function Tile({ width, children }) {
+  return (
+    <div className="tile" style={{ width: width }}>
+      {children}
+    </div>
+  );
 }

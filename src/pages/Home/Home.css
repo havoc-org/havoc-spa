@@ -1,0 +1,16 @@
+.toolbar {
+  margin-bottom: 2em;
+}
+
+.projects-view {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 1em;
+}
+
+.meta-toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
