@@ -1,7 +1,7 @@
 import './Tile.css';
-export default function Tile({ width, children }) {
+export default function Tile({ className, children }) {
   return (
-    <div className="tile" style={{ width: width }}>
+    <div className={'tile' + (className == undefined ? '' : ' ' + className)}>
       {children}
     </div>
   );

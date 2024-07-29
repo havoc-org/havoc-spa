@@ -6,7 +6,6 @@
   padding: 0.25em 1.25em 0.25em 1.25em;
   align-items: center;
   width: 85%;
-  margin-top: 1em;
 }
 
 .date-name {
@@ -25,4 +24,8 @@
 .icon {
   flex-grow: 0.2;
   height: 2.5em;
+}
+
+.project-list-tile {
+  padding-bottom: 1.25em;
 }

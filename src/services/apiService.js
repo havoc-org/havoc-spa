@@ -1,47 +1,81 @@
-import axios from 'axios';
-
-const API_URL = 'API_URL';
+// apiService.js
+const BASE_URL = 'https://localhost:7052/api'; // Replace with your API base URL
 
 const apiService = {
-  get: async (endpoint) => {
+  get: async (endpoint, headers = {}) => {
     try {
-      const response = await axios.get(`${API_URL}/${endpoint}`);
-      return response.data;
+      const response = await fetch(`${BASE_URL}${endpoint}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          ...headers,
+        },
+      });
+      return handleResponse(response);
     } catch (error) {
-      console.error('API GET request error:', error);
-      throw error;
+      handleError(error);
     }
   },
 
-  post: async (endpoint, data) => {
+  post: async (endpoint, data, headers = {}) => {
     try {
-      const response = await axios.post(`${API_URL}/${endpoint}`, data);
-      return response.data;
+      const response = await fetch(`${BASE_URL}${endpoint}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...headers,
+        },
+        body: JSON.stringify(data),
+      });
+      return handleResponse(response);
     } catch (error) {
-      console.error('API POST request error:', error);
-      throw error;
+      handleError(error);
     }
   },
 
-  put: async (endpoint, data) => {
+  put: async (endpoint, data, headers = {}) => {
     try {
-      const response = await axios.put(`${API_URL}/${endpoint}`, data);
-      return response.data;
+      const response = await fetch(`${BASE_URL}${endpoint}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          ...headers,
+        },
+        body: JSON.stringify(data),
+      });
+      return handleResponse(response);
     } catch (error) {
-      console.error('API PUT request error:', error);
-      throw error;
+      handleError(error);
     }
   },
 
-  delete: async (endpoint) => {
+  delete: async (endpoint, headers = {}) => {
     try {
-      const response = await axios.delete(`${API_URL}/${endpoint}`);
-      return response.data;
+      const response = await fetch(`${BASE_URL}${endpoint}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          ...headers,
+        },
+      });
+      return handleResponse(response);
     } catch (error) {
-      console.error('API DELETE request error:', error);
-      throw error;
+      handleError(error);
     }
   },
+};
+
+const handleResponse = async (response) => {
+  if (!response.ok) {
+    const error = response;
+    throw new Error(error.message);
+  }
+  return response.json();
+};
+
+const handleError = (error) => {
+  console.error('API call failed. ', error);
+  throw error;
 };
 
 export default apiService;
