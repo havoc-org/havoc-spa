@@ -8,6 +8,17 @@
   width: 85%;
 }
 
+.selected {
+  border-radius: 2em;
+  background-color: #bbd8eb;
+  color: #223168;
+  display: flex;
+  flex-direction: row;
+  padding: 0.25em 1.25em 0.25em 1.25em;
+  align-items: center;
+  width: 85%;
+}
+
 .date-name {
   display: flex;
   flex-direction: row;

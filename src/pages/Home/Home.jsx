@@ -9,7 +9,9 @@ import Loading from '../../components/Loading/Loading.jsx';
 export default function Home() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [projectChosed, setProjectChosed] = useState(false);
+  const [isProjectChosed, setIsProjectChosed] = useState(false);
+  const [selectedProjectId, setSelectedProjectId] = useState(null);
+  const [metaData, setMetaData] = useState('description');
 
   useEffect(() => {
     async function fetchData() {
@@ -26,9 +28,10 @@ export default function Home() {
       name={project.name}
       date={project.lastModified}
       id={project.projectId}
-      onClickApppend={() => {
-        console.log('aaaaaaaaaaaaaaaaa');
-        setProjectChosed(true);
+      selected={project.projectId === selectedProjectId}
+      onClick={() => {
+        setIsProjectChosed(true);
+        setSelectedProjectId(project.projectId);
       }}
     />
   ));
@@ -52,14 +55,35 @@ export default function Home() {
           </div>
           <div className="project-list-wrapper">{ProjectList}</div>
         </Tile>
-        <Tile>
-          {projectChosed && (
-            <nav className="meta-toolbar">
-              <div>Members</div>
-              <div>Description</div>
-            </nav>
+        <Tile className="meta-data">
+          {isProjectChosed && (
+            <>
+              <nav className="meta-toolbar">
+                <div
+                  className={
+                    'meta-nav-link' +
+                    (metaData == 'description' ? '-selected' : '')
+                  }
+                  onClick={() => setMetaData('description')}
+                >
+                  Description
+                </div>
+                <div
+                  className={
+                    'meta-nav-link' + (metaData == 'members' ? '-selected' : '')
+                  }
+                  onClick={() => setMetaData('members')}
+                >
+                  Members
+                </div>
+              </nav>
+              <div className="meta-content">
+                {metaData == 'description' && <Description />}
+                {metaData == 'members' && <MembersList />}
+              </div>
+            </>
           )}
-          {!projectChosed && <p>Choose a project...</p>}
+          {!isProjectChosed && <p>Choose a project...</p>}
         </Tile>
       </div>
     </div>
@@ -67,9 +91,9 @@ export default function Home() {
 }
 
 function MembersList() {
-  return <></>;
+  return <p>Lorem Ipsum Mebmerum</p>;
 }
 
 function Description() {
-  return <></>;
+  return <p>Loerm Ipsum Descriptorum</p>;
 }

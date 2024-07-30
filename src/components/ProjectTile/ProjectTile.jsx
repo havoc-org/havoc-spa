@@ -1,21 +1,14 @@
 import login from '../../assets/login.svg';
 import './ProjectTile.css';
-export default function ProjectTile({
-  name,
-  date,
-  id,
-  onClickApppend,
-  ...props
-}) {
+export default function ProjectTile({ name, date, id, onClick, selected }) {
   let diff = time_diff(date);
 
-  const handleClick = () => {
-    if (onClickApppend) onClickApppend();
-    console.log('bbbbbbb');
-  };
-
   return (
-    <div className="project-tile" id={id} {...props} onClick={handleClick}>
+    <div
+      className={'project-tile' + (selected ? ' selected' : '')}
+      id={id}
+      onClick={onClick}
+    >
       <div className="date-name">
         <p className="name">{name}</p>
         <p className="date">{diff}</p>
