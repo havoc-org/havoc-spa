@@ -1,5 +1,5 @@
 .toolbar {
-  margin-bottom: 2em;
+  margin-bottom: 1.5em;
 }
 
 .projects-view {
@@ -27,6 +27,7 @@
   align-items: center;
   overflow-y: scroll;
   max-height: 30vmax;
+  min-height: 30vmax;
 }
 
 .meta-nav-link {
@@ -61,5 +62,14 @@
 }
 
 .meta-content {
+  width: 90%;
   padding: 0.5em;
+  overflow-y: scroll;
+  max-height: 30vmax;
+}
+
+.text-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

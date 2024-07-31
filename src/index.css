@@ -82,7 +82,7 @@ button img {
   background: #142653;
   color: #73a5d3;
 }
-
+input[type='search'],
 input[type='text'] {
   background-color: #142653;
   font-size: 1em;
@@ -91,6 +91,7 @@ input[type='text'] {
   border-radius: 1.875em;
 }
 
+input[type='search']::placeholder,
 input[type='text']::placeholder {
   color: #283a7b;
   font-size: 1em;
