@@ -3,10 +3,11 @@ import ProjectTile from '../../components/ProjectTile/ProjectTile';
 import './Home.css';
 import { Link } from 'react-router-dom';
 import apiService from '../../services/apiService';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Loading from '../../components/Loading/Loading.jsx';
 import Participant from '../../components/Patrticipant/Participant.jsx';
 import NotFound from '../../components/NotFound/NotFound.jsx';
+import SearchBar from '../../components/SearchBar/SearchBar.jsx';
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -15,7 +16,6 @@ export default function Home() {
   const [selectedProject, setSelectedProject] = useState({});
   const [metaData, setMetaData] = useState('description');
   const [searchLoading, setSearchLoading] = useState(false);
-  const [input, setInput] = useState('');
 
   useEffect(() => {
     setLoading(true);
@@ -27,30 +27,15 @@ export default function Home() {
     fetchData();
   }, []);
 
-  useEffect(() => {
+  const handleStartLoading = useCallback(() => {
     setSearchLoading(true);
     setIsProjectChosed(false);
     setSelectedProject({});
-    async function fetchSearchData() {
-      const result = await apiService.get('/projects', {});
-      if (result == '') setData(result);
-      else {
-        if (
-          result.filter(
-            (p) =>
-              p.name.toLowerCase().includes(input.toLowerCase()).length == 0
-          )
-        )
-          setData(
-            result.filter((p) =>
-              p.name.toLowerCase().includes(input.toLowerCase())
-            )
-          );
-      }
-      setSearchLoading(false);
-    }
-    fetchSearchData();
-  }, [input]);
+  }, []);
+
+  const handleFinishLoading = useCallback(() => {
+    setSearchLoading(false);
+  }, []);
 
   const ProjectList = data.map((project) => (
     <ProjectTile
@@ -75,12 +60,10 @@ export default function Home() {
           <button className="yes-button">Create</button>
         </Link>
         <button className="yes-button">Join</button>
-        <input
-          type="search"
-          placeholder="Search"
-          onInput={(e) => {
-            setInput(e.target.value);
-          }}
+        <SearchBar
+          setResults={setData}
+          handleStartLoading={handleStartLoading}
+          handleFinishLoading={handleFinishLoading}
         />
       </div>
       <div className="projects-view">
@@ -91,8 +74,8 @@ export default function Home() {
           </div>
           <div className="project-list-wrapper">
             {!searchLoading && data.length != 0 && ProjectList}
-            {!searchLoading && data.length == 0 && <NotFound />}
             {searchLoading && <Loading />}
+            {!searchLoading && data.length == 0 && <NotFound />}
           </div>
         </Tile>
         <Tile className="meta-data">
