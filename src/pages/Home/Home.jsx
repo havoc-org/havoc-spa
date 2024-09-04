@@ -2,12 +2,12 @@ import Tile from '../../components/Tile/Tile';
 import ProjectTile from '../../components/ProjectTile/ProjectTile';
 import './Home.css';
 import { Link } from 'react-router-dom';
-import apiService from '../../services/apiService';
 import { useCallback, useEffect, useState } from 'react';
 import Loading from '../../components/Loading/Loading.jsx';
 import Participant from '../../components/Patrticipant/Participant.jsx';
 import NotFound from '../../components/NotFound/NotFound.jsx';
 import SearchBar from '../../components/SearchBar/SearchBar.jsx';
+import useProjectService from '../../hooks/useProjectService.js';
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -16,11 +16,12 @@ export default function Home() {
   const [selectedProject, setSelectedProject] = useState({});
   const [metaData, setMetaData] = useState('description');
   const [searchLoading, setSearchLoading] = useState(false);
+  const projectService = useProjectService();
 
   useEffect(() => {
     setLoading(true);
     async function fetchData() {
-      const result = await apiService.get('/projects', {});
+      const result = await projectService.getProjects();
       setData(result);
       setLoading(false);
     }
@@ -61,9 +62,11 @@ export default function Home() {
         </Link>
         <button className="yes-button">Join</button>
         <SearchBar
+          className="searchbar"
           setResults={setData}
           handleStartLoading={handleStartLoading}
           handleFinishLoading={handleFinishLoading}
+          fetchData={projectService.getProjects}
         />
       </div>
       <div className="projects-view">

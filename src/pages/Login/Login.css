@@ -1,0 +1,18 @@
+.flex-wrapper{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2em;
+}
+
+.buttons-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 5em;
+}
+
+.login-form{
+    gap: 1em;
+    width: 66%;
+    margin: auto;
+}

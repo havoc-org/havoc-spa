@@ -38,6 +38,20 @@ button {
   filter: drop-shadow(0px 4px 1px rgba(7, 13, 58, 0.5));
 }
 
+button:disabled {
+  opacity: 0.6;
+  transition: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+button:disabled:active {
+  opacity: 0.6;
+  margin: 0;
+  border-radius: 1.875em;
+  border-width: 0.3em;
+  border-style: solid;
+  transition: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
 button:hover {
   opacity: 0.7;
   transition: cubic-bezier(0.23, 1, 0.32, 1);
@@ -82,18 +96,17 @@ button img {
   background: #142653;
   color: #73a5d3;
 }
-input[type='search'],
-input[type='text'] {
-  background-color: #142653;
+
+input {
+  background-color: #283a7b;
   font-size: 1em;
   padding: 0.6em 2em 0.6em 2em;
   border-style: none;
   border-radius: 1.875em;
 }
 
-input[type='search']::placeholder,
-input[type='text']::placeholder {
-  color: #283a7b;
+input::placeholder {
+  color: #bbd8eb;
   font-size: 1em;
   font-weight: 550;
 }

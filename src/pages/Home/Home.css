@@ -73,3 +73,11 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.searchbar{
+  background-color: #142653;
+}
+
+.searchbar::placeholder{
+  color: #283A7B;
+}

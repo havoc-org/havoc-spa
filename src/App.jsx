@@ -3,10 +3,12 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/Home/Home.jsx';
 import ErrorPage from './pages/ErrorPage';
 import About from './pages/About';
-import Login from './pages/Login';
+import Login from './pages/Login/Login.jsx';
 import Register from './pages/Register';
 import MainLayout from './layouts/MainLayout';
 import CreateProject from './pages/CreateProject/CreateProject.jsx';
+import { AuthProvider } from './contexts/AuthContext.jsx';
+import ProtectedRoute from './layouts/ProtectedRoute.jsx';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'projects',
+        element: <ProtectedRoute />,
         children: [
           {
             index: true,
@@ -44,7 +47,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router}></RouterProvider>;
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 }
 
 export default App;
