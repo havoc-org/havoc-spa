@@ -13,6 +13,7 @@ export default function useAuth() {
   const user = contextAction.user;
   const logout = async () => {
     await api.post(`${endpoint}/logout`);
+    contextAction.logout();
   };
   const register = async (firstName, lastName, email, password) =>
     api.post(`${endpoint}/register`, {

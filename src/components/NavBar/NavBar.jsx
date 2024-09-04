@@ -7,11 +7,12 @@ import bell from '../../assets/bell.svg';
 import home from '../../assets/home.svg';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 export default function NavBar() {
   const [icon, setIcon] = useState(moon);
-  const [loggedIn, setCookie] = useState(false);
-  const Buttons = loggedIn ? ButtonsLoggedIn : ButtonsNotLoggedIn;
+  const { user, logout } = useAuth();
+  const Buttons = user ? ButtonsLoggedIn : ButtonsNotLoggedIn;
   return (
     <nav className="outer">
       <link
@@ -28,8 +29,7 @@ export default function NavBar() {
           <Buttons
             icon={icon}
             onClickTheme={() => (icon == moon ? setIcon(sun) : setIcon(moon))}
-            onLogOut={() => setCookie(false)}
-            onLogin={() => setCookie(!loggedIn)}
+            onLogOut={() => logout()}
           />
         </li>
       </ul>
@@ -37,7 +37,7 @@ export default function NavBar() {
   );
 }
 
-function ButtonsNotLoggedIn({ icon, onClickTheme, onLogin }) {
+function ButtonsNotLoggedIn({ icon, onClickTheme }) {
   return (
     <ul className="nav-links-list">
       <li className="nav-link">
@@ -47,9 +47,7 @@ function ButtonsNotLoggedIn({ icon, onClickTheme, onLogin }) {
       </li>
       <li className="nav-link">
         <Link to="/login">
-          <button className="a-button" onClick={onLogin}>
-            Sign In
-          </button>
+          <button className="a-button">Sign In</button>
         </Link>
       </li>
       <li className="nav-link">
