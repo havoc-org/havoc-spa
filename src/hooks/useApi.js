@@ -8,7 +8,6 @@ export default function useApi() {
   const api = {
     get: async (endpoint, headers = {}) => {
       try {
-        console.log(user?.token);
         const response = await fetch(`${BASE_URL}/${endpoint}`, {
           method: 'GET',
           withCredentials: true,
