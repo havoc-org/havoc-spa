@@ -3,12 +3,15 @@ import Tile from '../../components/Tile/Tile';
 import '../Login/Login.css';
 import { useEffect, useRef, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import Loading from '../../components/Loading/Loading';
 
 export default function Login() {
   const location = useLocation();
   const naviagate = useNavigate();
   const from = location.state?.from?.pathname || '/projects';
   const { login } = useAuth();
+  const [loading, setLoading] = useState(false);
   const errorRef = useRef();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,6 +23,7 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     async function handleRequest() {
       try {
         await login(email, password);
@@ -37,21 +41,28 @@ export default function Login() {
             break;
         }
         errorRef.current.focus();
+      } finally {
+        setLoading(false);
       }
     }
     handleRequest();
   };
-
   return (
-    <Tile className="login-form flex-wrapper">
-      <p ref={errorRef} className="error">
-        {error}
-      </p>
+    <Tile className="login-form-tile flex-wrapper">
       <form onSubmit={handleSubmit} className="login-form">
+        {loading && (
+          <span style={{ margin: '0 auto' }}>
+            <Loading />
+          </span>
+        )}
+        {!loading && (
+          <ErrorMessage message={error} ref={errorRef} className="error" />
+        )}
         <div className="flex-wrapper">
           <label htmlFor="email">Email</label>
           <input
             name="email"
+            id="email"
             type="email"
             autoComplete="off"
             required
@@ -62,6 +73,7 @@ export default function Login() {
           <label htmlFor="password">Password</label>
           <input
             name="password"
+            id="password"
             type="password"
             autoComplete="off"
             required
@@ -69,11 +81,13 @@ export default function Login() {
           />
         </div>
         <div className="buttons-wrapper">
-          <button type="submit" className="yes-button">
+          <button type="submit" className="yes-button" disabled={loading}>
             Login
           </button>
           <Link to="/register">
-            <button className="a-button">First time? Join us!</button>
+            <button className="a-button" disabled={loading}>
+              First time? Join us!
+            </button>
           </Link>
         </div>
       </form>
