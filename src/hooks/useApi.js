@@ -81,5 +81,6 @@ export default function useApi() {
     console.error('API call failed. ', error);
     throw error;
   };
+
   return api;
 }
