@@ -1,0 +1,9 @@
+.label-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.icon-wrap {
+  margin-left: 0.2em;
+}

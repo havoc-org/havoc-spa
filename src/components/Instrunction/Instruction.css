@@ -1,0 +1,12 @@
+.instruction {
+  background-color: #0d1134;
+  border-radius: 1em;
+  margin-bottom: 0;
+  display: flex;
+  align-items: flex-start;
+  padding: 0.7em;
+}
+
+.info-icon {
+  margin-right: 0.3em;
+}
