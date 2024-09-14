@@ -3,7 +3,7 @@ import Tile from '../../components/Tile/Tile';
 import '../Login/Login.css';
 import { useEffect, useRef, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
-import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import Message from '../../components/Message/Message';
 import Loading from '../../components/Loading/Loading';
 
 export default function Login() {
@@ -56,7 +56,7 @@ export default function Login() {
           </span>
         )}
         {!loading && (
-          <ErrorMessage message={error} ref={errorRef} className="error" />
+          <Message message={error} ref={errorRef} className="error" />
         )}
         <div className="flex-wrapper">
           <label htmlFor="email">Email</label>

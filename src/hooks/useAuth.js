@@ -22,7 +22,6 @@ export default function useAuth() {
       email,
       password,
     });
-    await login(email, password);
   };
   const refresh = async () => {
     api.post(`${endpoint}/refresh`);

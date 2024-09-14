@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import Tile from '../../components/Tile/Tile';
 import Loading from '../../components/Loading/Loading';
-import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import Message from '../../components/Message/Message';
 
 import TextInput from '../../components/TextInput/TextInput';
 
@@ -15,10 +15,11 @@ const emailRegex = /^^[^@]+@[^@]+\.[^@]+$/;
 
 export default function Register() {
   const naviagate = useNavigate();
-  const { register } = useAuth();
+  const { register, login } = useAuth();
   const [loading, setLoading] = useState(false);
   const errorRef = useRef();
   const [error, setError] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const [name, setName] = useState('');
   const [validName, setValidName] = useState(false);
@@ -40,13 +41,15 @@ export default function Register() {
     async function handleRequest() {
       try {
         await register(email, password, name, surname);
+        setIsSuccess(true);
+        await login(email, password);
         setEmail('');
         setPassword('');
         naviagate('/projects');
       } catch (e) {
         switch (e.message) {
           case '400':
-            setError('Login Failed');
+            setError('Registration Failed');
             break;
           default:
             console.error(e);
@@ -71,7 +74,12 @@ export default function Register() {
             </span>
           )}
           {!loading && (
-            <ErrorMessage message={error} ref={errorRef} className="error" />
+            <Message
+              message={isSuccess ? 'Account has been created' : error}
+              success={isSuccess}
+              ref={errorRef}
+              className="error"
+            />
           )}
           <TextInput
             autoComplete="off"
