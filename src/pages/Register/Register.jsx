@@ -18,6 +18,7 @@ export default function Register() {
   const { register, login } = useAuth();
   const [loading, setLoading] = useState(false);
   const errorRef = useRef();
+  const emailListRef = useRef([]);
   const [error, setError] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -39,6 +40,7 @@ export default function Register() {
     e.preventDefault();
     setLoading(true);
     async function handleRequest() {
+      const oldEmail = email;
       try {
         await register(email, password, name, surname);
         setIsSuccess(true);
@@ -49,7 +51,8 @@ export default function Register() {
       } catch (e) {
         switch (e.message) {
           case '400':
-            setError('Registration Failed');
+            setError('Email is already in use');
+            emailListRef.current.push(oldEmail);
             break;
           default:
             console.error(e);
@@ -88,9 +91,13 @@ export default function Register() {
             label="Email"
             setOutsideData={setEmail}
             setOutsideValidationState={setValidEmail}
-            validationFunc={(e) => emailRegex.test(e)}
+            validationFunc={(e) =>
+              emailRegex.test(e) && !emailListRef.current.includes(e)
+            }
           >
-            Invalid email
+            {emailListRef.current.includes(email)
+              ? 'Email is already in use'
+              : 'Invalid email'}
           </TextInput>
           <TextInput
             autoComplete="off"
