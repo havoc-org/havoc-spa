@@ -24,7 +24,6 @@ export default function useApi() {
     },
 
     post: async (endpoint, data) => {
-      console.log(data);
       try {
         const response = await fetch(`${BASE_URL}/${endpoint}`, {
           method: 'POST',

@@ -8,7 +8,11 @@ export default function useAuth() {
   const endpoint = 'auth';
   const login = async (email, password) => {
     const userData = await api.post(`${endpoint}/login`, { email, password });
-    contextAction.login(userData);
+    contextAction.login({
+      email: email,
+      password: password,
+      token: userData.accessToken,
+    });
   };
   const user = contextAction.user;
   const logout = async () => {
