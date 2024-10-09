@@ -27,14 +27,21 @@ export default function useApi() {
       try {
         const response = await fetch(`${BASE_URL}/${endpoint}`, {
           method: 'POST',
-          withCredentials: true,
+          credentials: 'include',
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: user?.token != null ? `Bearer ${user?.token}` : '',
+            'Access-Control-Allow-Credentials': true,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data),
         });
-        if (response.status != 200) throw new Error(response.status);
+        if (response.status != 200) {
+          const body = await response.json();
+          const error = new Error(body.message);
+          error.status = response.status;
+          throw error;
+        }
+
         return await response.json();
       } catch (error) {
         handleError(error);

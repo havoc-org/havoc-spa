@@ -5,13 +5,13 @@ import exit from '../../assets/exit.svg';
 import profile from '../../assets/profile.svg';
 import bell from '../../assets/bell.svg';
 import home from '../../assets/home.svg';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export default function NavBar() {
   const [icon, setIcon] = useState(moon);
-  const { user, logout } = useAuth();
+  const { user, logout } = useContext(AuthContext);
   const Buttons = user ? ButtonsLoggedIn : ButtonsNotLoggedIn;
   return (
     <nav className="outer">

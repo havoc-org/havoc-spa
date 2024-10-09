@@ -1,8 +1,8 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Tile from '../../components/Tile/Tile';
 import '../Login/Login.css';
-import { useEffect, useRef, useState } from 'react';
-import useAuth from '../../hooks/useAuth';
+import { AuthContext } from '../../contexts/AuthContext';
+import { useContext, useEffect, useRef, useState } from 'react';
 import Message from '../../components/Message/Message';
 import Loading from '../../components/Loading/Loading';
 
@@ -10,13 +10,12 @@ export default function Login() {
   const location = useLocation();
   const naviagate = useNavigate();
   const from = location.state?.from?.pathname || '/projects';
-  const { login } = useAuth();
+  const context = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const errorRef = useRef();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
   useEffect(() => {
     setError('');
   }, [email, password]);
@@ -26,13 +25,14 @@ export default function Login() {
     setLoading(true);
     async function handleRequest() {
       try {
-        await login(email, password);
+        console.log(context);
+        await context.login(email, password);
         setEmail('');
         setPassword('');
         naviagate(from, { replace: true });
       } catch (e) {
-        switch (e.message) {
-          case '400':
+        switch (e.status) {
+          case 400:
             setError('Login Failed');
             break;
           default:
