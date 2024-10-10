@@ -1,16 +1,14 @@
-import { Outlet, useNavigate } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 
 export default function ProtectedRoute() {
-  const { user, isRefreshing } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+  const location = useLocation();
 
-  useEffect(() => {
-    console.log(user, isRefreshing, navigate);
-    if (user?.token == null && !isRefreshing)
-      navigate({ to: '/login', state: { from: 'location' }, replace: true });
-  }, [user, isRefreshing, navigate]);
-
-  return user?.token == null ? null : <Outlet />;
+  return user?.token == null ? (
+    <Navigate to="/login" state={{ from: location }} replace />
+  ) : (
+    <Outlet />
+  );
 }

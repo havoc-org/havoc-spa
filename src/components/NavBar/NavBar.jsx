@@ -12,7 +12,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 export default function NavBar() {
   const [icon, setIcon] = useState(moon);
   const { user, logout } = useContext(AuthContext);
-  const Buttons = user ? ButtonsLoggedIn : ButtonsNotLoggedIn;
+  const Buttons = user?.token ? ButtonsLoggedIn : ButtonsNotLoggedIn;
   return (
     <nav className="outer">
       <link
@@ -29,7 +29,9 @@ export default function NavBar() {
           <Buttons
             icon={icon}
             onClickTheme={() => (icon == moon ? setIcon(sun) : setIcon(moon))}
-            onLogOut={() => logout()}
+            onLogOut={() => {
+              logout();
+            }}
           />
         </li>
       </ul>

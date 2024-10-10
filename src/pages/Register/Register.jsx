@@ -49,8 +49,8 @@ export default function Register() {
         setPassword('');
         naviagate('/projects');
       } catch (e) {
-        switch (e.message) {
-          case '400':
+        switch (e.status) {
+          case 400:
             setError('Email is already in use');
             emailListRef.current.push(oldEmail);
             break;

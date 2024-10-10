@@ -7,7 +7,7 @@ import Login from './pages/Login/Login.jsx';
 import Register from './pages/Register/Register.jsx';
 import MainLayout from './layouts/MainLayout';
 import CreateProject from './pages/CreateProject/CreateProject.jsx';
-import { AuthProvider } from './contexts/AuthContext.jsx';
+import { AppWrapper, AuthProvider } from './contexts/AuthContext.jsx';
 import ProtectedRoute from './layouts/ProtectedRoute.jsx';
 
 const router = createBrowserRouter([
@@ -49,7 +49,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <AuthProvider>
-      <RouterProvider router={router} />
+      <AppWrapper>
+        <RouterProvider router={router} />
+      </AppWrapper>
     </AuthProvider>
   );
 }

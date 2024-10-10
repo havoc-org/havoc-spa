@@ -25,7 +25,6 @@ export default function Login() {
     setLoading(true);
     async function handleRequest() {
       try {
-        console.log(context);
         await context.login(email, password);
         setEmail('');
         setPassword('');

@@ -1,10 +1,12 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useContext, useRef } from 'react';
 import useApi from '../hooks/useApi';
+import Loading from '../components/Loading/Loading';
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
-  const [isRefreshing, setIsRefreshing] = useState(false);
+  const firstRefresh = useRef(true);
+  const [isRefreshing, setIsRefreshing] = useState(true);
   const api = useApi();
   const endpoint = 'auth';
 
@@ -32,18 +34,30 @@ export const AuthProvider = ({ children }) => {
   }
 
   async function refresh() {
-    setIsRefreshing(true);
-    const tokens = await api.post(`${endpoint}/refresh`);
-    user.token = tokens.accessToken;
-    // console.log('I must render first');
-    setIsRefreshing(false);
+    try {
+      setIsRefreshing(true);
+      const tokens = await api.post(`${endpoint}/refresh`);
+      user.token = tokens.accessToken;
+      setIsRefreshing(false);
+    } catch (e) {
+      setIsRefreshing(false);
+    }
   }
 
   useEffect(() => {
-    (async () => {
-      if (user?.token == null && !isRefreshing) await refresh();
-    })();
-  });
+    async function initRefresh() {
+      try {
+        setIsRefreshing(true);
+        const tokens = await api.post(`${endpoint}/refresh`);
+        user.token = tokens.accessToken;
+        setIsRefreshing(false);
+      } catch (e) {
+        setIsRefreshing(false);
+      }
+    }
+    if (user?.token == null && firstRefresh.current) initRefresh();
+    firstRefresh.current = false;
+  }, [user, api]);
   return (
     <AuthContext.Provider
       value={{ user, login, logout, register, refresh, isRefreshing }}
@@ -51,4 +65,14 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+};
+
+export const AppWrapper = ({ children }) => {
+  const { isRefreshing } = useContext(AuthContext);
+
+  if (isRefreshing) {
+    return <Loading />;
+  }
+
+  return <>{children}</>;
 };

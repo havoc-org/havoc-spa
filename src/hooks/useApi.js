@@ -45,6 +45,7 @@ export default function useApi() {
         return await response.json();
       } catch (error) {
         handleError(error);
+        return null;
       }
     },
 
