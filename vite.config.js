@@ -9,14 +9,12 @@ export default defineConfig({
   server: {
     port: 5173,
     strictPort: true,
-    // hmr: {
-    //   protocol: 'wss',
-    //   host: 'localhost',
-    //   port: 5173,
-    // },
+    hmr: {
+      overlay: false,
+    },
     https: {
-      key: fs.readFileSync('./cert.key'),
-      cert: fs.readFileSync('./cert.crt'),
+      key: fs.readFileSync('./src/certificates/cert.key'),
+      cert: fs.readFileSync('./src/certificates/cert.crt'),
     },
   },
 });
