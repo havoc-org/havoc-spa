@@ -13,7 +13,13 @@ import ProtectedRoute from './layouts/ProtectedRoute.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <MainLayout />,
+    element: (
+      <AuthProvider>
+        <AppWrapper>
+          <MainLayout />
+        </AppWrapper>
+      </AuthProvider>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
@@ -47,13 +53,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return (
-    <AuthProvider>
-      <AppWrapper>
-        <RouterProvider router={router} />
-      </AppWrapper>
-    </AuthProvider>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

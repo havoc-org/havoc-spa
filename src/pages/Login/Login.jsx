@@ -1,16 +1,16 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Tile from '../../components/Tile/Tile';
 import '../Login/Login.css';
-import { AuthContext } from '../../contexts/AuthContext';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Message from '../../components/Message/Message';
 import Loading from '../../components/Loading/Loading';
+import useAuth from '../../hooks/useAuth';
 
 export default function Login() {
   const location = useLocation();
   const naviagate = useNavigate();
   const from = location.state?.from?.pathname || '/projects';
-  const context = useContext(AuthContext);
+  const context = useAuth();
   const [loading, setLoading] = useState(false);
   const errorRef = useRef();
   const [email, setEmail] = useState('');

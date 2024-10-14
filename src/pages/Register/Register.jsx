@@ -1,7 +1,7 @@
 import './Register.css';
 import { Link } from 'react-router-dom';
-import { useState, useRef, useContext } from 'react';
-import { AuthContext } from '../../contexts/AuthContext';
+import { useState, useRef } from 'react';
+import useAuth from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import Tile from '../../components/Tile/Tile';
 import Loading from '../../components/Loading/Loading';
@@ -15,7 +15,7 @@ const emailRegex = /^^[^@]+@[^@]+\.[^@]+$/;
 
 export default function Register() {
   const naviagate = useNavigate();
-  const { register, login } = useContext(AuthContext);
+  const { register, login } = useAuth();
   const [loading, setLoading] = useState(false);
   const errorRef = useRef();
   const emailListRef = useRef([]);

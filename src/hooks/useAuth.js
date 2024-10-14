@@ -1,12 +1,6 @@
-// import { useContext } from 'react';
-// import { AuthContext } from '../contexts/AuthContext';
-// import useApi from './useApi';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 
-// export default function useAuth() {
-
-//   const contextAction = useContext(AuthContext);
-//   const endpoint = 'auth';
-//   const user = contextAction.user;
-
-//   return { login, user, logout, register, refresh };
-// }
+export default function useAuth() {
+  return useContext(AuthContext);
+}

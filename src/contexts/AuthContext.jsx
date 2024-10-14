@@ -1,10 +1,12 @@
 import { createContext, useState, useEffect, useContext, useRef } from 'react';
 import useApi from '../hooks/useApi';
 import Loading from '../components/Loading/Loading';
+import { useNavigate } from 'react-router-dom';
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  const navigate = useNavigate();
   const firstRefresh = useRef(true);
   const [isRefreshing, setIsRefreshing] = useState(true);
   const api = useApi();
@@ -38,8 +40,11 @@ export const AuthProvider = ({ children }) => {
       setIsRefreshing(true);
       const tokens = await api.post(`${endpoint}/refresh`);
       user.token = tokens.accessToken;
+      console.log(tokens);
       setIsRefreshing(false);
     } catch (e) {
+      await logout();
+      navigate('/login');
       setIsRefreshing(false);
     }
   }
