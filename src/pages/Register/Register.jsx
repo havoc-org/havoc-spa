@@ -35,6 +35,7 @@ export default function Register() {
   const [validPassword, setValidPassword] = useState(false);
 
   const [validMatch, setValidMatch] = useState(false);
+  const [matchPassword, setMatchPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,6 +67,17 @@ export default function Register() {
     }
     handleRequest();
   };
+
+  function validMatchCheck(e) {
+    switch (true) {
+      case password === e && pwdRegex.test(e):
+        return 0;
+      case password !== e:
+        return -1;
+      case !pwdRegex.test(e):
+        return -2;
+    }
+  }
 
   return (
     <Tile className="login-form-tile flex-wrapper">
@@ -141,9 +153,12 @@ export default function Register() {
             id="confirm-password"
             label="Confirm password"
             setOutsideValidationState={setValidMatch}
-            validationFunc={(e) => password === e}
+            setOutsideData={setMatchPassword}
+            validationFunc={(e) => validMatchCheck(e) === 0}
           >
-            Passwords doesnt match
+            {validMatchCheck(matchPassword) === -1 && "Passwords doesn't match"}
+            {validMatchCheck(matchPassword) === -2 &&
+              "Passwords match, but they aren't secure"}
           </TextInput>
         </div>
         <div className="buttons-wrapper">
