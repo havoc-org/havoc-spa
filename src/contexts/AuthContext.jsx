@@ -13,10 +13,8 @@ export const AuthProvider = ({ children }) => {
   const endpoint = 'auth';
 
   const login = async (email, password) => {
-    setIsRefreshing(true);
     const userData = await api.post(`${endpoint}/login`, { email, password });
-    setUser({ token: userData.accessToken });
-    setIsRefreshing(false);
+    setUser({ token: userData?.accessToken });
   };
 
   async function register(email, password, firstName, lastName) {
@@ -37,15 +35,16 @@ export const AuthProvider = ({ children }) => {
 
   async function refresh() {
     try {
-      setIsRefreshing(true);
+      // setIsRefreshing(true);
       const tokens = await api.post(`${endpoint}/refresh`);
       user.token = tokens.accessToken;
-      console.log(tokens);
-      setIsRefreshing(false);
+      // setIsRefreshing(false);
+      return true;
     } catch (e) {
       await logout();
       navigate('/login');
-      setIsRefreshing(false);
+      // setIsRefreshing(false);
+      return false;
     }
   }
 

@@ -30,12 +30,11 @@ export default function Login() {
         setPassword('');
         naviagate(from, { replace: true });
       } catch (e) {
-        switch (e.status) {
+        switch (e?.status) {
           case 400:
             setError('Login Failed');
             break;
           default:
-            console.error(e);
             setError('Internal error');
             break;
         }
