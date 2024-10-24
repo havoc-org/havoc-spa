@@ -1,45 +1,19 @@
-import { useCallback } from 'react';
 import './SearchBar.css';
-
-function debounce(func, delay) {
-  let timeoutId;
-
-  return function (...args) {
-    const context = this;
-
-    clearTimeout(timeoutId);
-
-    timeoutId = setTimeout(() => {
-      func.apply(context, args);
-    }, delay);
-  };
-}
 
 export default function SearchBar({
   setResults,
-  handleStartLoading,
-  handleFinishLoading,
-  fetchData,
+  projects,
+  original,
   className,
 }) {
-  const memoizedDebounce = useCallback(debounce, []);
-  const debouncedSearch = useCallback(
-    memoizedDebounce((input) => {
-      async function fetchSearchData() {
-        handleStartLoading();
-        const result = await fetchData();
-        setResults(
-          result.filter((p) =>
-            p.name.toLowerCase().includes(input.toLowerCase())
+  const handleChange = (e) =>
+    e.target.value === ''
+      ? setResults(original)
+      : setResults(
+          projects.filter((p) =>
+            p.name.toLowerCase().includes(e.target.value.toLowerCase())
           )
         );
-        handleFinishLoading();
-      }
-      fetchSearchData();
-    }, 500),
-    [handleFinishLoading, handleStartLoading, setResults, fetchData]
-  );
-  const handleChange = (e) => debouncedSearch(e.target.value);
 
   return (
     <input

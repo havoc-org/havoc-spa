@@ -74,9 +74,9 @@ export const AuthProvider = ({ children }) => {
 export const AppWrapper = ({ children }) => {
   const { isRefreshing } = useContext(AuthContext);
 
-  if (isRefreshing) {
-    return <Loading />;
-  }
+  // if (isRefreshing) {
+  //   return <Loading />;
+  // }
 
   return <>{children}</>;
 };

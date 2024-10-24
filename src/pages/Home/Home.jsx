@@ -11,6 +11,7 @@ import useProjectService from '../../hooks/useProjectService.js';
 
 export default function Home() {
   const [data, setData] = useState([]);
+  const [original, setOriginal] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isProjectChosed, setIsProjectChosed] = useState(false);
   const [selectedProject, setSelectedProject] = useState({});
@@ -24,19 +25,12 @@ export default function Home() {
       const result = await projectService.getProjects();
       setData(result);
       setLoading(false);
+      setOriginal(result);
     }
     fetchData();
   }, []);
 
-  const handleStartLoading = useCallback(() => {
-    setSearchLoading(true);
-    setIsProjectChosed(false);
-    setSelectedProject({});
-  }, []);
-
-  const handleFinishLoading = useCallback(() => {
-    setSearchLoading(false);
-  }, []);
+  
 
   const ProjectList = data.map((project) => (
     <ProjectTile
@@ -52,7 +46,7 @@ export default function Home() {
     />
   ));
 
-  if (loading) return <Loading />;
+  
 
   return (
     <div>
@@ -62,11 +56,10 @@ export default function Home() {
         </Link>
         <button className="yes-button">Join</button>
         <SearchBar
+          projects={data}
+          original={original}
           className="searchbar"
           setResults={setData}
-          handleStartLoading={handleStartLoading}
-          handleFinishLoading={handleFinishLoading}
-          fetchData={projectService.getProjects}
         />
       </div>
       <div className="projects-view">
