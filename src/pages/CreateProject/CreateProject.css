@@ -1,0 +1,109 @@
+.create-project-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5em;
+  }
+  
+  .create-project-form, .invite-to-project {
+    background-color: #142653;
+    padding: 20px;
+    border-radius: 10px;
+   
+  }
+
+  .create-project-form{
+    width: 65%;
+  }
+
+  .invite-to-project{
+    width: 30%;
+  }
+  
+ .invite-to-project h2 {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    padding: 5px;
+    text-align: center;
+    color: #73A5D3;
+  }
+
+  .create-project-form h1{
+
+    color: #73A5D3;
+    margin-left: 40px;
+
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  input[type="date"], input[type="email"], .create-project-input {
+    width: 99%;
+    padding: 8px;
+    height: 40px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: none;
+    background-color: #0D1134;
+    color: #73A5D3;
+    font-size: 20px;
+  }
+
+  .create-project-input::placeholder{
+    color:#73A5D3;
+  }
+
+ 
+  .create-button, .invite-button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #283A7B;
+    color: #BBD8EB;
+    cursor: pointer;
+  }
+  .create-button{
+    margin-top: 40px;
+    width: 35%;
+    height: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-bottom: 30px;
+  }
+
+  
+  .create-button:hover, .invite-button:hover {
+    background-color: #73A5D3;
+    color: #142653;
+    opacity:100% ;
+
+  }
+  
+
+
+  .date-inputs {
+    display: flex;
+    justify-content:space-between;
+    width: 45%;
+    gap:1.5em;
+
+}
+  
+  .user-list {
+    margin-top: 20px;
+  }
+  
+  .user-item {
+    background-color: #223168;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #73A5D3;
+  }
+  

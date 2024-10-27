@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     const userData = await api.post(`${endpoint}/login`, { email, password });
-    setUser({ token: userData?.accessToken });
+    setUser({ email:userData?.email, id: userData?.userId, token: userData?.accessToken });
   };
 
   async function register(email, password, firstName, lastName) {
