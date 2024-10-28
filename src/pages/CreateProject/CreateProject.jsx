@@ -26,23 +26,21 @@ export default function CreateProject() {
       const newProject = {
         name: projectName,
         description: description || null,
-        background: null, 
-        creatorId: user?.id,  
+        background: null,
         start: startDate || null,  
         deadline: deadline || null, 
         projectStatus: {
           name: "New" 
         },
         participations: [
-          {
-            email: user?.email
-          },
+          //Add Participation list here example: {email}, {email}, ...
         ]
       };
     
       try {
         const response = await projectService.createProject(newProject);
-        console.log('Project created successfully', response);
+        console.log('USER: ', response);
+        console.log('Project created successfully', user?.email);
       } catch (error) {
         console.error('Error creating project:', error.message);
       }
