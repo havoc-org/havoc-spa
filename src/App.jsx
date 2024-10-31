@@ -9,6 +9,7 @@ import MainLayout from './layouts/MainLayout';
 import CreateProject from './pages/CreateProject/CreateProject.jsx';
 import { AppWrapper, AuthProvider } from './contexts/AuthContext.jsx';
 import ProtectedRoute from './layouts/ProtectedRoute.jsx';
+import Tasks from './pages/Tasks/Tasks.jsx';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,16 @@ const router = createBrowserRouter([
             path: 'create',
             element: <CreateProject />,
           },
+        ],
+      },
+      {
+        path: 'tasks',
+        
+        children: [
+          {
+            index: true,
+            element: <Tasks />,
+          }
         ],
       },
       {

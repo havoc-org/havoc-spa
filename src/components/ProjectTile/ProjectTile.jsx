@@ -1,5 +1,6 @@
 import login from '../../assets/login.svg';
 import './ProjectTile.css';
+import { Link } from 'react-router-dom';
 export default function ProjectTile({ name, date, id, onClick, selected }) {
   let diff = time_diff(date);
 
@@ -13,7 +14,9 @@ export default function ProjectTile({ name, date, id, onClick, selected }) {
         <p className="name">{name}</p>
         <p className="date">{diff}</p>
       </div>
-      <img src={login} className="icon" />
+      <Link className='project-button' to={"/tasks"}>
+      <img src={login} alt="Login Icon" />
+      </Link>
     </div>
   );
 }
