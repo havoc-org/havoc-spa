@@ -42,6 +42,7 @@ export default function CreateProject() {
     try {
       const response = await projectService.createProject(newProject);
       console.log('Project created successfully', response);
+      setUsers([user?.email]);
       setDescription('');
       setProjectName('');
     } catch (error) {
