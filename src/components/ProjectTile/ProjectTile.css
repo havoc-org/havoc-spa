@@ -40,3 +40,13 @@
 .project-list-tile {
   padding-bottom: 1.25em;
 }
+.project-button {
+  /* background-color: #587060; */
+  margin-top: 5px; /* отступ сверху на 20px */
+}
+.project-button:hover {
+  /*background-color: #587060;*/
+  color: #374ea3;
+  transform: scale(1.2) ; /* Сдвиг вниз на 5px */
+  transition: transform 0.1s ease;
+}

@@ -30,6 +30,10 @@
   min-height: 30vmax;
 }
 
+.yes-button{
+  margin-right:20px;
+}
+
 .meta-nav-link {
   color: #73a5d3;
   flex-grow: 1;
