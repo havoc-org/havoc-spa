@@ -11,7 +11,7 @@ export default function CreateProject() {
   const [startDate, setStartDate] = useState('');
   const [deadline, setDeadline] = useState('');
   const [email, setEmail] = useState('');
-  const [users, setUsers] = useState([user?.email]);
+  const [users, setUsers] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const projectService = useProjectService();
