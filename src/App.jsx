@@ -7,7 +7,7 @@ import Login from './pages/Login/Login.jsx';
 import Register from './pages/Register/Register.jsx';
 import MainLayout from './layouts/MainLayout';
 import CreateProject from './pages/CreateProject/CreateProject.jsx';
-import { AppWrapper, AuthProvider } from './contexts/AuthContext.jsx';
+import { AuthProvider } from './contexts/AuthContext.jsx';
 import ProtectedRoute from './layouts/ProtectedRoute.jsx';
 import Tasks from './pages/Tasks/Tasks.jsx';
 
@@ -16,9 +16,7 @@ const router = createBrowserRouter([
     path: '/',
     element: (
       <AuthProvider>
-        <AppWrapper>
-          <MainLayout />
-        </AppWrapper>
+        <MainLayout />
       </AuthProvider>
     ),
     errorElement: <ErrorPage />,
@@ -43,12 +41,12 @@ const router = createBrowserRouter([
       },
       {
         path: 'tasks',
-        
+
         children: [
           {
             index: true,
             element: <Tasks />,
-          }
+          },
         ],
       },
       {
