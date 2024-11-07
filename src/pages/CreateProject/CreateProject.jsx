@@ -42,7 +42,7 @@ export default function CreateProject() {
     try {
       const response = await projectService.createProject(newProject);
       console.log('Project created successfully', response);
-      setUsers([user?.email]);
+      setUsers([]);
       setDescription('');
       setProjectName('');
     } catch (error) {
@@ -50,10 +50,20 @@ export default function CreateProject() {
     }
   };
 
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+  };
+
   const handleInvite = () => {
-    setUsers((prevUsers) => [...prevUsers, email]);
-    console.log(`Invite sent to: ${email}`);
-    setEmail('');
+    if(email != "" &&
+       email != user.email && 
+       validateEmail(email) ){
+      setUsers((prevUsers) => [...prevUsers, email]);
+      console.log(`Invite sent to: ${email}`);
+      setEmail('');
+    }
+    
   };
 
   const handleDeleteUser = (index) => {
@@ -122,12 +132,12 @@ export default function CreateProject() {
           </button>
         </div>
         <div className="user-list">
-          {users.slice(1).map((userEmail, index) => (
-            <div key={index + 1} className="user-item">
+          {users.slice(0).map((userEmail, index) => (
+            <div key={index} className="user-item">
               {userEmail}
               <button
                 className="delete-button"
-                onClick={() => handleDeleteUser(index + 1)}
+                onClick={() => handleDeleteUser(index)}
               >
                 X
               </button>
