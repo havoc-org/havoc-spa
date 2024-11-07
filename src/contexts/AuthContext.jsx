@@ -1,6 +1,5 @@
-import { createContext, useState, useEffect, useContext, useRef } from 'react';
+import { createContext, useState, useEffect, useRef } from 'react';
 import useApi from '../hooks/useApi';
-import Loading from '../components/Loading/Loading';
 import { useNavigate } from 'react-router-dom';
 export const AuthContext = createContext({});
 
@@ -14,7 +13,11 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     const userData = await api.post(`${endpoint}/login`, { email, password });
-    setUser({ email:userData?.email, id: userData?.userId, token: userData?.accessToken });
+    setUser({
+      email: userData?.email,
+      id: userData?.userId,
+      token: userData?.accessToken,
+    });
   };
 
   async function register(email, password, firstName, lastName) {
@@ -69,14 +72,4 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
-};
-
-export const AppWrapper = ({ children }) => {
-  const { isRefreshing } = useContext(AuthContext);
-
-  // if (isRefreshing) {
-  //   return <Loading />;
-  // }
-
-  return <>{children}</>;
 };
