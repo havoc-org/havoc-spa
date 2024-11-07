@@ -38,15 +38,16 @@ export const AuthProvider = ({ children }) => {
 
   async function refresh() {
     try {
-      // setIsRefreshing(true);
-      const tokens = await api.post(`${endpoint}/refresh`);
-      user.token = tokens.accessToken;
-      // setIsRefreshing(false);
+      const userData = await api.post(`${endpoint}/refresh`);
+      setUser({
+        email: userData?.email,
+        id: userData?.userId,
+        token: userData?.accessToken,
+      });
       return true;
     } catch (e) {
       await logout();
       navigate('/login');
-      // setIsRefreshing(false);
       return false;
     }
   }
@@ -55,8 +56,12 @@ export const AuthProvider = ({ children }) => {
     async function initRefresh() {
       try {
         setIsRefreshing(true);
-        const tokens = await api.post(`${endpoint}/refresh`);
-        user.token = tokens.accessToken;
+        const userData = await api.post(`${endpoint}/refresh`);
+        setUser({
+          email: userData?.email,
+          id: userData?.userId,
+          token: userData?.accessToken,
+        });
         setIsRefreshing(false);
       } catch (e) {
         setIsRefreshing(false);
