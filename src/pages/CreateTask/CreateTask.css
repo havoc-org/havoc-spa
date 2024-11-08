@@ -1,0 +1,251 @@
+.create-task-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5em;
+  padding: 20px;
+  background-color: #0D1134;
+  border-radius: 10px;
+}
+
+.create-task-form {
+  background-color: #142653;
+  padding: 20px;
+  border-radius: 10px;
+  color: #BBD8EB;
+  width: 65%;
+}
+
+.task-details-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.members-section {
+  background-color: #142653;
+  padding: 20px;
+  border-radius: 10px;
+  color: #BBD8EB;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.create-task-form h2, .members-section h3 {
+  color: #73A5D3;
+  font-size: 1.4em;
+  margin-bottom: 15px;
+}
+
+.input-field, .textarea-field, select {
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0;
+  border-radius: 5px;
+  border: none;
+  background-color: #0D1134;
+  color: #BBD8EB;
+  box-sizing: border-box;
+}
+
+.input-field::placeholder, .textarea-field::placeholder {
+  color: #78849E;
+}
+
+.textarea-field {
+  resize: vertical;
+}
+
+.required::after {
+  content: " *";
+  color: #d9534f;
+  font-weight: bold;
+}
+
+.error-message {
+  color: #d9534f;
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 1em;
+}
+
+.success-message {
+  color: #5cb85c;
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 1em;
+}
+
+.file-upload-section {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.file-upload-button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 8px;
+  background-color: #283A7B;
+  color: #BBD8EB;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.file-upload-button input[type="file"] {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.file-upload-button:hover {
+  background-color: #73A5D3;
+}
+
+.file-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background-color: #223168;
+  border-radius: 5px;
+  color: #BBD8EB;
+  width: 100%;
+  max-width: 300px;
+  min-width: 250px;
+  box-sizing: border-box;
+}
+
+.file-remove-button {
+  background-color: #d4776a;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s;
+}
+
+.file-remove-button:hover {
+  background-color: #a33d35;
+}
+
+.date-picker-section {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Уменьшение отступа между двумя полями ввода */
+  margin-top: 10px; /* Уменьшение общего верхнего отступа */
+}
+
+.date-picker-section .field-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px; /* Минимальный отступ между заголовком и полем ввода */
+  margin: 0; /* Убираем внешний отступ */
+}
+
+.field-group h3 {
+  margin: 0; /* Убираем отступ заголовка */
+  padding: 0; /* Убираем внутренний отступ заголовка */
+}
+
+.assigned-users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  padding: 0;
+  margin-top: 15px;
+  list-style: none;
+}
+
+.assigned-user-item {
+  background-color: #223168;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #BBD8EB;
+  font-size: 1.1em;
+  width: 100%;
+  height: 80px;
+  box-sizing: border-box;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.user-email {
+  font-size: 1em;
+  color: #AFCDEB;
+}
+
+.remove-button {
+  background-color: #d4776a;
+  padding: 8px 14px;
+  font-size: 1em;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.add-button {
+  padding: 10px 18px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #283A7B;
+  color: #BBD8EB;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.submit-button {
+  padding: 15px 30px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #283A7B;
+  color: #BBD8EB;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2em;
+  width: 100%;
+  text-align: center;
+}
+
+.add-button:hover, .submit-button:hover, .remove-button:hover {
+  background-color: #73A5D3;
+  color: #142653;
+}

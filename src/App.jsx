@@ -10,6 +10,7 @@ import CreateProject from './pages/CreateProject/CreateProject.jsx';
 import { AuthProvider } from './contexts/AuthContext.jsx';
 import ProtectedRoute from './layouts/ProtectedRoute.jsx';
 import Tasks from './pages/Tasks/Tasks.jsx';
+import CreateTask from './pages/CreateTask/CreateTask.jsx';
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <Tasks />,
+          },
+          {
+            path: 'create',
+            element: <CreateTask />
           },
         ],
       },
