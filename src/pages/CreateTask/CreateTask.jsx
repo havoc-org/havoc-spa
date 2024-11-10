@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import useTaskService from '../../hooks/useTaskService.js';
 import './CreateTask.css';
 import useAuth from '../../hooks/useAuth.js';
-import { Link } from 'react-router-dom';
+import useFileUpload from '../../hooks/useFileUpload.js';
 
 export default function CreateTask() {
   const { user } = useAuth();
+  const { uploadFile, uploading, uploadError } = useFileUpload();
   const [taskName, setTaskName] = useState('');
   const [description, setDescription] = useState('');
   const [taskStatus, setTaskStatus] = useState('');
@@ -14,6 +15,7 @@ export default function CreateTask() {
   const [selectedUser, setSelectedUser] = useState('');
   const [assignedUsers, setAssignedUsers] = useState([]);
   const [files, setFiles] = useState([]);
+  const [fileUrls, setFileUrls] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const taskService = useTaskService();
 
@@ -23,12 +25,21 @@ export default function CreateTask() {
     { id: 3, name: 'Charlie', surname: 'Brown', email: 'charlie@example.com' }
   ]);
 
-  const handleFileUpload = (event) => {
-    setFiles([...files, ...Array.from(event.target.files)]);
+  const handleFileUpload = async (event) => {
+    const newFiles = Array.from(event.target.files);
+    setFiles([...files, ...newFiles]);
+
+    const uploadedFileUrls = await Promise.all(newFiles.map(async (file) => {
+      const url = await uploadFile(file);
+      return url;
+    }));
+    
+    setFileUrls([...fileUrls, ...uploadedFileUrls]);
   };
 
   const handleFileRemove = (index) => {
     setFiles(files.filter((_, i) => i !== index));
+    setFileUrls(fileUrls.filter((_, i) => i !== index));
   };
 
   const handleAddAssignment = () => {
@@ -65,15 +76,14 @@ export default function CreateTask() {
       start: startDate || null,
       deadline: deadline || null,
       projectId: 176,
-      assignments: [],
-      attachments: []
+      assignments: assignedUsers.map((user) => ({ userId: user.id, description: '' })),
+      attachments: fileUrls.map((url) => ({ fileLink: url }))
     };
 
     try {
       const result = await taskService.createTask(newTask);
-
       console.log('Response from server:', result);
-      setErrorMessage(result.message)
+      setErrorMessage(result.message);
 
       setTaskName('');
       setDescription('');
@@ -87,11 +97,11 @@ export default function CreateTask() {
         { id: 3, name: 'Charlie', surname: 'Brown', email: 'charlie@example.com' }
       ]);
       setFiles([]);
+      setFileUrls([]);
     } catch (error) {
       console.error('Error creating task: ', error.message);
-      setErrorMessage('An unexpected error occurred. Please try again.')
+      setErrorMessage('An unexpected error occurred. Please try again.');
     }
-  
   };
 
   return (
@@ -135,8 +145,10 @@ export default function CreateTask() {
           <h3>Attach file</h3>
           <label className="file-upload-button">
             Choose File
-            <input type="file" multiple onChange={handleFileUpload} />
+            <input type="file" multiple onChange={handleFileUpload} disabled={uploading} />
           </label>
+          {uploading && <p>Uploading files...</p>}
+          {uploadError && <p className="error-message">{uploadError}</p>}
           <ul className="file-list">
             {files.map((file, index) => (
               <li className="file-item" key={index}>
