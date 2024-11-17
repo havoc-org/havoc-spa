@@ -2,14 +2,17 @@ import Tile from '../../components/Tile/Tile';
 import ProjectTile from '../../components/ProjectTile/ProjectTile';
 import './Home.css';
 import { Link } from 'react-router-dom';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState,useContext } from 'react';
 import Loading from '../../components/Loading/Loading.jsx';
 import Participant from '../../components/Patrticipant/Participant.jsx';
 import NotFound from '../../components/NotFound/NotFound.jsx';
 import SearchBar from '../../components/SearchBar/SearchBar.jsx';
 import useProjectService from '../../hooks/useProjectService.js';
+import { ProjectContext } from '../../contexts/ProjcetContext.jsx';
 
 export default function Home() {
+  const context=useContext(ProjectContext);
+  
   const [data, setData] = useState([]);
   const [original, setOriginal] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,6 +23,7 @@ export default function Home() {
   const projectService = useProjectService();
 
   useEffect(() => {
+    console.log({context});
     setLoading(true);
     async function fetchData() {
       const result = await projectService.getProjects();
@@ -43,6 +47,7 @@ export default function Home() {
         setIsProjectChosed(true);
         setSelectedProject(project);
       }}
+      enterProjectClick={()=>{context.setProject(project);}}
     />
   ));
 

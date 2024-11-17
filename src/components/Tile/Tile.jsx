@@ -1,7 +1,7 @@
 import './Tile.css';
-export default function Tile({ className, children }) {
+export default function Tile({   className, children }) {
   return (
-    <div className={'tile' + (className == undefined ? '' : ' ' + className)}>
+    <div className={`tile ${className}`}>
       {children}
     </div>
   );

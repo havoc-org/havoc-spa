@@ -11,13 +11,16 @@ import { AuthProvider } from './contexts/AuthContext.jsx';
 import ProtectedRoute from './layouts/ProtectedRoute.jsx';
 import Tasks from './pages/Tasks/Tasks.jsx';
 import CreateTask from './pages/CreateTask/CreateTask.jsx';
+import {ProjectProvider } from './contexts/ProjcetContext.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: (
       <AuthProvider>
-        <MainLayout />
+        <ProjectProvider>
+          <MainLayout />
+        </ProjectProvider>
       </AuthProvider>
     ),
     errorElement: <ErrorPage />,
@@ -50,7 +53,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'create',
-            element: <CreateTask />
+            element: <CreateTask />,
           },
         ],
       },
