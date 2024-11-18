@@ -1,9 +1,11 @@
-import { createContext, useState, useEffect, useRef } from 'react';
+import { createContext, useState, useEffect, useRef,useContext } from 'react';
 import useApi from '../hooks/useApi';
 import { useNavigate } from 'react-router-dom';
+import { ProjectContext } from './ProjectContext';
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
+  const projectContext=useContext(ProjectContext);
   const [user, setUser] = useState({});
   const navigate = useNavigate();
   const firstRefresh = useRef(true);
@@ -34,6 +36,7 @@ export const AuthProvider = ({ children }) => {
     await api.post(`${endpoint}/logout`);
     setUser(null);
     setIsRefreshing(false);
+    projectContext.leaveProject();
   }
 
   async function refresh() {
