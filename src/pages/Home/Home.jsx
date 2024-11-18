@@ -8,7 +8,7 @@ import Participant from '../../components/Patrticipant/Participant.jsx';
 import NotFound from '../../components/NotFound/NotFound.jsx';
 import SearchBar from '../../components/SearchBar/SearchBar.jsx';
 import useProjectService from '../../hooks/useProjectService.js';
-import { ProjectContext } from '../../contexts/ProjcetContext.jsx';
+import { ProjectContext } from '../../contexts/ProjectContext.jsx';
 
 export default function Home() {
   const context=useContext(ProjectContext);

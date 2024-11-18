@@ -11,7 +11,7 @@ import { AuthProvider } from './contexts/AuthContext.jsx';
 import ProtectedRoute from './layouts/ProtectedRoute.jsx';
 import Tasks from './pages/Tasks/Tasks.jsx';
 import CreateTask from './pages/CreateTask/CreateTask.jsx';
-import {ProjectProvider } from './contexts/ProjcetContext.jsx';
+import { ProjectProvider } from './contexts/ProjectContext.jsx';
 
 const router = createBrowserRouter([
   {

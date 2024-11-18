@@ -4,9 +4,34 @@
   justify-content: space-between;
 }
 
-.tasks-container{
+.task-lists-container{
   display: flex;
+  
+}
+.task-container{
+  border-radius: 2em;
+  background-color: #283a7b;
+  padding: 0.25em 1.25em 0.25em 1.25em;
+  
+  width: 80%;
+}
+
+.task-info{
+  display: flex;
+  align-items: center;
   flex-direction: row;
+  justify-content: space-between;
+}
+
+.task-icon-container{
+  display: flex;
+  align-items: center;  
+}
+
+.task-icon{
+  vertical-align: middle;
+  width: 30px;
+  height: 30px;
 }
 
 .tile{

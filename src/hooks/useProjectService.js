@@ -5,6 +5,7 @@ const endpoint = 'projects';
 export default function useProjectService() {
   const api = useApi();
   const projectService = {
+    getProjectById: async (id) => api.get(`${endpoint}/${id}`),
     getProjects: async () => api.get(endpoint),
     createProject: async (data) => api.post(endpoint, data),
     editProject: async (data) => api.put(endpoint, data),
