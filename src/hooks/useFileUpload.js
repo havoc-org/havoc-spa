@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useFileUpload = () => {
+export default function useFileUpload() {
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState(null);
 
@@ -26,7 +26,7 @@ const useFileUpload = () => {
 
       const data = await response.json();
       setUploading(false);
-      return data.secure_url; // Возвращаем URL загруженного файла
+      return data.secure_url;
     } catch (error) {
       setUploading(false);
       setUploadError('Failed to upload file');
@@ -38,4 +38,3 @@ const useFileUpload = () => {
   return { uploadFile, uploading, uploadError };
 };
 
-export default useFileUpload;
