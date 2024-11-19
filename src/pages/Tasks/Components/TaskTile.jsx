@@ -2,8 +2,9 @@ import members from '../../../assets/people.svg';
 import comments from '../../../assets/message.svg';
 import calendar from '../../../assets/calendar.svg';
 import Tag from './Tag';
+import { Draggable } from 'react-beautiful-dnd';
 
-const TaskTile = ({ task }) => {
+const TaskTile = ({ task,index }) => {
     let tag = task.tags?.length > 0 ? task.tags.at(-1) : null;
    
     tag={
@@ -33,7 +34,13 @@ const TaskTile = ({ task }) => {
       }
 
     return (
-      <div className="task-container">
+      <Draggable draggableId={String(task.taskId)} index={index}>
+        {(provided)=>(
+      <div className="task-container" 
+      {...provided.draggableProps}
+      {...provided.dragHandleProps}
+      ref={provided.innerRef}
+      >
         <div className="task-info">
           <p className="name">{task.name}</p>
           <TaskIcon icon={members} info={task.attachments.length}/>
@@ -48,6 +55,8 @@ const TaskTile = ({ task }) => {
         <TaskIcon icon={comments} info={task.comments.length}/>
         </div>  
       </div>
+      )}
+      </Draggable>
     );
   };
 

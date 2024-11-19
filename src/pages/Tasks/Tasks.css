@@ -5,7 +5,9 @@
 }
 
 .status-section{
-  max-width: 300px;
+  /* max-width: 400px;
+  min-width: 250px; */
+  width: 300px;
   min-height: 100vh;
 }
 
@@ -28,7 +30,7 @@
 }
 
 .task-info{
-  margin: 5px;
+  margin: 10px;
   display: flex;
   align-items: center;
   flex-direction: row;

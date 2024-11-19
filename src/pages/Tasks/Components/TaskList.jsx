@@ -1,29 +1,51 @@
-import TaskTile from "./TaskTile";
-import Tile from "../../../components/Tile/Tile";
+import TaskTile from './TaskTile';
+import Tile from '../../../components/Tile/Tile';
+import { Droppable } from 'react-beautiful-dnd';
+import { useContext } from 'react';
+import { ProjectContext } from '../../../contexts/ProjectContext.jsx';
+const TaskListComponent = ({ tasks }) => {
+  if (!tasks?.length) {
+    console.log({tasks})
+    return <div>No data available</div>; // Отображение сообщения при отсутствии данных
+  }
 
-const TaskListComponent = ({data}) => {
-    if (!data?.statuses?.length || !data?.tasks?.length) {
-      return <div>No data available</div>; // Отображение сообщения при отсутствии данных
-    }
-    return (
+   const context =useContext(ProjectContext);
+
+  return (
       <div className="task-lists-container">
-        {data.statuses.filter(status => {
-          // Отфильтровываем статусы, у которых есть связанные задания
-          const tasksForStatus = data.tasks.filter(task => task.taskStatus.taskStatusId === status.taskStatusId);
-          return tasksForStatus.length > 0;
-        }).map(status => {
-          const tasksForStatus = data.tasks.filter(task => task.taskStatus.taskStatusId === status.taskStatusId);
-          return (
-            <Tile key={status.taskStatusId} className="status-section">
-              <h3>{status.name}</h3>
-                {tasksForStatus.map(task => (
-                     <TaskTile task={task}></TaskTile>   
+        {context.statuses
+          .filter((status) => {
+            // Отфильтровываем статусы, у которых есть связанные задания
+            const tasksForStatus = tasks.filter(
+              (task) => task.taskStatus.taskStatusId === status.taskStatusId
+            );
+            return tasksForStatus.length > 0;
+          })
+          .map((status) => {
+            const tasksForStatus = tasks.filter(
+              (task) => task.taskStatus.taskStatusId === status.taskStatusId
+            );
+            return (
+              <Droppable key={status.taskStatusId} droppableId={String(status.taskStatusId)}>
+                {(provided)=>(
+              <div ref={provided.innerRef} 
+              {...provided.droppableProps}
+              >    
+              <Tile className="status-section"
+                >
+                <h3>{status.name}</h3>
+                {tasksForStatus.map((task,index) => (
+                  <TaskTile key={task.taskId} task={task} index={index}/>
                 ))}
-            </Tile>
-          );
-        })}
+                {provided.placeholder}
+              </Tile>
+              </div>
+          )}
+              </Droppable>
+            );
+          })}
       </div>
-    );
-  };
+  );
+};
 
-  export default TaskListComponent;
+export default TaskListComponent;

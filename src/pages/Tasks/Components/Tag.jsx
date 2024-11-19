@@ -4,7 +4,7 @@ import React from 'react';
 const Tag = ({ backgroundColor, text}) => {
   const style = {
     display: 'flex',
-    padding: '0px 5px',
+    padding: '0px 15px',
     width: 'fit-content',
     backgroundColor: backgroundColor || 'transparent', // Цвет фона
       // Отступы вокруг текста
@@ -12,7 +12,7 @@ const Tag = ({ backgroundColor, text}) => {
     color: 'black', // Цвет текста по умолчанию
   };
 
-  const displayText = text.length > 7 ? `${text.slice(0, 7)}...` : text;
+  const displayText = text.length > 10 ? `${text.slice(0, 10)}...` : text;
 
   return (
       <p style={style} className='name'>{displayText}</p>
