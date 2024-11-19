@@ -19,6 +19,7 @@ export default function Tasks() {
       setTasks(result);
     }
     fetchData();
+    projectContext.setStatuses(tasks.statuses);
   }, []);
 
   return (

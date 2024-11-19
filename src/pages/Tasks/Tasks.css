@@ -4,19 +4,31 @@
   justify-content: space-between;
 }
 
+.status-section{
+  max-width: 300px;
+  min-height: 100vh;
+}
+
+.tag-container{
+  padding-bottom: 50px;
+}
 .task-lists-container{
   display: flex;
-  
+}
+.name{
+  font-size: larger;
+  margin: 0px;
 }
 .task-container{
   border-radius: 2em;
   background-color: #283a7b;
   padding: 0.25em 1.25em 0.25em 1.25em;
-  
+  margin: 20px;
   width: 80%;
 }
 
 .task-info{
+  margin: 5px;
   display: flex;
   align-items: center;
   flex-direction: row;

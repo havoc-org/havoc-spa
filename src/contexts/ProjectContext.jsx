@@ -4,7 +4,7 @@ export const ProjectContext = createContext({});
 
 export const ProjectProvider = ({ children }) => {
   const [currentProject, setCurrentProject] = useState({});
-
+  const [statuses,setStatuses]=useState([]);
   const projectService = useProjectService();
   
   useEffect(() => {
@@ -47,7 +47,7 @@ export const ProjectProvider = ({ children }) => {
 
   return (
     <ProjectContext.Provider
-      value={{ currentProject, setProject, leaveProject }}
+      value={{ currentProject, statuses, setProject, leaveProject, setStatuses }}
     >
       {children}
     </ProjectContext.Provider>
