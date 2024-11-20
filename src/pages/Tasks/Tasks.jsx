@@ -20,11 +20,12 @@ export default function Tasks() {
 
       setTasks(result.tasks);
       projectContext.setStatuses(result.statuses);
-      statuses
     }
     fetchData();
   }, []);
 
+
+  
   const onDragEnd = (result) => {
     console.log({ result });
     const { source, destination } = result;
@@ -42,6 +43,16 @@ export default function Tasks() {
         task.taskStatus=newStatus;
         
         setTasks(updatedTasks);
+
+        async function fetchData() {
+          const patchStatus={
+            taskId: task.taskId,
+            name: newStatus.name
+          };
+          const result = await taskService.editStatus(patchStatus);
+          console.log({result});
+        }
+        fetchData();
       }
     
   };

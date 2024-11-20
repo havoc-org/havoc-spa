@@ -8,6 +8,7 @@ export default function useTaskService() {
     getTasks: async (projectId) => api.get(`${endpoint}/${projectId}`),
     createTask: async (taskData) => api.post(endpoint, taskData),
     editTask: async (taskData) => api.put(endpoint, taskData),
+    editStatus: async (taskData) => api.patch(`${endpoint}/updateStatus`, taskData),
     deleteTask: async (taskId) => api.delete(`${endpoint}/${taskId}`),
   };
   return taskService;
