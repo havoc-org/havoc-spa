@@ -1,0 +1,71 @@
+.tags-section {
+    margin-top: 10px;
+  }
+  
+  .tag-input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .color-picker {
+    width: 50px;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid #BBD8EB;
+    cursor: pointer;
+    background-color: transparent;
+    transition: border-color 0.3s, background-color 0.3s;
+  }
+  
+  .color-picker:hover {
+    border-color: #73A5D3;
+  }
+  
+  .add-tag-button {
+    padding: 10px 18px;
+    border: 2px solid #BBD8EB;
+    border-radius: 5px;
+    background-color: #142653;
+    color: #BBD8EB;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .add-tag-button:hover {
+    background-color: #73A5D3;
+    border-color: #73A5D3;
+    color: #142653;
+  }
+  
+  .tag-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .tag-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: #BBD8EB;
+    font-size: 1.1em;
+    transition: background-color 0.3s;
+    background-color: #283A7B;
+  }
+  
+  .tag-item:hover {
+    background-color: #223168;
+  }
+  
+  .tag-name {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  
