@@ -6,6 +6,7 @@ import exitButton from '../../assets/projectexit.svg';
 import './Tasks.css';
 import { ProjectContext } from '../../contexts/ProjectContext.jsx';
 import TaskList from './Components/TaskList.jsx';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 export default function Tasks() {
   const projectContext = useContext(ProjectContext);
@@ -16,10 +17,45 @@ export default function Tasks() {
     console.log({ projectContext });
     async function fetchData() {
       const result = await taskService.getTasks(project.projectId);
-      setTasks(result);
+
+      setTasks(result.tasks);
+      projectContext.setStatuses(result.statuses);
     }
     fetchData();
   }, []);
+
+
+  
+  const onDragEnd = (result) => {
+    console.log({ result });
+    const { source, destination } = result;
+
+    if (!destination) {
+      return;
+    }
+    const updatedTasks = [...tasks];
+    if (destination.droppableId !== source.droppableId) {
+      
+      const newStatus=projectContext.statuses.find((status)=>status.taskStatusId==destination.droppableId);
+      const task = updatedTasks.find(
+        (task) => task.taskId == result.draggableId);
+        console.log({task});
+        task.taskStatus=newStatus;
+        
+        setTasks(updatedTasks);
+
+        async function fetchData() {
+          const patchStatus={
+            taskId: task.taskId,
+            name: newStatus.name
+          };
+          const result = await taskService.editStatus(patchStatus);
+          console.log({result});
+        }
+        fetchData();
+      }
+    
+  };
 
   return (
     <div>
@@ -38,7 +74,9 @@ export default function Tasks() {
           </Link>
         </div>
       </div>
-      <TaskList data={tasks}></TaskList>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <TaskList tasks={tasks}></TaskList>
+      </DragDropContext>
     </div>
   );
 }

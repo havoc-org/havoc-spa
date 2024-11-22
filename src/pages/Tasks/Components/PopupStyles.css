@@ -1,0 +1,66 @@
+.modal {
+    font-size: 12px;
+    background: #283a7b;
+    border-radius: 18px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Добавляет тень */
+  }
+  .modal:hover{
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4); /* Увеличивает тень при наведении */
+  
+  }
+  .modal > .header {
+    width: 100%;
+    border-bottom: 1px solid gray;
+    font-size: 18px;
+    text-align: center;
+    padding: 5px;
+  }
+  .modal > .content {
+    width: 100%;
+    padding: 10px 5px;
+  }
+  .modal > .actions {
+    width: 100%;
+    padding: 10px 5px;
+    margin: auto;
+    
+    text-align: center;
+    
+  }
+  .modal > .close {
+    
+    position: absolute;
+    display: block;
+    padding: 2px 5px;
+    line-height: 20px;
+    right: -10px;
+    top: -10px;
+    font-size: 24px;
+    background: #283a7b;
+    border-radius: 18px;
+    border: 0px;
+    outline: none;
+  tabindex: -1; 
+  }
+  
+  .menu {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+  }
+  .menu-item > h3{
+    margin: 3px;
+  }
+  .menu-item {
+    cursor: pointer;
+    margin: 5px;
+    padding: 5px;
+    height: 28px;
+    background: #73A5D3;
+    color: black;
+    border-bottom: 1px solid rgb(187, 187, 187);
+    border-radius: 10px;
+  }
+  .menu-item:hover {
+    color: #2980b9;
+  }  

@@ -59,7 +59,13 @@ export default function useApi() {
         await handleError(error);
       }
     },
-
+    patch: async (endpoint, data, headers = {}) => {
+      try {
+        return await makeAsyncRequest('PATCH', endpoint, headers, data);
+      } catch (error) {
+        await handleError(error);
+      }
+    },
     delete: async (endpoint, headers = {}) => {
       try {
         return await makeAsyncRequest('DELETE', endpoint, headers);
