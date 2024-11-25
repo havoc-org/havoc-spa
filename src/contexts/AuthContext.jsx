@@ -1,6 +1,8 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 import useApi from '../hooks/useApi';
 import { ProjectContext } from './ProjectContext';
+import useAuth from '../hooks/useAuth';
+import Loading from '../components/Loading/Loading';
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
@@ -55,4 +57,19 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+};
+
+export const GlobalLoginRefresher = ({ children }) => {
+  const { refresh, user } = useAuth();
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    async function initRefresh() {
+      setIsLoading(true);
+      await refresh();
+      setIsLoading(false);
+    }
+    user?.token == null ? initRefresh() : setIsLoading(false);
+  }, [refresh, user]);
+  if (isLoading) return <Loading />;
+  else return <>{children}</>;
 };

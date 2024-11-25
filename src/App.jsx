@@ -7,7 +7,7 @@ import Login from './pages/Login/Login.jsx';
 import Register from './pages/Register/Register.jsx';
 import MainLayout from './layouts/MainLayout';
 import CreateProject from './pages/CreateProject/CreateProject.jsx';
-import { AuthProvider } from './contexts/AuthContext.jsx';
+import { AuthProvider, GlobalLoginRefresher } from './contexts/AuthContext.jsx';
 import ProtectedRoute from './layouts/ProtectedRoute.jsx';
 import Tasks from './pages/Tasks/Tasks.jsx';
 import CreateTask from './pages/CreateTask/CreateTask.jsx';
@@ -18,9 +18,11 @@ const router = createBrowserRouter([
     path: '/',
     element: (
       <AuthProvider>
-        <ProjectProvider>
-          <MainLayout />
-        </ProjectProvider>
+        <GlobalLoginRefresher>
+          <ProjectProvider>
+            <MainLayout />
+          </ProjectProvider>
+        </GlobalLoginRefresher>
       </AuthProvider>
     ),
     errorElement: <ErrorPage />,
