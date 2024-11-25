@@ -4,22 +4,21 @@ export const ProjectContext = createContext({});
 
 export const ProjectProvider = ({ children }) => {
   const [currentProject, setCurrentProject] = useState({});
-  const [statuses,setStatuses]=useState([]);
+  const [statuses, setStatuses] = useState([]);
   const projectService = useProjectService();
-  
+
   useEffect(() => {
     const storedProjectId = localStorage.getItem('currentProjectId');
     let currentProjectId = null;
 
+    async function fetchData() {
+      const result = await projectService.getProjectById(currentProjectId);
+      setCurrentProject(result);
+    }
+
     if (storedProjectId !== null) {
       currentProjectId = parseInt(storedProjectId, 10);
-      console.log({storedProjectId});
-
-      async function fetchData() {
-        const result = await projectService.getProjectById(currentProjectId);
-        setCurrentProject(result);
-      }
-
+      console.log({ storedProjectId });
       fetchData();
     }
   }, []);
@@ -47,7 +46,13 @@ export const ProjectProvider = ({ children }) => {
 
   return (
     <ProjectContext.Provider
-      value={{ currentProject, statuses, setProject, leaveProject, setStatuses }}
+      value={{
+        currentProject,
+        statuses,
+        setProject,
+        leaveProject,
+        setStatuses,
+      }}
     >
       {children}
     </ProjectContext.Provider>
