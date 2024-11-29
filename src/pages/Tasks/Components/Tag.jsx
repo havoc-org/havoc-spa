@@ -9,7 +9,7 @@ const Tag = ({ backgroundColor, text}) => {
     backgroundColor: backgroundColor || 'transparent', // Цвет фона
       // Отступы вокруг текста
     borderRadius: '30px', // Радиус скругления углов (передается как пропс)
-    color: 'black', // Цвет текста по умолчанию
+    
   };
 
   const displayText = text.length > 10 ? `${text.slice(0, 10)}...` : text;

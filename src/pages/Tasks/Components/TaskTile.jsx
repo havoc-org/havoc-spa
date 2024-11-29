@@ -7,10 +7,10 @@ import { Draggable } from 'react-beautiful-dnd';
 const TaskTile = ({ task,index }) => {
     let tag = task.tags?.length > 0 ? task.tags.at(-1) : null;
    
-    tag={
-      name: "sadsadsASDASDASDASDSAasda",
-      colorHex: "#123456"
-    }
+    // tag={
+    //   name: "sadsadsASDASDASDASDSAasda",
+    //   colorHex: "#123456"
+    // }
 
     const TaskIcon=({icon,info})=>{
       return(
