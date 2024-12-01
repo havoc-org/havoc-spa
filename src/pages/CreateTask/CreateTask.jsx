@@ -8,12 +8,14 @@ import TagsSection from './Components/TagsSection/TagsSection';
 import AssignMembers from './Components/AssignMembers/AssignMembers';
 import useTaskService from '../../hooks/useTaskService';
 import useProject from '../../hooks/useProject';
+import useFileUpload from '../../hooks/useFileUpload';
 import './CreateTask.css';
 
 export default function CreateTaskContainer() {
   const navigate = useNavigate();
   const { currentProject, statuses } = useProject();
   const taskService = useTaskService();
+  const { uploadFile } = useFileUpload();
 
   const [taskName, setTaskName] = useState('');
   const [description, setDescription] = useState('');
@@ -21,7 +23,6 @@ export default function CreateTaskContainer() {
   const [startDate, setStartDate] = useState('');
   const [deadline, setDeadline] = useState('');
   const [files, setFiles] = useState([]);
-  const [fileUrls, setFileUrls] = useState([]);
   const [tags, setTags] = useState([]);
   const [assignedUsers, setAssignedUsers] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
@@ -37,22 +38,29 @@ export default function CreateTaskContainer() {
 
     setIsLoading(true);
 
-    const newTask = {
-      name: taskName,
-      description: description || null,
-      taskStatus: { name: taskStatus },
-      start: startDate || null,
-      deadline: deadline || null,
-      projectId: currentProject.projectId,
-      assignments: assignedUsers.map((user) => ({
-        userId: user.id,
-        description: user.comment || null,
-      })),
-      attachments: fileUrls.map((url) => ({ fileLink: url })),
-      tags: tags,
-    };
-
     try {
+      const uploadedFileUrls = await Promise.all(
+        files.map(async (file) => {
+          const url = await uploadFile(file);
+          return url;
+        })
+      );
+
+      const newTask = {
+        name: taskName,
+        description: description || null,
+        taskStatus: { name: taskStatus },
+        start: startDate || null,
+        deadline: deadline || null,
+        projectId: currentProject.projectId,
+        assignments: assignedUsers.map((user) => ({
+          userId: user.id,
+          description: user.comment || null,
+        })),
+        attachments: uploadedFileUrls.map((url) => ({ fileLink: url })),
+        tags: tags,
+      };
+
       const result = await taskService.createTask(newTask);
 
       if (result.message) {
@@ -68,7 +76,6 @@ export default function CreateTaskContainer() {
       setDeadline('');
       setAssignedUsers([]);
       setFiles([]);
-      setFileUrls([]);
       setTags([]);
     } catch (error) {
       console.error('Error creating task: ', error.message);
@@ -93,8 +100,6 @@ export default function CreateTaskContainer() {
         <FileUpload
           files={files}
           setFiles={setFiles}
-          fileUrls={fileUrls}
-          setFileUrls={setFileUrls}
         />
         <DatePickerSection
           startDate={startDate}
