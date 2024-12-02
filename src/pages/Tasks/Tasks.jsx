@@ -15,12 +15,17 @@ export default function Tasks() {
   const taskService = useTaskService();
   useEffect(() => {
     console.log({ projectContext });
+
+    const storedProjectId = localStorage.getItem('currentProjectId');
+
     async function fetchData() {
-      const result = await taskService.getTasks(project.projectId);
+      
+      const result = await taskService.getTasks(parseInt(storedProjectId, 10));
 
       setTasks(result.tasks);
       projectContext.setStatuses(result.statuses);
     }
+    if (storedProjectId !== null) 
     fetchData();
   }, []);
 
