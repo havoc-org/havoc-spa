@@ -29,7 +29,6 @@ export default function Tasks() {
     fetchData();
   }, []);
 
-
   
   const onDragEnd = (result) => {
     console.log({ result });

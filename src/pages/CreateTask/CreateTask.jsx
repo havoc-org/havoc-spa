@@ -13,7 +13,7 @@ import './CreateTask.css';
 
 export default function CreateTaskContainer() {
   const navigate = useNavigate();
-  const { currentProject, statuses } = useProject();
+  const { currentProject, statuses } = useProject(); // `isLoading` из контекста проекта
   const taskService = useTaskService();
   const { uploadFile } = useFileUpload();
 
@@ -26,17 +26,20 @@ export default function CreateTaskContainer() {
   const [tags, setTags] = useState([]);
   const [assignedUsers, setAssignedUsers] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  if ( !currentProject.participations || !statuses) {
+    console.log({currentProject});
+    return <Loading />;
+  }
 
   const handleCreateTask = async () => {
     if (!taskName || !taskStatus) {
       setErrorMessage('Please fill in all required fields.');
       return;
-    } else {
-      setErrorMessage('');
     }
 
-    setIsLoading(true);
+    setIsSubmitting(true);
 
     try {
       const uploadedFileUrls = await Promise.all(
@@ -66,9 +69,10 @@ export default function CreateTaskContainer() {
       if (result.message) {
         setErrorMessage(result.message);
       } else {
-        navigate('/tasks');
+        navigate('/tasks'); // Успешно создали задачу, переходим на страницу задач
       }
 
+      // Сброс формы
       setTaskName('');
       setDescription('');
       setTaskStatus('');
@@ -81,7 +85,7 @@ export default function CreateTaskContainer() {
       console.error('Error creating task: ', error.message);
       setErrorMessage('An unexpected error occurred. Please try again.');
     } finally {
-      setIsLoading(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -97,10 +101,7 @@ export default function CreateTaskContainer() {
           description={description}
           setDescription={setDescription}
         />
-        <FileUpload
-          files={files}
-          setFiles={setFiles}
-        />
+        <FileUpload files={files} setFiles={setFiles} />
         <DatePickerSection
           startDate={startDate}
           setStartDate={setStartDate}
@@ -110,7 +111,7 @@ export default function CreateTaskContainer() {
         <TagsSection tags={tags} setTags={setTags} />
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         
-        {isLoading ? (
+        {isSubmitting ? (
           <Loading />
         ) : (
           <button className="submit-button" onClick={handleCreateTask}>
