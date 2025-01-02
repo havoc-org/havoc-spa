@@ -9,7 +9,6 @@ import AddStatusPopup from './AddStatusPopup.jsx';
 const TaskListComponent = ({ tasks }) => {
   const context = useContext(ProjectContext);
   const [showedStatuses, setShowedStatuses] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   const getStatusesWithTasks = () => {
     return context.statuses.filter((status) => {
@@ -26,24 +25,20 @@ const TaskListComponent = ({ tasks }) => {
   useEffect(() => {
     const statuses = getStatusesWithTasks();
     setShowedStatuses(statuses);
-    setIsLoading(false);
   }, [tasks]);
 
   const handleAddStatus = (status) => {
     
     setShowedStatuses((prevStatuses) => {
-      // Фильтруем уже существующие статусы, исключая пустые
       const filteredStatuses = prevStatuses.filter(
         (s) => tasks.some((task) => task.taskStatus.taskStatusId === s.taskStatusId)
       );
-      const updatedStatuses = [...filteredStatuses, status]; // Добавляем новый статус
-      return updatedStatuses.sort((a, b) => a.taskStatusId - b.taskStatusId); // Сортируем по taskStatusId
+      const updatedStatuses = [...filteredStatuses, status]; 
+      return updatedStatuses.sort((a, b) => a.taskStatusId - b.taskStatusId);
     });
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  
 
   return (
     <div className="task-lists-container">
