@@ -48,10 +48,8 @@ RUN npm run build
 ################################################################################
 # Create a new stage to run the application with minimal runtime dependencies
 # where the necessary files are copied from the build stage.
-FROM nginx:alpine as prod
+FROM nginx as final
 
-# Use production node environment by default.
-ENV NODE_ENV production
 # Copy package.json so that package manager commands can be used.
 COPY package.json .
 
