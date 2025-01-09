@@ -11,6 +11,7 @@ export default function CreateProject() {
   const [startDate, setStartDate] = useState('');
   const [deadline, setDeadline] = useState('');
   const [email, setEmail] = useState('');
+  const [role, setRole] = useState('Member');
   const [users, setUsers] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -24,7 +25,7 @@ export default function CreateProject() {
       setErrorMessage('');
     }
 
-    const participations = users.map((userEmail) => ({ email: userEmail }));
+    const participations = users.map(({ email, role }) => ({ email, role }));
 
     const newProject = {
       name: projectName,
@@ -56,20 +57,17 @@ export default function CreateProject() {
   };
 
   const handleInvite = () => {
-    if(email != "" &&
-       email != user.email && 
-       validateEmail(email) ){
-      setUsers((prevUsers) => [...prevUsers, email]);
-      console.log(`Invite sent to: ${email}`);
+    if (email !== '' && email !== user.email && validateEmail(email)) {
+      setUsers((prevUsers) => [...prevUsers, { email, role }]);
+      console.log(`Invite sent to: ${email} with role: ${role}`);
       setEmail('');
+      setRole('Member'); 
     }
-    
   };
 
   const handleDeleteUser = (index) => {
     setUsers((prevUsers) => prevUsers.filter((_, i) => i !== index));
   };
-  
 
   return (
     <div className="create-project-container">
@@ -127,14 +125,23 @@ export default function CreateProject() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <select
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            className="role-select"
+          >
+            <option value="Owner">Owner</option>
+            <option value="Manager">Manager</option>
+            <option value="Developer">Developer</option>
+          </select>
           <button className="invite-button" onClick={handleInvite}>
             Invite
           </button>
         </div>
         <div className="user-list">
-          {users.slice(0).map((userEmail, index) => (
+          {users.map(({ email, role }, index) => (
             <div key={index} className="user-item">
-              {userEmail}
+              {email} ({role})
               <button
                 className="delete-button"
                 onClick={() => handleDeleteUser(index)}

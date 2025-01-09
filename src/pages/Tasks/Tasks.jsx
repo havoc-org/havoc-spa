@@ -1,29 +1,35 @@
-import { Link } from 'react-router-dom';
 import useTaskService from '../../hooks/useTaskService.js';
 import { useState, useEffect, useContext } from 'react';
-import createButton from '../../assets/AddNewTask.svg';
-import exitButton from '../../assets/projectexit.svg';
 import './Tasks.css';
 import { ProjectContext } from '../../contexts/ProjectContext.jsx';
 import TaskList from './Components/TaskList.jsx';
 import { DragDropContext } from 'react-beautiful-dnd';
+import TaskToolBar from './Components/TaskToolBar.jsx';
 
 export default function Tasks() {
   const projectContext = useContext(ProjectContext);
   const [tasks, setTasks] = useState([]);
   const project = projectContext.currentProject;
   const taskService = useTaskService();
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    console.log({ projectContext });
+
+    const storedProjectId = localStorage.getItem('currentProjectId');
+
     async function fetchData() {
-      const result = await taskService.getTasks(project.projectId);
+      
+      const result = await taskService.getTasks(parseInt(storedProjectId, 10));
 
       setTasks(result.tasks);
       projectContext.setStatuses(result.statuses);
+      
     }
-    fetchData();
+    if (storedProjectId !== null) 
+      fetchData();
+    
+    setIsLoading(false);
+    console.log({ projectContext });
   }, []);
-
 
   
   const onDragEnd = (result) => {
@@ -56,24 +62,14 @@ export default function Tasks() {
       }
     
   };
-
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  console.log("projectContext.role: ",projectContext.role);
+  
   return (
     <div>
-      <div className="task-toolbar">
-        <div>
-          <Link to="create">
-            <img className="buttons" src={createButton} alt="Create Task" />
-          </Link>
-        </div>
-        <div className="task-toolbar">
-          <Link to="edit">
-            <button className="edit-project">Edit Project</button>
-          </Link>
-          <Link replace={true} to="/projects">
-            <img className="buttons" src={exitButton} alt="Create Task" />
-          </Link>
-        </div>
-      </div>
+      <TaskToolBar role={projectContext.role} />
       <DragDropContext onDragEnd={onDragEnd}>
         <TaskList tasks={tasks}></TaskList>
       </DragDropContext>
