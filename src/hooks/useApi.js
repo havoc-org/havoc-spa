@@ -1,6 +1,6 @@
 import useAuth from './useAuth';
 
-const BASE_URL = 'https://localhost:7052/api';
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 export default function useApi() {
   const { user, refresh } = useAuth();

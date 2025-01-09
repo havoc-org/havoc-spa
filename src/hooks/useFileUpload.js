@@ -15,7 +15,7 @@ export default function useFileUpload() {
     formData.append('resource_type', 'auto');
 
     try {
-      const response = await fetch(`https://api.cloudinary.com/v1_1/dhgd2oshh/upload`, {
+      const response = await fetch(import.meta.env.VITE_CLOUDINARY_URL, {
         method: 'POST',
         body: formData,
       });
@@ -36,5 +36,4 @@ export default function useFileUpload() {
   };
 
   return { uploadFile, uploading, uploadError };
-};
-
+}
