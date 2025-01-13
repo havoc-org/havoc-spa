@@ -3,10 +3,11 @@ import comments from '../../../assets/message.svg';
 import calendar from '../../../assets/calendar.svg';
 import Tag from './Tag';
 import { Draggable } from 'react-beautiful-dnd';
+import { useNavigate } from 'react-router-dom';
 
 const TaskTile = ({ task,index }) => {
     let tag = task.tags?.length > 0 ? task.tags.at(-1) : null;
-   
+    const navigate = useNavigate();
     // tag={
     //   name: "sadsadsASDASDASDASDSAasda",
     //   colorHex: "#123456"
@@ -33,6 +34,10 @@ const TaskTile = ({ task,index }) => {
         return `${formatDate(start)}-${formatDate(deadline)}`;
       }
 
+      const handleDoubleClick = (taskId) => {
+        navigate(`/tasks/${taskId}`);
+      };
+
     return (
       <Draggable draggableId={String(task.taskId)} index={index}>
         {(provided)=>(
@@ -40,6 +45,7 @@ const TaskTile = ({ task,index }) => {
       {...provided.draggableProps}
       {...provided.dragHandleProps}
       ref={provided.innerRef}
+      onDoubleClick={() => handleDoubleClick(task.taskId)}
       >
         <div className="task-info">
           <p className="name">{task.name}</p>
@@ -61,5 +67,4 @@ const TaskTile = ({ task,index }) => {
   };
 
   
-  // Правильный экспорт по умолчанию
   export default TaskTile;

@@ -12,6 +12,7 @@ import ProtectedRoute from './layouts/ProtectedRoute.jsx';
 import Tasks from './pages/Tasks/Tasks.jsx';
 import CreateTask from './pages/CreateTask/CreateTask.jsx';
 import { ProjectProvider } from './contexts/ProjectContext.jsx';
+import TaskInfoPage from './pages/TaskInfo/TaskInfoPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
           {
             path: 'create',
             element: <CreateTask />,
+          },
+          {
+            path: ':id',
+            element: <TaskInfoPage />,
           },
         ],
       },

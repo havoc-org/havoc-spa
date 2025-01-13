@@ -3,15 +3,16 @@ import { Link } from 'react-router-dom';
 import createButton from '../../../assets/AddNewTask.svg';
 import exitButton from '../../../assets/projectexit.svg';
 
+
 const TaskToolBar = ({ role }) => {
   if (role === 'Developer' || !role) {
     return (<Exit />);
   } else if (role === 'Manager') {
     return (
       <div className="task-toolbar">
-        <Tools />
+        <Exit />
         <div className="task-toolbar">
-          <Exit />
+          <Create />
         </div>
       </div>
     );
@@ -19,12 +20,12 @@ const TaskToolBar = ({ role }) => {
   else if (role === 'Owner') {
     return (
       <div className="task-toolbar">
-        <Tools />
+        <Exit />
         <div className="task-toolbar">
         <Link to="edit">
             <button className="edit-project">Edit Project</button>
           </Link>
-          <Exit />
+          <Create />
         </div>
       </div>
     );
@@ -38,7 +39,7 @@ function Exit() {
       </Link>
     );
   }
-function Tools() {
+function Create() {
   return (
     <div >
         <div>
