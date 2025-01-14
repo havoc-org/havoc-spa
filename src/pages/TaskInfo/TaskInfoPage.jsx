@@ -48,11 +48,12 @@ const TaskInfoPage = () => {
      }
      try {
       const response = await commentService.createComment(commentPOST,task.taskId);
-      if (response.message) {
-        console.log(result.message);
+      console.log(response);
+      if (response) {
+        setComments([...comments, response]);
       }
     } catch (error) {
-      console.error('Error creating project:', error.message);
+      console.error('Error creating Comment:', error.message);
     }
   }
 
@@ -67,13 +68,13 @@ const TaskInfoPage = () => {
         <input type="text" className="task-name" placeholder={task.name} defaultValue={task.name} />
         <Description description={task.description}/>
         <AttachmentsList files={files}/>
-        <Comments comments={[]} handleAddComment={handleAddComment}/>
+        <Comments comments={comments} handleAddComment={handleAddComment}/>
       </div>
       <div className="task-sidebar">
-        <button className="sidebar-button">Members</button>
-        <button className="sidebar-button">Tags</button>
-        <button className="sidebar-button">Files</button>
-        <button className="sidebar-button">Dates</button>
+        <button className="sidebar-button" onClick={() => {}}>Members</button>
+        <button className="sidebar-button" onClick={() => {}}>Tags</button>
+        <button className="sidebar-button" onClick={() => {}}>Files</button>
+        <button className="sidebar-button" onClick={() => {}}>Dates</button>
       </div>
     </div>
     </div>
