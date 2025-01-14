@@ -69,7 +69,7 @@ export default function Tasks() {
   
   return (
     <div>
-      <TaskToolBar role={projectContext.role} />
+      <TaskToolBar />
       <DragDropContext onDragEnd={onDragEnd}>
         <TaskList tasks={tasks}></TaskList>
       </DragDropContext>

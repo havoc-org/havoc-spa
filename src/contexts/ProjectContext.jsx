@@ -47,15 +47,15 @@ export const ProjectProvider = ({ children }) => {
     localStorage.removeItem('currentProjectId');
   }
 
-  // Используем useEffect для обновления localStorage при изменении currentProject
-  // useEffect(() => {
-  //   if (currentProject) {
-  //     localStorage.setItem('currentProjectId', JSON.stringify(project.projectId));
-  //   } else {
-  //     localStorage.removeItem('currentProjectId');
-  //   }
-  // }, [currentProject]);
-
+  function isOwner(){
+    return role === 'Owner'
+  }
+  function isManager(){
+    return role === 'Manager'
+  }
+  function isDeveloper(){
+    return role === 'Developer'
+  }
   return (
     <ProjectContext.Provider
       value={{
@@ -65,6 +65,9 @@ export const ProjectProvider = ({ children }) => {
         setProject,
         leaveProject,
         setStatuses,
+        isOwner,
+        isManager,  
+        isDeveloper
       }}
     >
       {children}

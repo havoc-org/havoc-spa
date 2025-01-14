@@ -2,12 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import createButton from '../../../assets/AddNewTask.svg';
 import exitButton from '../../../assets/projectexit.svg';
+import useProject from '../../../hooks/useProject';
 
-
-const TaskToolBar = ({ role }) => {
-  if (role === 'Developer' || !role) {
+const TaskToolBar = () => {
+  const perm = useProject();
+  if (perm.isDeveloper()) {
     return (<Exit />);
-  } else if (role === 'Manager') {
+  } else if (perm.isManager()) {
     return (
       <div className="task-toolbar">
         <Exit />
@@ -17,7 +18,7 @@ const TaskToolBar = ({ role }) => {
       </div>
     );
   }
-  else if (role === 'Owner') {
+  else if (perm.isOwner()) {
     return (
       <div className="task-toolbar">
         <Exit />

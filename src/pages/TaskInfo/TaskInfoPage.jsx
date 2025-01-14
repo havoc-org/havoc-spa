@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import useTaskService from '../../hooks/useTaskService.js';
-import exitButton from '../../assets/projectexit.svg';
 import './TaskInfo.css';
 import useProject from '../../hooks/useProject.js';
 import useAuth from '../../hooks/useAuth.js';
@@ -9,6 +8,7 @@ import Description from './Components/Description.jsx';
 import AttachmentsList from './Components/AttachmentsList.jsx';
 import Comments from './Components/Comments.jsx';
 import useCommentService from '../../hooks/useCommentsService.js';
+import TaskInfoToolbar from './Components/TaskInfoToolbar.jsx';
 
 const TaskInfoPage = () => {
   const projectContext=useProject();
@@ -20,6 +20,7 @@ const TaskInfoPage = () => {
   const [task, setTask] = useState({});
   const [files, setFiles] = useState([]); 
   const [comments, setComments] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     async function fetchData() {
       try {
@@ -40,7 +41,6 @@ const TaskInfoPage = () => {
   }, [id]);
   
   async function handleAddComment(content){
-     
      const commentPOST={
       content:content,
       taskId:id,
@@ -48,7 +48,6 @@ const TaskInfoPage = () => {
      }
      try {
       const response = await commentService.createComment(commentPOST,task.taskId);
-      console.log(response);
       if (response) {
         setComments([...comments, response]);
       }
@@ -57,12 +56,22 @@ const TaskInfoPage = () => {
     }
   }
 
+  async function handleDeleteTask(){
+    try {
+      const response = await taskService.deleteTask(id);
+      console.log(response);
+      navigate('/tasks');
+    } catch (error) {
+      console.error('Error deleting Comment:', error.message);
+    }
+  }
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
   return (
     <div>
-      <Exit />
+      <TaskInfoToolbar handleDeleteTask={handleDeleteTask}/>
     <div className="task-page">
       <div className="task-main">
         <input type="text" className="task-name" placeholder={task.name} defaultValue={task.name} />
@@ -71,22 +80,15 @@ const TaskInfoPage = () => {
         <Comments comments={comments} handleAddComment={handleAddComment}/>
       </div>
       <div className="task-sidebar">
-        <button className="sidebar-button" onClick={() => {}}>Members</button>
-        <button className="sidebar-button" onClick={() => {}}>Tags</button>
-        <button className="sidebar-button" onClick={() => {}}>Files</button>
-        <button className="sidebar-button" onClick={() => {}}>Dates</button>
+        <button className="sidebar-button" >Members</button>
+        <button className="sidebar-button" >Tags</button>
+        <button className="sidebar-button" >Files</button>
+        <button className="sidebar-button" >Dates</button>
       </div>
     </div>
     </div>
   );
-
-  function Exit() {
-    return (
-      <Link replace={true} to="/tasks">
-        <img className="buttons" src={exitButton} alt="Create Task" />
-      </Link>
-    );
-  }
+  
   // function Menu() {
   //   return (
   //     <div className="task-info-menu">
