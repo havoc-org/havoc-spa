@@ -89,21 +89,6 @@ const TaskInfoPage = () => {
     </div>
   );
   
-  // function Menu() {
-  //   return (
-  //     <div className="task-info-menu">
-  //       <div className="task-info-menu-item" onClick={() => {}}>
-  //         <h3>Members</h3>
-  //       </div>
-  //       <div className="task-info-menu-item" onClick={() => {}}>
-  //         <h3>Tags</h3>
-  //       </div>
-  //       <div className="task-info-menu-item" onClick={() => {}}>
-  //         <h3>Files</h3>
-  //       </div>
-  //     </div>
-  //   );
-  // }
 };
 
 export default TaskInfoPage;
