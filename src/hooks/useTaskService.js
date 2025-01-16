@@ -10,7 +10,7 @@ export default function useTaskService() {
     getAllAttachments: async (taskId) => api.get(`${endpoint}/${taskId}/attachments`),
     getAllComments: async (taskId) => api.get(`${endpoint}/${taskId}/comments`),
     createTask: async (taskData) => api.post(endpoint, taskData),
-    editTask: async (taskData) => api.put(endpoint, taskData),
+    editTask: async (taskData) => api.patch(endpoint, taskData),
     editStatus: async (taskData) => api.patch(`${endpoint}/updateStatus`, taskData),
     deleteTask: async (taskId) => api.delete(`${endpoint}/${taskId}`),
   };

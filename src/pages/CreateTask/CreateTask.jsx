@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading/Loading.jsx';
 import TaskDetails from './Components/TaskDetails/TaskDetails';
 import FileUpload from './Components/FileUpload/FileUpload';
-import DatePickerSection from './Components/DatePickerSection/DatePickerSection';
+import DatePickerSection from '../../components/DatePickerSection/DatePickerSection';
 import TagsSection from './Components/TagsSection/TagsSection';
 import AssignMembers from './Components/AssignMembers/AssignMembers';
 import useTaskService from '../../hooks/useTaskService';
@@ -13,7 +13,7 @@ import './CreateTask.css';
 
 export default function CreateTaskContainer() {
   const navigate = useNavigate();
-  const { currentProject, statuses } = useProject(); // `isLoading` из контекста проекта
+  const { currentProject, statuses } = useProject();
   const taskService = useTaskService();
   const { uploadFile } = useFileUpload();
 
@@ -69,10 +69,9 @@ export default function CreateTaskContainer() {
       if (result.message) {
         setErrorMessage(result.message);
       } else {
-        navigate('/tasks'); // Успешно создали задачу, переходим на страницу задач
+        navigate('/tasks');
       }
 
-      // Сброс формы
       setTaskName('');
       setDescription('');
       setTaskStatus('');
