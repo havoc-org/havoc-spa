@@ -10,25 +10,38 @@ import Comments from './Components/Comments.jsx';
 import useCommentService from '../../hooks/useCommentsService.js';
 import TaskInfoToolbar from './Components/TaskInfoToolbar.jsx';
 import DatePickerSection from '../../components/DatePickerSection/DatePickerSection';
+import FileUpload from '../../components/FileUpload/FileUpload';
+
+import useFileUpload from '../../hooks/useFileUpload';
+import useAttachmentService from '../../hooks/useAttachmentService';
 
 const TaskInfoPage = () => {
   const projectContext = useProject();
   const user = useAuth().user;
-  const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const taskService = useTaskService();
   const commentService = useCommentService();
-  const [task, setTask] = useState({});
-  const [files, setFiles] = useState([]);
+  const attachmentService = useAttachmentService();
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [taskFiles, setTaskFiles] = useState([]);
+
+  const [selectedFiles, setSelectedFiles] = useState([]);
+
   const [comments, setComments] = useState([]);
-  const navigate = useNavigate();
+  const [task, setTask] = useState({});
 
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [startDate, setStartDate] = useState('');
   const [deadline, setDeadline] = useState('');
+  const [hasChanges, setHasChanges] = useState(false);
+  const [showFilePopup, setShowFilePopup] = useState(false);
 
-  const [hasChanges, setHasChanges] = useState(false); // Отслеживаем изменения
+  const { uploadFile, uploading, uploadError } = useFileUpload();
 
   useEffect(() => {
     async function fetchData() {
@@ -38,7 +51,7 @@ const TaskInfoPage = () => {
         const taskResult = await taskService.getTaskById(id);
 
         setComments(commentsResult);
-        setFiles(filesResult);
+        setTaskFiles(filesResult);
         setTask(taskResult.task);
 
         setName(taskResult.task.name || '');
@@ -55,7 +68,6 @@ const TaskInfoPage = () => {
     fetchData();
   }, [id]);
 
-  // Обновляем состояние hasChanges при изменениях
   useEffect(() => {
     if (
       name !== task.name ||
@@ -103,18 +115,37 @@ const TaskInfoPage = () => {
       start: startDate || null,
       deadline: deadline || null,
     };
-
     try {
       const response = await taskService.editTask(updatedTask);
       if (response) {
         console.log('Task updated successfully:', response);
         setTask((prev) => ({ ...prev, ...updatedTask }));
         alert('Changes saved successfully!');
-        setHasChanges(false); // Сбрасываем состояние изменений
+        setHasChanges(false);
       }
     } catch (error) {
       console.error('Error updating task:', error.message);
       alert('Failed to save changes.');
+    }
+  }
+
+  async function handleAddFiles() {
+    try {
+      const attachments = [];
+      for (const file of selectedFiles) {
+        const url = await uploadFile(file);
+        attachments.push({ fileLink: url });
+      }
+
+      await attachmentService.addAttachments(attachments, projectContext.currentProject.projectId, id);
+
+      const updatedFiles = await taskService.getAllAttachments(id);
+      setTaskFiles(updatedFiles);
+
+      setSelectedFiles([]);
+      setShowFilePopup(false);
+    } catch (error) {
+      console.error('Error uploading attachments:', error);
     }
   }
 
@@ -123,42 +154,82 @@ const TaskInfoPage = () => {
   }
 
   return (
-    <div>
-      <TaskInfoToolbar handleDeleteTask={handleDeleteTask} />
-      <div className="task-page">
-        <div className="task-main">
-          <input
-            type="text"
-            className="task-name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <Description description={description} setDescription={setDescription} />
-          <DatePickerSection
-            startDate={startDate}
-            setStartDate={setStartDate}
-            deadline={deadline}
-            setDeadline={setDeadline}
-            className="task-info-datepicker"
-          />
-          <button
-            className={`save-button ${hasChanges ? 'active' : 'disabled'}`}
-            onClick={handleSaveChanges}
-            disabled={!hasChanges}
-          >
-            Save Changes
-          </button>
-          <AttachmentsList files={files} />
-          <Comments comments={comments} handleAddComment={handleAddComment} />
-        </div>
-        <div className="task-sidebar">
-          <button className="sidebar-button">Members</button>
-          <button className="sidebar-button">Tags</button>
-          <button className="sidebar-button">Files</button>
-        </div>
+  <div>
+    <TaskInfoToolbar handleDeleteTask={handleDeleteTask} />
+    <div className="task-page">
+      <div className="task-main">
+        <input
+          type="text"
+          className="task-name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <Description
+          description={description}
+          setDescription={setDescription}
+        />
+        <DatePickerSection
+          startDate={startDate}
+          setStartDate={setStartDate}
+          deadline={deadline}
+          setDeadline={setDeadline}
+          className="task-info-datepicker"
+        />
+
+        <button
+          className={`save-button ${hasChanges ? 'active' : 'disabled'}`}
+          onClick={handleSaveChanges}
+          disabled={!hasChanges}
+        >
+          Save Changes
+        </button>
+
+        <AttachmentsList files={taskFiles} />
+
+        <Comments comments={comments} handleAddComment={handleAddComment} />
+      </div>
+
+      <div className="task-sidebar">
+        <button className="sidebar-button">Members</button>
+        <button className="sidebar-button">Tags</button>
+        <button
+          className="sidebar-button"
+          onClick={() => setShowFilePopup(true)}
+        >
+          Files
+        </button>
       </div>
     </div>
-  );
+
+    {showFilePopup && (
+      <div className="popup-taskinfo-overlay">
+        <div className="popup-taskinfo-content">
+          <FileUpload files={selectedFiles} setFiles={setSelectedFiles} />
+
+          {uploading && <div>Uploading to Cloudinary...</div>}
+          {uploadError && <div style={{ color: 'red' }}>{uploadError}</div>}
+
+          <div className="popup-taskinfo-buttons">
+            <button
+              className="close-button"
+              onClick={() => setShowFilePopup(false)}
+            >
+              Close
+            </button>
+            <button
+              className="add-button"
+              onClick={handleAddFiles}
+              disabled={uploading}
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
+);
+
 };
 
 export default TaskInfoPage;

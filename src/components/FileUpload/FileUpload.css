@@ -69,4 +69,20 @@
   .file-remove-button:hover {
     background-color: #a33d35;
   }
+
+  .file-item {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .file-name {
+    display: inline-block;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  
+    margin-right: 10px;
+  }
   

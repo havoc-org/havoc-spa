@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading/Loading.jsx';
 import TaskDetails from './Components/TaskDetails/TaskDetails';
-import FileUpload from './Components/FileUpload/FileUpload';
+import FileUpload from '../../components/FileUpload/FileUpload.jsx';
 import DatePickerSection from '../../components/DatePickerSection/DatePickerSection';
 import TagsSection from './Components/TagsSection/TagsSection';
 import AssignMembers from './Components/AssignMembers/AssignMembers';

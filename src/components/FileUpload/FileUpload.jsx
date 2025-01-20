@@ -21,7 +21,7 @@ export default function FileUpload({ files, setFiles }) {
       <ul className="file-list">
         {files.map((file, index) => (
           <li className="file-item" key={index}>
-            {file.name}
+            <span className="file-name">{file.name}</span>
             <button className="file-remove-button" onClick={() => handleFileRemove(index)}>
               Remove
             </button>

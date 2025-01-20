@@ -287,3 +287,63 @@
 .save-button:hover {
   background-color: #0056b3;
 }
+
+.popup-taskinfo-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup-taskinfo-content {
+  background-color: #1a2a5a;
+  color: #bbd8eb;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  position: relative;
+}
+
+.popup-taskinfo-buttons {
+  display: flex;
+  justify-content: space-between; /* Разводим кнопки по краям */
+  margin-top: 20px; /* Отступ между кнопками и остальным содержимым */
+}
+
+.close-button {
+  background-color: #283a7b;
+  border: none;
+  color: #bbd8eb;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.close-button:hover {
+  background-color: #73a5d3;
+  color: #142653;
+}
+
+.add-button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.add-button:hover {
+  background-color: #0056b3;
+}
+
