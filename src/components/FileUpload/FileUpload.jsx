@@ -1,7 +1,7 @@
 import React from 'react';
 import './FileUpload.css';
 
-export default function FileUpload({ files, setFiles }) {
+function FileUpload({ files, setFiles }) {
   const handleFileUpload = (event) => {
     const newFiles = Array.from(event.target.files);
     setFiles([...files, ...newFiles]);
@@ -31,3 +31,5 @@ export default function FileUpload({ files, setFiles }) {
     </div>
   );
 }
+
+export default FileUpload;

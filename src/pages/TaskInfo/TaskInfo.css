@@ -239,7 +239,6 @@
   color: #2980b9;
 }
 
-/* Стили для DatePickerSection */
 .date-picker-section {
   background-color: #1c2757;
   border-radius: 10px;
@@ -310,12 +309,14 @@
   width: 100%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
-.popup-taskinfo-buttons {
+.popup-taskinfo-footer {
   display: flex;
-  justify-content: space-between; /* Разводим кнопки по краям */
-  margin-top: 20px; /* Отступ между кнопками и остальным содержимым */
+  justify-content: space-between; /* Разводит кнопки по краям */
+  margin-top: 20px; /* Отступ сверху от содержимого */
 }
 
 .close-button {
@@ -346,4 +347,3 @@
 .add-button:hover {
   background-color: #0056b3;
 }
-

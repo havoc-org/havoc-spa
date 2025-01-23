@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './TagsSection.css';
 
-export default function TagsSection({ tags, setTags }) {
+function TagsSection({ tags, setTags }) {
   const [tagName, setTagName] = useState('');
   const [tagColor, setTagColor] = useState('#ffffff');
 
@@ -57,3 +57,5 @@ export default function TagsSection({ tags, setTags }) {
     </div>
   );
 }
+
+export default TagsSection;
