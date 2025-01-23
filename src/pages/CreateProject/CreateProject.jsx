@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useProjectService from '../../hooks/useProjectService.js';
 import './CreateProject.css';
 import useAuth from '../../hooks/useAuth.js';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreateProject() {
   const { user } = useAuth();
@@ -15,18 +15,32 @@ export default function CreateProject() {
   const [users, setUsers] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const projectService = useProjectService();
+  const navigate = useNavigate();
 
-  const handleCreateProject = async () => {
+  const handleCreateProject = async (e) => {
+    e.preventDefault();
+
     if (!projectName) {
       setErrorMessage('Please fill in all required fields.');
       return;
-    } else {
-      setErrorMessage('');
+    } 
+
+    if (projectName.length > 25) {
+      setErrorMessage('Project name cannot exceed 25 characters.');
+      return;
     }
 
-    const participations = users.map(({ email, role }) => ({ email, role }));
+    if (description.length > 200) {
+      setErrorMessage('Description cannot exceed 200 characters.');
+      return;
+    }
 
+    setErrorMessage(''); 
+  
+    const participations = users.map(({ email, role }) => ({ email, role }));
+  
     const newProject = {
       name: projectName,
       description: description || null,
@@ -39,17 +53,27 @@ export default function CreateProject() {
       },
       participations,
     };
-
+  
+    setIsLoading(true); 
     try {
       const response = await projectService.createProject(newProject);
+      if (response.status === 400) {
+        setErrorMessage('Failed to create project. Please check the input data.');
+        return;
+      }
       console.log('Project created successfully', response);
       setUsers([]);
       setDescription('');
       setProjectName('');
+      navigate('/projects');
     } catch (error) {
       console.error('Error creating project:', error.message);
+      setErrorMessage('Failed to create project.');
+    } finally {
+      setIsLoading(false); 
     }
   };
+  
 
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -111,8 +135,8 @@ export default function CreateProject() {
             />
           </label>
         </div>
-        <button className="create-button" onClick={handleCreateProject}>
-          Create
+        <button className="create-button" onClick={handleCreateProject} disabled={isLoading}>
+         {isLoading ? 'Loading...' : 'Create'}
         </button>
       </div>
 
