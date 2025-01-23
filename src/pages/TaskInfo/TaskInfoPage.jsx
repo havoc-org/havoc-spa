@@ -33,6 +33,7 @@ const TaskInfoPage = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [comments, setComments] = useState([]);
   const [task, setTask] = useState({});
+  const [assignments, setAssignments] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
 
   const [name, setName] = useState('');
