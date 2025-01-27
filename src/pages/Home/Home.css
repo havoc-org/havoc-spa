@@ -14,7 +14,7 @@
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
-  background-color: #0f1c3d;
+  background-color: #0D1134;
   border-radius: 0.8em 0.8em 0em 0em;
   font-size: 1.25em;
 }
@@ -41,7 +41,7 @@
   flex-grow: 1;
   align-items: center;
   flex-direction: column;
-  background-color: #0f1c3d;
+  background-color: #0D1134;
   border-radius: 0.8em 0.8em 0em 0em;
 }
 

@@ -1,5 +1,6 @@
 import './NavBar.css';
 import moon from '../../assets/moon.svg';
+import logo from '../../assets/logo.svg';
 import sun from '../../assets/sun.svg';
 import exit from '../../assets/exit.svg';
 import profile from '../../assets/profile.svg';
@@ -15,14 +16,10 @@ export default function NavBar() {
   const Buttons = user?.token ? ButtonsLoggedIn : ButtonsNotLoggedIn;
   return (
     <nav className="outer">
-      <link
-        href="https://fonts.googleapis.com/css?family=Akronim"
-        rel="stylesheet"
-      ></link>
       <ul>
         <li className="nav-link">
-          <Link to="/" style={{ textDecoration: 'none', color: '#BBD8EB' }}>
-            <p className="logo">HAVOC</p>
+          <Link to="/" >
+            <img style={{ maxWidth: '20%', margin: '10px 0 10px 20px' }} src={logo} alt="Logo" />
           </Link>
         </li>
         <li className="nav-links">
@@ -43,18 +40,13 @@ function ButtonsNotLoggedIn({ icon, onClickTheme }) {
   return (
     <ul className="nav-links-list">
       <li className="nav-link">
-        <button className="tab-button" onClick={onClickTheme}>
-          <img src={icon} />
-        </button>
-      </li>
-      <li className="nav-link">
         <Link to="/login">
-          <button className="a-button">Sign In</button>
+          <button className="login-button register-button">Sign In</button>
         </Link>
       </li>
       <li className="nav-link">
         <Link to="/register">
-          <button className="yes-button">Sign Up</button>
+          <button className="signup-button register-button">Sign Up</button>
         </Link>
       </li>
     </ul>
