@@ -11,12 +11,12 @@ import Comments from './Components/Comments.jsx';
 import TaskInfoToolbar from './Components/TaskInfoToolbar.jsx';
 import DatePickerSection from '../../components/DatePickerSection/DatePickerSection';
 
+import MembersPopup from './Components/Pop-Ups/MembersPopup.jsx';
 import TagPopup from './Components/Pop-Ups/TagPopup.jsx';
 import FilePopup from './Components/Pop-Ups/FilePopup.jsx';
 
 const TaskInfoPage = () => {
   const projectContext = useProject();
-  const user = useAuth().user;
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -36,6 +36,7 @@ const TaskInfoPage = () => {
 
   const [hasChanges, setHasChanges] = useState(false);
 
+  const [showMembersPopup, setShowMembersPopup] = useState(false);
   const [showFilePopup, setShowFilePopup] = useState(false);
   const [showTagPopup, setShowTagPopup] = useState(false);
 
@@ -169,7 +170,11 @@ const TaskInfoPage = () => {
         </div>
 
         <div className="task-sidebar">
-          <button className="sidebar-button">Members</button>
+          <button className="sidebar-button"
+            onClick={() => setShowMembersPopup(true)}
+          >
+            Members
+          </button>
           <button
             className="sidebar-button"
             onClick={() => setShowTagPopup(true)}
@@ -184,6 +189,14 @@ const TaskInfoPage = () => {
           </button>
         </div>
       </div>
+
+      {showMembersPopup &&( 
+        <MembersPopup 
+        currentProject={projectContext.currentProject}
+        task={task}
+        setShowMembersPopup={setShowMembersPopup} 
+        />
+      )}
 
       {showFilePopup && (
         <FilePopup

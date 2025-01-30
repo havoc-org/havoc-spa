@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import './AssignMembers.css';
+import { set } from '@cloudinary/url-gen/actions/variable';
+import React, { useEffect, useState } from 'react';
 
-export default function AssignMembers({ assignedUsers, setAssignedUsers, currentProject }) {
+export default function AssignUsers({ newUsers,removedUsers, setNewUsers, setRemovedUsers, currentProject,task }) {
   const initialUsers = currentProject?.participations.map((p) => ({
     id: p.user.userId,
     name: p.user.firstName,
@@ -9,10 +9,16 @@ export default function AssignMembers({ assignedUsers, setAssignedUsers, current
     email: p.user.email,
     role: p.user.role.name,
   })) || [];
-  console.log({currentProject});
-  const [availableUsers, setAvailableUsers] = useState(initialUsers);
+  const [availableUsers, setAvailableUsers] = useState(initialUsers.filter(
+    (user) => !task.assignments.some((assignment) => assignment.user.userId === user.id)
+  ));
+  const [assignedUsers, setAssignedUsers] = useState(initialUsers.filter(
+    (user) => task.assignments.some((assignment) => assignment.user.userId === user.id)
+  ));
   const [selectedUser, setSelectedUser] = useState('');
   const [selectedUserComment, setSelectedUserComment] = useState('');
+  useEffect(() => {}
+  , [assignedUsers]);
 
   const handleAddAssignment = () => {
     if (selectedUser) {
@@ -22,10 +28,15 @@ export default function AssignMembers({ assignedUsers, setAssignedUsers, current
           ...userToAdd,
           comment: selectedUserComment || '',
         };
-        setAssignedUsers([...assignedUsers, userWithComment]);
+        setNewUsers([...newUsers, userWithComment]);
         setAvailableUsers(availableUsers.filter((user) => user.id !== userToAdd.id));
+        if (removedUsers.some((user) => user.id ===  userToAdd.id))
+          setRemovedUsers(removedUsers.filter((user) => user.id !== userToAdd.id));
+        setAssignedUsers([...assignedUsers, userToAdd]);
         setSelectedUser('');
         setSelectedUserComment('');
+        console.log({removedUsers});
+        console.log({newUsers});
       }
     }
   };
@@ -34,7 +45,13 @@ export default function AssignMembers({ assignedUsers, setAssignedUsers, current
     const userToRemove = assignedUsers.find((user) => user.id === userId);
     if (userToRemove) {
       setAvailableUsers([...availableUsers, userToRemove]);
+      setRemovedUsers([...removedUsers, userToRemove]);
       setAssignedUsers(assignedUsers.filter((user) => user.id !== userId));
+      if (newUsers.some((user) => user.id === userId))
+        setNewUsers(newUsers.filter((user) => user.id !== userId));
+
+      console.log({removedUsers});
+      console.log({newUsers});
     }
   };
 

@@ -194,50 +194,6 @@
   align-items: start;
 }
 
-.files-tile {
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
-}
-
-.main-task-info-container {
-  display: flex;
-  width: 100%;
-}
-
-.task-info-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.task-info-menu {
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-}
-
-.task-info-menu-item > h3 {
-  margin: 0;
-}
-
-.task-info-menu-item {
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  margin: 5px;
-  padding: 5px;
-  height: 28px;
-  background: #283a7b;
-  color: #bbd8eb;
-  border-bottom: 1px solid rgb(30, 44, 92);
-  border-radius: 10px;
-}
-
-.task-info-menu-item:hover {
-  color: #2980b9;
-}
 
 .date-picker-section {
   background-color: #1c2757;
@@ -346,4 +302,8 @@
 
 .add-button:hover {
   background-color: #0056b3;
+}
+
+.members-section{
+  display: flex;
 }

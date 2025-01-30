@@ -49,7 +49,7 @@ const TaskTile = ({ task,index }) => {
       >
         <div className="task-info">
           <p className="name">{task.name}</p>
-          <TaskIcon icon={members} info={task.attachments.length}/>
+          <TaskIcon icon={members} info={task.assignments.length}/>
         </div>
         <div className='tag-container'>
           {tag && (
