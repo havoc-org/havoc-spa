@@ -7,6 +7,10 @@ function TagsSection({ tags, setTags }) {
 
   const handleAddTag = () => {
     if (tagName.trim() && tagColor) {
+      if(tagName.length>20){
+        alert('Tag name should be less than 20 characters');
+        return;
+      }
       setTags([...tags, { name: tagName.trim(), colorHex: tagColor }]);
       setTagName('');
       setTagColor('#ffffff');

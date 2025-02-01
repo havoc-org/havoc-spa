@@ -1,9 +1,11 @@
 import {React,useState} from 'react';
 import useTagService from '../../../../hooks/useTagService';
 import TagsSection from '../../../../components/TagsSection/TagsSection';
-const TagPopup = ({projectId,taskId, setShowTagPopup}) => {
+import TagList from './Components/TagList';
+const TagPopup = ({projectId,task, setShowTagPopup}) => {
     const tagService = useTagService();
     const [selectedTags, setSelectedTags] = useState([]);
+    const taskId=task.taskId;
     async function handleAddTags() {
         try {
           await tagService.addtags(selectedTags, projectId, taskId);
@@ -19,6 +21,7 @@ const TagPopup = ({projectId,taskId, setShowTagPopup}) => {
     return (
         <div className="popup-taskinfo-overlay">
           <div className="popup-taskinfo-content">
+            <TagList task={task} />
             <TagsSection tags={selectedTags} setTags={setSelectedTags} />
             <div className="popup-taskinfo-footer">
               <button

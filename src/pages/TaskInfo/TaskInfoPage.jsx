@@ -211,7 +211,7 @@ const TaskInfoPage = () => {
         <TagPopup
           projectId={projectContext.currentProject.projectId}
           setShowTagPopup={setShowTagPopup}
-          taskId={id}
+          task={task}
         />
       )}
     </div>

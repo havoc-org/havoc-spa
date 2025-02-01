@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 import useAssignmentService from '../../../../hooks/useAssignmentService';
-import AssignUsers from '../AssignUsers';
+import AssignUsers from './Components/AssignUsers';
 import './MembersPopup.css';
 const MembersPopup = ({ currentProject, task, setShowMembersPopup }) => {
   const [newAssignedUsers, setNewAssignedUsers] = useState([]);
