@@ -2,6 +2,7 @@ import React from 'react';
 import Attachment from './Attachment.jsx';
 import folderIcon from '../../../assets/folder.svg';
 const AttachmentsList = ({files}) => {
+  console.log({files});
     return (
         <div className="task-files">
                   <div className="files-header">

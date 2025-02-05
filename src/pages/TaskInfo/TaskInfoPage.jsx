@@ -14,6 +14,7 @@ import DatePickerSection from '../../components/DatePickerSection/DatePickerSect
 import MembersPopup from './Components/Pop-Ups/MembersPopup.jsx';
 import TagPopup from './Components/Pop-Ups/TagPopup.jsx';
 import FilePopup from './Components/Pop-Ups/FilePopup.jsx';
+import TagsTile from './Components/TagsTile.jsx';
 
 const TaskInfoPage = () => {
   const projectContext = useProject();
@@ -144,6 +145,7 @@ const TaskInfoPage = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
+          <TagsTile task={task} />
           <Description
             description={description}
             setDescription={setDescription}

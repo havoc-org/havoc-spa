@@ -15,7 +15,7 @@ const Tag = ({ backgroundColor, text}) => {
   //const displayText = text.length > 10 ? `${text.slice(0, 10)}...` : text;
 
   return (
-      <p style={style} className='name'>{text}</p>
+      <p style={style} className='name'>#{text}</p>
   );
   
 };

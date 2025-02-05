@@ -1,7 +1,7 @@
 import {React,useState} from 'react';
 import useTagService from '../../../../hooks/useTagService';
 import TagsSection from '../../../../components/TagsSection/TagsSection';
-import TagList from './Components/TagList';
+import TagList from '../TagList';
 const TagPopup = ({projectId,task, setShowTagPopup}) => {
     const tagService = useTagService();
     const [selectedTags, setSelectedTags] = useState([]);
@@ -12,6 +12,7 @@ const TagPopup = ({projectId,task, setShowTagPopup}) => {
     
           setSelectedTags([]);
           setShowTagPopup(false);
+          window.location.reload();
         } catch (error) {
           console.error('Error adding tags:', error);
           alert('Failed to add tags.');
@@ -21,7 +22,6 @@ const TagPopup = ({projectId,task, setShowTagPopup}) => {
     return (
         <div className="popup-taskinfo-overlay">
           <div className="popup-taskinfo-content">
-            <TagList task={task} />
             <TagsSection tags={selectedTags} setTags={setSelectedTags} />
             <div className="popup-taskinfo-footer">
               <button
