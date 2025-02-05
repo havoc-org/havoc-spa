@@ -19,7 +19,7 @@
   border-style: solid;
 }
 
-.tab-button:active {
+.tab-button:hover {
   border-radius: 0.6em;
   margin: 0.2em;
   border-style: hidden;

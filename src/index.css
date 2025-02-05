@@ -5,15 +5,16 @@
 
   color-scheme: light dark;
   color: #bbd8eb;
-  background-color: #0d1134;
+  background-color: #0a0c32;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 body {
-  background-color: #0d1134;
+  background-color: #0a0c32;
   margin: 0;
   place-items: center;
   min-width: 320px;
@@ -21,11 +22,23 @@ body {
 }
 
 h1 {
+  color: white;
   font-size: 3.2em;
   line-height: 1.1;
 }
 
+::-moz-selection {
+  color: #0a0c32;
+  background: #bbd8eb;
+}
+
+::selection {
+  color: #0a0c32;
+  background: #bbd8eb;
+}
+
 button {
+  cursor: pointer;
   font-family: 'Inter', sans-serif;
   padding: 0.6em 2em 0.6em 2em;
   font-style: normal;
@@ -53,7 +66,6 @@ button:disabled:active {
 }
 
 button:hover {
-  opacity: 0.7;
   transition: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
@@ -67,6 +79,66 @@ button img {
   padding: 0;
   display: block;
 }
+
+.login-button {
+  background-color: #142653;
+  border-color: #bbd8eb;
+  color: #bbd8eb;
+}
+
+.signup-button {
+  background-color: #bbd8eb;
+  border-color: #bbd8eb;
+  color: #142653;
+}
+
+#about-page {
+  &::after {
+    right: 85%;
+    top: 43%;
+  }
+}
+
+.register-button {
+  transition: all 0.5s;
+  width: auto;
+  position: relative;
+
+  &::after {
+    content: "➔";
+    font-size: 20px;
+    position: absolute;
+    right: 70%;
+    top: 43%;
+    bottom: 0;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover {
+    transition: all 0.5s;
+    border-radius: 20px;
+    -webkit-box-shadow: inset 0px 0px 50px -19px #bbd8eb;
+    -moz-box-shadow: inset 0px 0px 50px -19px #bbd8eb;
+    box-shadow: inset 0px 0px 50px -19px #bbd8eb;
+    color: #ffffff;
+
+    &::after {
+      opacity: 1;
+      transition: all 0.5s;
+      color: #bbd8eb;
+
+    }
+  }
+}
+
+.register-button:hover {
+  background-color: #142653;
+  color: #bbd8eb;
+  border-color: bbd8eb;
+}
+
+
 
 .yes-button {
   border-color: #bbd8eb;
@@ -91,6 +163,17 @@ button img {
   background: #142653;
   color: #73a5d3;
 }
+
+.about-flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+.about-flex #video {}
 
 input {
   background-color: #283a7b;

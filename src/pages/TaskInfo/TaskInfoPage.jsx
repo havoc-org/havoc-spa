@@ -1,40 +1,33 @@
 import { React, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import useTaskService from '../../hooks/useTaskService.js';
+import useCommentService from '../../hooks/useCommentsService.js';
 import './TaskInfo.css';
 import useProject from '../../hooks/useProject.js';
 import useAuth from '../../hooks/useAuth.js';
 import Description from './Components/Description.jsx';
 import AttachmentsList from './Components/AttachmentsList.jsx';
 import Comments from './Components/Comments.jsx';
-import useCommentService from '../../hooks/useCommentsService.js';
 import TaskInfoToolbar from './Components/TaskInfoToolbar.jsx';
 import DatePickerSection from '../../components/DatePickerSection/DatePickerSection';
-import FileUpload from '../../components/FileUpload/FileUpload';
-import TagsSection from '../../components/TagsSection/TagsSection';
-import useFileUpload from '../../hooks/useFileUpload';
-import useAttachmentService from '../../hooks/useAttachmentService';
-import useTagService from '../../hooks/useTagService';
+
+import MembersPopup from './Components/Pop-Ups/MembersPopup.jsx';
+import TagPopup from './Components/Pop-Ups/TagPopup.jsx';
+import FilePopup from './Components/Pop-Ups/FilePopup.jsx';
 
 const TaskInfoPage = () => {
   const projectContext = useProject();
-  const user = useAuth().user;
   const { id } = useParams();
   const navigate = useNavigate();
 
   const taskService = useTaskService();
   const commentService = useCommentService();
-  const attachmentService = useAttachmentService();
-  const tagService = useTagService();
 
   const [isLoading, setIsLoading] = useState(true);
 
   const [taskFiles, setTaskFiles] = useState([]);
-  const [selectedFiles, setSelectedFiles] = useState([]);
   const [comments, setComments] = useState([]);
   const [task, setTask] = useState({});
-  const [assignments, setAssignments] = useState([]);
-  const [selectedTags, setSelectedTags] = useState([]);
 
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -43,10 +36,9 @@ const TaskInfoPage = () => {
 
   const [hasChanges, setHasChanges] = useState(false);
 
+  const [showMembersPopup, setShowMembersPopup] = useState(false);
   const [showFilePopup, setShowFilePopup] = useState(false);
   const [showTagPopup, setShowTagPopup] = useState(false);
-
-  const { uploadFile, uploading, uploadError } = useFileUpload();
 
   useEffect(() => {
     async function fetchData() {
@@ -93,7 +85,10 @@ const TaskInfoPage = () => {
       projectId: projectContext.currentProject.projectId,
     };
     try {
-      const response = await commentService.createComment(commentPOST, task.taskId);
+      const response = await commentService.createComment(
+        commentPOST,
+        task.taskId
+      );
       if (response) {
         setComments([...comments, response]);
       }
@@ -134,38 +129,6 @@ const TaskInfoPage = () => {
     }
   }
 
-  async function handleAddFiles() {
-    try {
-      const attachments = [];
-      for (const file of selectedFiles) {
-        const url = await uploadFile(file);
-        attachments.push({ fileLink: url });
-      }
-
-      await attachmentService.addAttachments(attachments, projectContext.currentProject.projectId, id);
-
-      const updatedFiles = await taskService.getAllAttachments(id);
-      setTaskFiles(updatedFiles);
-
-      setSelectedFiles([]);
-      setShowFilePopup(false);
-    } catch (error) {
-      console.error('Error uploading attachments:', error);
-    }
-  }
-
-  async function handleAddTags() {
-    try {
-      await tagService.addtags(selectedTags, projectContext.currentProject.projectId, id);
-
-      setSelectedTags([]);
-      setShowTagPopup(false);
-    } catch (error) {
-      console.error('Error adding tags:', error);
-      alert('Failed to add tags.');
-    }
-  }
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -192,7 +155,7 @@ const TaskInfoPage = () => {
             setDeadline={setDeadline}
             className="task-info-datepicker"
           />
-  
+
           <button
             className={`save-button ${hasChanges ? 'active' : 'disabled'}`}
             onClick={handleSaveChanges}
@@ -200,14 +163,18 @@ const TaskInfoPage = () => {
           >
             Save Changes
           </button>
-  
+
           <AttachmentsList files={taskFiles} />
-  
+
           <Comments comments={comments} handleAddComment={handleAddComment} />
         </div>
-  
+
         <div className="task-sidebar">
-          <button className="sidebar-button">Members</button>
+          <button className="sidebar-button"
+            onClick={() => setShowMembersPopup(true)}
+          >
+            Members
+          </button>
           <button
             className="sidebar-button"
             onClick={() => setShowTagPopup(true)}
@@ -222,58 +189,33 @@ const TaskInfoPage = () => {
           </button>
         </div>
       </div>
-  
-      {showFilePopup && (
-        <div className="popup-taskinfo-overlay">
-          <div className="popup-taskinfo-content">
-            <FileUpload files={selectedFiles} setFiles={setSelectedFiles} />
-  
-            {uploading && <div>Uploading to Cloudinary...</div>}
-            {uploadError && <div style={{ color: 'red' }}>{uploadError}</div>}
-  
-            <div className="popup-taskinfo-footer">
-              <button
-                className="close-button"
-                onClick={() => setShowFilePopup(false)}
-              >
-                Close
-              </button>
-              <button
-                className="add-button"
-                onClick={handleAddFiles}
-                disabled={uploading}
-              >
-                Add
-              </button>
-            </div>
-          </div>
-        </div>
+
+      {showMembersPopup &&( 
+        <MembersPopup 
+        currentProject={projectContext.currentProject}
+        task={task}
+        setShowMembersPopup={setShowMembersPopup} 
+        />
       )}
-  
+
+      {showFilePopup && (
+        <FilePopup
+          projectId={projectContext.currentProject.projectId}
+          taskId={id}
+          setShowFilePopup={setShowFilePopup}
+          setTaskFiles={setTaskFiles}
+        />
+      )}
+
       {showTagPopup && (
-        <div className="popup-taskinfo-overlay">
-          <div className="popup-taskinfo-content">
-            <TagsSection tags={selectedTags} setTags={setSelectedTags} />
-            <div className="popup-taskinfo-footer">
-              <button
-                className="close-button"
-                onClick={() => setShowTagPopup(false)}
-              >
-                Close
-              </button>
-              <button
-                className="add-button"
-                onClick={handleAddTags}
-              >
-                Add
-              </button>
-            </div>
-          </div>
-        </div>
+        <TagPopup
+          projectId={projectContext.currentProject.projectId}
+          setShowTagPopup={setShowTagPopup}
+          task={task}
+        />
       )}
     </div>
   );
-  
 };
 
 export default TaskInfoPage;
