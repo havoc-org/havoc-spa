@@ -15,6 +15,8 @@ export default function NavBar() {
   const { user, logout } = useContext(AuthContext);
   const [showPopup, setShowPopup] = useState(false);
 
+  const Buttons = user?.token ? ButtonsLoggedIn : ButtonsNotLoggedIn;
+
   return (
     <nav className="outer">
       <link
@@ -28,10 +30,12 @@ export default function NavBar() {
           </Link>
         </li>
         <li className="nav-links">
-          <ButtonsLoggedIn
+          <Buttons
             icon={icon}
             onClickTheme={() => (icon === moon ? setIcon(sun) : setIcon(moon))}
-            onLogOut={logout}
+            onLogOut={() => {
+              logout();
+            }}
             onProfileClick={() => setShowPopup(!showPopup)}
           />
         </li>
@@ -42,35 +46,57 @@ export default function NavBar() {
   );
 }
 
+function ButtonsNotLoggedIn({ icon, onClickTheme }) {
+  return (
+    <ul className="nav-links-list">
+      <li className="nav-link">
+        <button className="tab-button" onClick={onClickTheme}>
+          <img src={icon} alt="Theme Toggle" />
+        </button>
+      </li>
+      <li className="nav-link">
+        <Link to="/login">
+          <button className="a-button">Sign In</button>
+        </Link>
+      </li>
+      <li className="nav-link">
+        <Link to="/register">
+          <button className="yes-button">Sign Up</button>
+        </Link>
+      </li>
+    </ul>
+  );
+}
+
 function ButtonsLoggedIn({ icon, onClickTheme, onLogOut, onProfileClick }) {
   return (
     <ul className="nav-links-list">
       <li className="nav-link">
         <button className="tab-button" onClick={onClickTheme}>
-          <img src={icon} />
+          <img src={icon} alt="Theme Toggle" />
         </button>
       </li>
       <li className="nav-link">
         <Link to="/projects">
           <button className="tab-button">
-            <img src={home} />
+            <img src={home} alt="Projects" />
           </button>
         </Link>
       </li>
       <li className="nav-link">
         <button className="tab-button">
-          <img src={bell} />
+          <img src={bell} alt="Notifications" />
         </button>
       </li>
       <li className="nav-link">
         <button className="tab-button" onClick={onProfileClick}>
-          <img src={profile} />
+          <img src={profile} alt="Profile" />
         </button>
       </li>
       <li className="nav-link">
         <Link to="/">
           <button className="no-button tab-button" onClick={onLogOut}>
-            <img src={exit} />
+            <img src={exit} alt="Logout" />
           </button>
         </Link>
       </li>
