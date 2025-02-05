@@ -11,7 +11,10 @@ export default function useUserService() {
       api.get(`${endpoint}/byId/${userId}`),
 
     updateUser: async (userData) =>
-        api.patch(endpoint, userData)
+        api.patch(endpoint, userData),
+
+    updateUserPass: async (oldPass, newPass) => 
+        api.patch(`${endpoint}/updatePassword`, { oldPass, newPass }),
 
   };
 

@@ -12,6 +12,14 @@ export default function ProfilePopup({ user, onClose }) {
   const [editedLastName, setEditedLastName] = useState('');
   const [updating, setUpdating] = useState(false);
 
+  // Поля для смены пароля
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [passwordUpdating, setPasswordUpdating] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
+  const [passwordSuccess, setPasswordSuccess] = useState(false);
+
   useEffect(() => {
     async function fetchUserData() {
       try {
@@ -66,6 +74,30 @@ export default function ProfilePopup({ user, onClose }) {
     }
   }
 
+  async function handleChangePassword() {
+    setPasswordError('');
+    setPasswordSuccess(false);
+    setPasswordUpdating(true);
+
+    if (!oldPassword || !newPassword) {
+      setPasswordError('Both fields are required.');
+      setPasswordUpdating(false);
+      return;
+    }
+
+    try {
+      await userService.updateUserPass(oldPassword, newPassword);
+      setPasswordSuccess(true);
+      setOldPassword('');
+      setNewPassword('');
+      setShowPasswordForm(false);
+    } catch (error) {
+      setPasswordError('Failed to change password. Check your old password and try again.');
+    } finally {
+      setPasswordUpdating(false);
+    }
+  }
+
   if (loading) {
     return (
       <div className="profile-popup-container">
@@ -78,21 +110,12 @@ export default function ProfilePopup({ user, onClose }) {
     );
   }
 
-  if (!userData) {
-    return (
-      <div className="profile-popup-container">
-        <div className="profile-popup" ref={popupRef}>
-          <h2>Profile Settings</h2>
-          <p>Error loading user data.</p>
-          <button className="close-btn" onClick={onClose}>Close</button>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="profile-popup-container">
       <div className="profile-popup" ref={popupRef}>
+        {/* Кнопка закрытия (крестик) */}
+        <button className="close-btn" onClick={onClose}>✖</button>
+
         <h2>Personal Profile</h2>
 
         <div className="profile-field">
@@ -137,8 +160,32 @@ export default function ProfilePopup({ user, onClose }) {
           <button className="edit-btn" onClick={() => setEditMode(true)}>Edit</button>
         )}
 
-        <button className="reset-password-btn">Reset Password</button>
-        <button className="close-btn" onClick={onClose}>Close</button>
+        {showPasswordForm ? (
+          <div className="reset-password-form">
+            <input
+              type="password"
+              placeholder="Old Password"
+              value={oldPassword}
+              onChange={(e) => setOldPassword(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="New Password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+            <div className="reset-password-buttons">
+              <button className="submit-btn" onClick={handleChangePassword} disabled={passwordUpdating}>
+                {passwordUpdating ? 'Updating...' : 'Submit'}
+              </button>
+              <button className="cancel-password-btn" onClick={() => setShowPasswordForm(false)}>Cancel</button>
+            </div>
+            {passwordError && <p className="error-message">{passwordError}</p>}
+            {passwordSuccess && <p className="success-message">Password updated successfully!</p>}
+          </div>
+        ) : (
+          <button className="reset-password-btn" onClick={() => setShowPasswordForm(true)}>Reset Password</button>
+        )}
       </div>
     </div>
   );
