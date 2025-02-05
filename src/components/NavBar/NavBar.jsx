@@ -8,11 +8,13 @@ import home from '../../assets/home.svg';
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
+import ProfilePopup from '../ProfilePopup/ProfilePopup';
 
 export default function NavBar() {
   const [icon, setIcon] = useState(moon);
   const { user, logout } = useContext(AuthContext);
-  const Buttons = user?.token ? ButtonsLoggedIn : ButtonsNotLoggedIn;
+  const [showPopup, setShowPopup] = useState(false);
+
   return (
     <nav className="outer">
       <link
@@ -26,42 +28,21 @@ export default function NavBar() {
           </Link>
         </li>
         <li className="nav-links">
-          <Buttons
+          <ButtonsLoggedIn
             icon={icon}
-            onClickTheme={() => (icon == moon ? setIcon(sun) : setIcon(moon))}
-            onLogOut={() => {
-              logout();
-            }}
+            onClickTheme={() => (icon === moon ? setIcon(sun) : setIcon(moon))}
+            onLogOut={logout}
+            onProfileClick={() => setShowPopup(!showPopup)}
           />
         </li>
       </ul>
+
+      {showPopup && <ProfilePopup user={user} onClose={() => setShowPopup(false)} />}
     </nav>
   );
 }
 
-function ButtonsNotLoggedIn({ icon, onClickTheme }) {
-  return (
-    <ul className="nav-links-list">
-      <li className="nav-link">
-        <button className="tab-button" onClick={onClickTheme}>
-          <img src={icon} />
-        </button>
-      </li>
-      <li className="nav-link">
-        <Link to="/login">
-          <button className="a-button">Sign In</button>
-        </Link>
-      </li>
-      <li className="nav-link">
-        <Link to="/register">
-          <button className="yes-button">Sign Up</button>
-        </Link>
-      </li>
-    </ul>
-  );
-}
-
-function ButtonsLoggedIn({ icon, onClickTheme, onLogOut }) {
+function ButtonsLoggedIn({ icon, onClickTheme, onLogOut, onProfileClick }) {
   return (
     <ul className="nav-links-list">
       <li className="nav-link">
@@ -82,7 +63,7 @@ function ButtonsLoggedIn({ icon, onClickTheme, onLogOut }) {
         </button>
       </li>
       <li className="nav-link">
-        <button className="tab-button">
+        <button className="tab-button" onClick={onProfileClick}>
           <img src={profile} />
         </button>
       </li>
