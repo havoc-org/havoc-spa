@@ -56,7 +56,7 @@ export default function AssignUsers({ newUsers,removedUsers, setNewUsers, setRem
   };
 
   return (
-    <div className="members-section">
+    <div className="members-container">
       <h3>Assign to</h3>
       <div className="assign-input-group">
         <select
