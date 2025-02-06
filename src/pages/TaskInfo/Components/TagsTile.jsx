@@ -3,8 +3,7 @@ import TagList from './TagList';
 
 const TagsTile = ({task}) => {
     return (
-        <div className="task-description">
-      <h2>Tags</h2>
+        <div className="tag-list-container">
       <TagList task={task}
       />
     </div>

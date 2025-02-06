@@ -14,7 +14,6 @@ import DatePickerSection from '../../components/DatePickerSection/DatePickerSect
 import MembersPopup from './Components/Pop-Ups/MembersPopup.jsx';
 import TagPopup from './Components/Pop-Ups/TagPopup.jsx';
 import FilePopup from './Components/Pop-Ups/FilePopup.jsx';
-import TagsTile from './Components/TagsTile.jsx';
 
 const TaskInfoPage = () => {
   const projectContext = useProject();
@@ -136,7 +135,8 @@ const TaskInfoPage = () => {
 
   return (
     <div>
-      <TaskInfoToolbar handleDeleteTask={handleDeleteTask} />
+      
+      <TaskInfoToolbar task={task} handleDeleteTask={handleDeleteTask} />
       <div className="task-page">
         <div className="task-main">
           <input
@@ -145,7 +145,6 @@ const TaskInfoPage = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <TagsTile task={task} />
           <Description
             description={description}
             setDescription={setDescription}
@@ -166,13 +165,19 @@ const TaskInfoPage = () => {
             Save Changes
           </button>
 
-          <AttachmentsList files={taskFiles} />
+          <AttachmentsList
+            files={taskFiles}
+            setFiles={setTaskFiles}
+            taskId={id}
+            projectId={projectContext.currentProject.projectId}
+          />
 
           <Comments comments={comments} handleAddComment={handleAddComment} />
         </div>
 
         <div className="task-sidebar">
-          <button className="sidebar-button"
+          <button
+            className="sidebar-button"
             onClick={() => setShowMembersPopup(true)}
           >
             Members
@@ -192,11 +197,11 @@ const TaskInfoPage = () => {
         </div>
       </div>
 
-      {showMembersPopup &&( 
-        <MembersPopup 
-        currentProject={projectContext.currentProject}
-        task={task}
-        setShowMembersPopup={setShowMembersPopup} 
+      {showMembersPopup && (
+        <MembersPopup
+          currentProject={projectContext.currentProject}
+          task={task}
+          setShowMembersPopup={setShowMembersPopup}
         />
       )}
 

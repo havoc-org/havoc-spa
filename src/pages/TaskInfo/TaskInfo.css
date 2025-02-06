@@ -54,7 +54,34 @@
   width: 100%;
   box-sizing: border-box;
 }
-
+.delete-button{
+  background-color: #d4776a;
+  border: 2px solid #792929;
+  color: #BBD8EB;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  border-radius: 5px;
+  cursor: pointer;
+  float: right;
+  font-size: 14px;
+  max-height: 80px;
+}
+.tag-list-container {
+  display: flex;
+  gap: 5px;
+  margin-left: 20px;
+  
+  margin-right: 20px;
+}
+.task-info-tag-list{
+  list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
 .task-description {
   background-color: #142653;
   padding: 15px;
@@ -89,10 +116,38 @@
   flex-direction: column;
 }
 
-.file-item {
+.attachment-item {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  padding: 8px 12px;
+  background-color: #223168;
+  border-radius: 5px;
+  color: #BBD8EB;
+  width: 100%;
+  
   margin-top: 10px;
+
+  box-sizing: border-box;
+}
+.attachment-info{
+  
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  margin-right: 20px;
+  width: 50%;
+}
+.file-deletion-container {
+  
+  cursor: pointer;
+}
+.file-deletion-icon{
+  max-width: 90%;
+  max-height: 90%;
+}
+.file-deletion-icon:hover{
+  opacity: 0.5;
 }
 
 .file-icon {
@@ -193,7 +248,9 @@
   flex-direction: column;
   align-items: start;
 }
-
+.attachments-list > li {
+  width: 95%;
+}
 
 .date-picker-section {
   background-color: #1c2757;
@@ -304,6 +361,3 @@
   background-color: #0056b3;
 }
 
-.members-section{
-  display: flex;
-}
