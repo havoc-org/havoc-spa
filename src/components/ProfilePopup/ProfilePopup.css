@@ -40,7 +40,6 @@
     border: 1px solid #ddd;
 }
 
-/* Кнопки для редактирования профиля */
 .edit-buttons {
     display: flex;
     gap: 10px;
@@ -68,7 +67,6 @@
     background-color: gray;
 }
 
-/* Форма смены пароля стилизована так же, как редактирование профиля */
 .reset-password-form {
     display: flex;
     flex-direction: column;
@@ -85,7 +83,6 @@
     text-align: right;
 }
 
-/* Кнопки в форме смены пароля такие же, как Edit/Save */
 .reset-password-buttons {
     display: flex;
     gap: 10px;
@@ -112,7 +109,6 @@
     border-radius: 5px;
 }
 
-/* Кнопка Reset Password (чтобы открыть форму) */
 .reset-password-btn {
     background-color: #4a90e2;
     border: none;

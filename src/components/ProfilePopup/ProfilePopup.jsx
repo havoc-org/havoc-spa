@@ -12,7 +12,6 @@ export default function ProfilePopup({ user, onClose }) {
   const [editedLastName, setEditedLastName] = useState('');
   const [updating, setUpdating] = useState(false);
 
-  // Поля для смены пароля
   const [showPasswordForm, setShowPasswordForm] = useState(false);
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -113,7 +112,6 @@ export default function ProfilePopup({ user, onClose }) {
   return (
     <div className="profile-popup-container">
       <div className="profile-popup" ref={popupRef}>
-        {/* Кнопка закрытия (крестик) */}
         <button className="close-btn" onClick={onClose}>✖</button>
 
         <h2>Personal Profile</h2>
