@@ -3,7 +3,10 @@
   flex-direction: row;
   justify-content: space-between;
 }
-
+.sort-container{
+  display: flex;
+  margin-left: 20px;
+}
 .add-status-section{
   max-width: 200px;
   min-width: 200px;
