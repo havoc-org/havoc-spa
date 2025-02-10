@@ -41,7 +41,9 @@ export default function NavBar() {
         </li>
       </ul>
 
-      {showPopup && <ProfilePopup user={user} onClose={() => setShowPopup(false)} />}
+      {showPopup && (
+        <ProfilePopup user={user} onClose={() => setShowPopup(false)} />
+      )}
     </nav>
   );
 }
