@@ -33,15 +33,17 @@ export default function NavBar() {
           <Buttons
             icon={icon}
             onClickTheme={() => (icon === moon ? setIcon(sun) : setIcon(moon))}
-            onLogOut={() => {
-              logout();
+            onLogOut={async () => {
+              await logout();
             }}
             onProfileClick={() => setShowPopup(!showPopup)}
           />
         </li>
       </ul>
 
-      {showPopup && <ProfilePopup user={user} onClose={() => setShowPopup(false)} />}
+      {showPopup && (
+        <ProfilePopup user={user} onClose={() => setShowPopup(false)} />
+      )}
     </nav>
   );
 }
