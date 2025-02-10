@@ -7,12 +7,13 @@ import Login from './pages/Login/Login.jsx';
 import Register from './pages/Register/Register.jsx';
 import MainLayout from './layouts/MainLayout';
 import CreateProject from './pages/CreateProject/CreateProject.jsx';
-import { AuthProvider, GlobalLoginRefresher } from './contexts/AuthContext.jsx';
+import { AuthProvider, GlobalLoginRefresher } from './contexts/AuthContext.jsx';    
 import ProtectedRoute from './layouts/ProtectedRoute.jsx';
 import Tasks from './pages/Tasks/Tasks.jsx';
 import CreateTask from './pages/CreateTask/CreateTask.jsx';
 import { ProjectProvider } from './contexts/ProjectContext.jsx';
 import TaskInfoPage from './pages/TaskInfo/TaskInfoPage.jsx';
+import ProjectInfoPage from './pages/ProjectInfo/ProjectInfoPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
           {
             path: ':id',
             element: <TaskInfoPage />,
+          },
+          {
+            path: 'edit',
+            element: <ProjectInfoPage />,
           },
         ],
       },

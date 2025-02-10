@@ -10,6 +10,7 @@ export default function useProjectService() {
     createProject: async (data) => api.post(endpoint, data),
     editProject: async (data) => api.put(endpoint, data),
     deleteProject: async (id) => api.delete(`${endpoint}/${id}`),
+    updateProject: async (id, data) => api.patch(`${endpoint}/${id}`, data),
   };
   return projectService;
 }

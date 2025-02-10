@@ -1,0 +1,117 @@
+.project-form {
+    background: #142653;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-top: 12px;
+    width: 40%;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.project-form h1 {
+    color: #BBD8EB;
+    margin: 0 0 2rem 0;
+    text-align: left;
+    font-size: 1.8em;
+}
+
+.project-input {
+    width: 90%;
+    padding: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.project-input, 
+.date-group input[type="date"],
+.project-textarea {
+    background: #0a0c32;
+    border: 2px solid #283a7b;
+    border-radius: 8px;
+    color: #BBD8EB;
+    transition: all 0.3s ease;
+}
+
+.project-textarea {
+    width: 90%;
+    padding: 12px;
+    margin-bottom: 1.5rem;
+    min-height: 100px;
+    resize: none;
+    font-family: inherit;
+}
+
+.date-group input[type="date"] {
+    padding: 8px;
+}
+
+.date-group {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.date-group label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: #73A5D3;
+    flex: 1;
+}
+
+
+
+.date-group input[type="date"]:focus,
+.project-input:focus, .project-textarea:focus {
+    border: 2px solid #73A5D3;
+    outline: none;
+    border-color: #8dc1d7;
+    box-shadow: 0 0 8px rgba(115, 165, 211, 0.5);
+}
+
+.submit-button {
+    width: 100%;
+    padding: 14px;
+    background: #31661d;
+    color: #82c885;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: solid 2px #31661d;
+}
+
+.submit-button:hover {
+    border: solid 2px #82c885;
+    color: #82c885;
+    box-shadow: 0 0 8px rgba(115, 211, 166, 0.5);
+    background: #31661d;
+    transform: translateY(-2px);
+}
+
+.submit-button:disabled {
+    background: #2d4a3d;
+    color: #5a7d6b;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.error-message {
+    color: #d37373;
+    background: #53143288;
+    padding: 1rem;
+    border: 2px solid #d37373;
+    border-radius: 8px;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.success-message {
+    color: #82c885;
+    background: #134b1788;
+    padding: 1rem;
+    border: 2px solid #82c885;
+    border-radius: 8px;
+    margin: 1rem 0;
+    text-align: center;
+}

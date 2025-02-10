@@ -15,7 +15,7 @@ export default function About() {
         </h1>
 
         <h3>
-          <p>Havoc is a powerful tool for managing projects and tasks </p>
+          <p>Havoc is a powerful tool for managing projects and tasks.</p>
           <p> Plan, organize, and achieve goals efficiently.</p>
         </h3>
 

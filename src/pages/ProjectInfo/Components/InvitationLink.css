@@ -1,0 +1,62 @@
+.invitation-link-container {
+    margin-top: 20px;
+    margin-bottom: 65px;
+    padding: 10px;
+    background: #73A5D3;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; 
+    flex-wrap: nowrap;
+}
+
+.invite-span {
+    color: #283a7b;
+    font-weight: 700;
+    margin: 0; 
+    display: flex;
+    align-items: center; 
+    height: 100%;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 600px;
+    margin: 0;
+    flex-grow: 1; 
+}
+
+.invitation-input {
+    width: 100%;
+    padding: 10px 15px;
+
+    border-radius: 10px;
+    background: #8dc1d7;
+    color: #283a7b;
+    pointer-events: none;
+    padding-right: 80px;
+}
+
+.copy-button {
+   
+    margin-right: 15px;
+    padding: 0px 12px;
+    background: #8dc1d7;
+    color: #283a7b;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: none !important;
+    outline: none;
+    height: 32px;
+   
+}
+
+.copy-button:hover {
+    background: #5B8DB3;
+}

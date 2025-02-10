@@ -11,9 +11,11 @@ export default function CreateProject() {
   const [startDate, setStartDate] = useState('');
   const [deadline, setDeadline] = useState('');
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState('Member');
+  const roles = ['Owner', 'Manager', 'Developer'];
+  const [role, setRole] = useState(roles[0]);
   const [users, setUsers] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
+  const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const projectService = useProjectService();
@@ -25,7 +27,7 @@ export default function CreateProject() {
     if (!projectName) {
       setErrorMessage('Please fill in all required fields.');
       return;
-    } 
+    }
 
     if (projectName.length > 25) {
       setErrorMessage('Project name cannot exceed 25 characters.');
@@ -37,10 +39,10 @@ export default function CreateProject() {
       return;
     }
 
-    setErrorMessage(''); 
-  
+    setErrorMessage('');
+
     const participations = users.map(({ email, role }) => ({ email, role }));
-  
+
     const newProject = {
       name: projectName,
       description: description || null,
@@ -53,8 +55,8 @@ export default function CreateProject() {
       },
       participations,
     };
-  
-    setIsLoading(true); 
+
+    setIsLoading(true);
     try {
       const response = await projectService.createProject(newProject);
       if (response.status === 400) {
@@ -70,10 +72,9 @@ export default function CreateProject() {
       console.error('Error creating project:', error.message);
       setErrorMessage('Failed to create project.');
     } finally {
-      setIsLoading(false); 
+      setIsLoading(false);
     }
   };
-  
 
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -81,12 +82,22 @@ export default function CreateProject() {
   };
 
   const handleInvite = () => {
-    if (email !== '' && email !== user.email && validateEmail(email)) {
-      setUsers((prevUsers) => [...prevUsers, { email, role }]);
-      console.log(`Invite sent to: ${email} with role: ${role}`);
-      setEmail('');
-      setRole('Member'); 
+    setEmailErrorMessage('');
+    
+    if (email === '' || email === user.email || !validateEmail(email)) {
+      setEmailErrorMessage('Please enter a valid email address.');
+      return;
     }
+
+    if (users.some((user) => user.email === email)) {
+      setEmailErrorMessage('You have already sent an invitation to this email');
+      return;
+    }
+
+    setUsers((prevUsers) => [...prevUsers, { email, role }]);
+    console.log(`Invite sent to: ${email} with role: ${role}`);
+    setEmail('');
+    setErrorMessage('');
   };
 
   const handleDeleteUser = (index) => {
@@ -136,7 +147,7 @@ export default function CreateProject() {
           </label>
         </div>
         <button className="create-button" onClick={handleCreateProject} disabled={isLoading}>
-         {isLoading ? 'Loading...' : 'Create'}
+          {isLoading ? 'Loading...' : 'Create'}
         </button>
       </div>
 
@@ -154,14 +165,15 @@ export default function CreateProject() {
             onChange={(e) => setRole(e.target.value)}
             className="role-select"
           >
-            <option value="Owner">Owner</option>
             <option value="Manager">Manager</option>
+            <option value="Owner">Owner</option>
             <option value="Developer">Developer</option>
           </select>
           <button className="invite-button" onClick={handleInvite}>
             Invite
           </button>
         </div>
+        {emailErrorMessage && <p className="error-message">{emailErrorMessage}</p>}
         <div className="user-list">
           {users.map(({ email, role }, index) => (
             <div key={index} className="user-item">
