@@ -14,29 +14,30 @@ jobs:
     runs-on: 'ubuntu-latest'
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-    - name: Log in to registry
-      uses: docker/login-action@v2
-      with:
-        registry: https://havocimages.azurecr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_c0142767e4d844fcb1568cab3fc4bfda }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_e9c7a397a09e44dfbb8754d046054506 }}
+      - name: Log in to registry
+        uses: docker/login-action@v2
+        with:
+          registry: https://havocimages.azurecr.io/
+          username: ${{ secrets.AzureAppService_ContainerUsername_c0142767e4d844fcb1568cab3fc4bfda }}
+          password: ${{ secrets.AzureAppService_ContainerPassword_e9c7a397a09e44dfbb8754d046054506 }}
 
-    - name: Create .env.production File
-      run: |
-        echo "VITE_API_URL=${{ secrets.APIURL }}" >> .env.production
-        echo "VITE_CLOUDINARY_URL=${{ secrets.CLOUDINARY }}" >> .env.production
+      - name: Create .env.production File
+        run: |
+          echo "VITE_API_URL=${{ secrets.APIURL }}" >> .env.production
+          echo "VITE_CLOUDINARY_URL=${{ secrets.CLOUDINARY }}" >> .env.production
 
-    - name: Build and push container image to registry
-      uses: docker/build-push-action@v3
-      with:
-        push: true
-        tags: havocimages.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_c0142767e4d844fcb1568cab3fc4bfda }}/spa/havoc-spa:${{ github.sha }}
-        file: ./Dockerfile
+      - name: Build and push container image to registry
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: havocimages.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_c0142767e4d844fcb1568cab3fc4bfda }}/spa/havoc-spa:${{ github.sha }}
+          file: ./Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
@@ -46,11 +47,11 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-    - name: Deploy to Azure Web App
-      id: deploy-to-webapp
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: 'havocorg'
-        slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_3f882523b2904e87a1b6b3152266e2af }}
-        images: 'havocimages.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_c0142767e4d844fcb1568cab3fc4bfda }}/spa/havoc-spa:${{ github.sha }}'
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'havocorg'
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_3f882523b2904e87a1b6b3152266e2af }}
+          images: 'havocimages.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_c0142767e4d844fcb1568cab3fc4bfda }}/spa/havoc-spa:${{ github.sha }}'

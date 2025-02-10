@@ -8,6 +8,7 @@ export const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
   const projectContext = useContext(ProjectContext);
   const [user, setUser] = useState({});
+  const [out, setOut] = useState(false);
   // const [persist, setPersist] = useState(
   //   JSON.parse(localStorage.getItem('persist') || false)
   // );
@@ -15,6 +16,7 @@ export const AuthProvider = ({ children }) => {
   const endpoint = 'auth';
 
   const login = async (email, password) => {
+    setOut(false);
     const userData = await api.post(`${endpoint}/login`, { email, password });
     setUser({
       email: userData?.email,
@@ -24,6 +26,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   async function register(email, password, firstName, lastName) {
+    setOut(false);
     await api.post(`${endpoint}/register`, {
       firstName,
       lastName,
@@ -33,12 +36,14 @@ export const AuthProvider = ({ children }) => {
   }
 
   async function logout() {
+    setOut(true);
     await api.post(`${endpoint}/logout`);
     setUser(null);
     projectContext.leaveProject();
   }
 
   async function refresh() {
+    if (out) return false;
     try {
       const userData = await api.post(`${endpoint}/refresh`);
       setUser({
@@ -51,8 +56,6 @@ export const AuthProvider = ({ children }) => {
       return false;
     }
   }
-
-  
 
   return (
     <AuthContext.Provider value={{ user, login, logout, register, refresh }}>
