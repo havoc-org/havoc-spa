@@ -33,8 +33,8 @@ export default function NavBar() {
           <Buttons
             icon={icon}
             onClickTheme={() => (icon === moon ? setIcon(sun) : setIcon(moon))}
-            onLogOut={async () => {
-              await logout();
+            onLogOut={() => {
+              logout();
             }}
             onProfileClick={() => setShowPopup(!showPopup)}
           />
