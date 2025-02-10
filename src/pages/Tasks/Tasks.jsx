@@ -9,6 +9,7 @@ import TaskToolBar from './Components/TaskToolBar.jsx';
 export default function Tasks() {
   const projectContext = useContext(ProjectContext);
   const [tasks, setTasks] = useState([]);
+  const [sortValue, setSortValue] = useState('deadline');
   const project = projectContext.currentProject;
   const taskService = useTaskService();
   const [isLoading, setIsLoading] = useState(true);
@@ -65,13 +66,28 @@ export default function Tasks() {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  console.log("projectContext.role: ",projectContext.role);
   
+  const sortedTasks = [...tasks].sort((a, b) => {
+    if (sortValue === 'deadline') {
+      const dateA = a.deadline ? new Date(a.deadline) : new Date(0); // Use epoch date for null values
+      const dateB = b.deadline ? new Date(b.deadline) : new Date(0);
+      return dateA - dateB;
+    } else if (sortValue === 'startDate') {
+      const dateA = a.start ? new Date(a.start) : new Date(0); // Use epoch date for null values
+      const dateB = b.start ? new Date(b.start) : new Date(0);
+      return dateA - dateB;
+    }
+    else if (sortValue === 'name') {
+      return a.name.localeCompare(b.name);
+    }
+    return 0;
+  });
+  console.log({ sortedTasks });
   return (
     <div>
-      <TaskToolBar />
-      <DragDropContext onDragEnd={onDragEnd}>
-        <TaskList tasks={tasks}></TaskList>
+      <TaskToolBar sortValue={sortValue} setSortValue={setSortValue}/>
+      <DragDropContext onDragEnd={onDragEnd} >
+        <TaskList tasks={sortedTasks}></TaskList>
       </DragDropContext>
     </div>
   );

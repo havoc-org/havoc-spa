@@ -27,9 +27,9 @@ jobs:
         password: ${{ secrets.AzureAppService_ContainerPassword_e9c7a397a09e44dfbb8754d046054506 }}
 
     - name: Create .env.production File
-        run: |
-          echo "VITE_API_URL=${{ secrets.APIURL }}" >> .env.production
-          echo "VITE_CLOUDINARY_URL=${{ secrets.CLOUDINARY }}" >> .env.production
+      run: |
+        echo "VITE_API_URL=${{ secrets.APIURL }}" >> .env.production
+        echo "VITE_CLOUDINARY_URL=${{ secrets.CLOUDINARY }}" >> .env.production
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
