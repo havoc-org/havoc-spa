@@ -1,29 +1,29 @@
-import Tile from '../../components/Tile/Tile';
-import ProjectTile from '../../components/ProjectTile/ProjectTile';
-import './Home.css';
-import { Link } from 'react-router-dom';
-import { useCallback, useEffect, useState,useContext } from 'react';
-import Loading from '../../components/Loading/Loading.jsx';
-import Participant from '../../components/Patrticipant/Participant.jsx';
-import NotFound from '../../components/NotFound/NotFound.jsx';
-import SearchBar from '../../components/SearchBar/SearchBar.jsx';
-import useProjectService from '../../hooks/useProjectService.js';
-import { ProjectContext } from '../../contexts/ProjectContext.jsx';
+import { useState, useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Tile from "../../components/Tile/Tile";
+import ProjectTile from "../../components/ProjectTile/ProjectTile";
+import "./Home.css";
+import Loading from "../../components/Loading/Loading.jsx";
+import Participant from "../../components/Patrticipant/Participant.jsx";
+import NotFound from "../../components/NotFound/NotFound.jsx";
+import SearchBar from "../../components/SearchBar/SearchBar.jsx";
+import useProjectService from "../../hooks/useProjectService.js";
+import { ProjectContext } from "../../contexts/ProjectContext.jsx";
+import JoinProjectPopup from "./Components/JoinProjectPopup.jsx";
 
 export default function Home() {
-  const context=useContext(ProjectContext);
-  
+  const context = useContext(ProjectContext);
   const [data, setData] = useState([]);
   const [original, setOriginal] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isProjectChosed, setIsProjectChosed] = useState(false);
   const [selectedProject, setSelectedProject] = useState({});
-  const [metaData, setMetaData] = useState('description');
+  const [metaData, setMetaData] = useState("description");
   const [searchLoading, setSearchLoading] = useState(false);
+  const [isJoinPopupOpen, setIsJoinPopupOpen] = useState(false); // Состояние попапа
   const projectService = useProjectService();
 
   useEffect(() => {
-    console.log({context});
     setLoading(true);
     async function fetchData() {
       const result = await projectService.getProjects();
@@ -34,24 +34,22 @@ export default function Home() {
     fetchData();
   }, []);
 
-  
-
   const ProjectList = data.map((project) => (
     <ProjectTile
       key={project.projectId}
       name={project.name}
       date={project.lastModified}
-      id={'project-' + project.projectId}
+      id={"project-" + project.projectId}
       selected={project.projectId === selectedProject.projectId}
       onClick={() => {
         setIsProjectChosed(true);
         setSelectedProject(project);
       }}
-      enterProjectClick={()=>{context.setProject(project);}}
+      enterProjectClick={() => {
+        context.setProject(project);
+      }}
     />
   ));
-
-  
 
   return (
     <div>
@@ -59,7 +57,9 @@ export default function Home() {
         <Link to="create">
           <button className="yes-button">Create</button>
         </Link>
-        <button className="yes-button">Join</button>
+        <button className="yes-button" onClick={() => setIsJoinPopupOpen(true)}>
+          Join
+        </button>
         <SearchBar
           projects={data}
           original={original}
@@ -71,12 +71,12 @@ export default function Home() {
         <Tile className="project-list-tile">
           <div className="column-names">
             <h4 className="project-name">Project</h4>
-            <h4 className="last-mod">Last modiefied</h4>
+            <h4 className="last-mod">Last modified</h4>
           </div>
           <div className="project-list-wrapper">
-            {!searchLoading && data.length != 0 && ProjectList}
+            {!searchLoading && data.length !== 0 && ProjectList}
             {searchLoading && <Loading />}
-            {!searchLoading && data.length == 0 && <NotFound />}
+            {!searchLoading && data.length === 0 && <NotFound />}
           </div>
         </Tile>
         <Tile className="meta-data">
@@ -85,27 +85,27 @@ export default function Home() {
               <nav className="meta-toolbar">
                 <div
                   className={
-                    'meta-nav-link' +
-                    (metaData == 'description' ? '-selected' : '')
+                    "meta-nav-link" +
+                    (metaData === "description" ? "-selected" : "")
                   }
-                  onClick={() => setMetaData('description')}
+                  onClick={() => setMetaData("description")}
                 >
                   Description
                 </div>
                 <div
                   className={
-                    'meta-nav-link' + (metaData == 'members' ? '-selected' : '')
+                    "meta-nav-link" + (metaData === "members" ? "-selected" : "")
                   }
-                  onClick={() => setMetaData('members')}
+                  onClick={() => setMetaData("members")}
                 >
                   Members
                 </div>
               </nav>
               <div className="meta-content">
-                {metaData == 'description' && (
+                {metaData === "description" && (
                   <Description project={selectedProject} />
                 )}
-                {metaData == 'members' && (
+                {metaData === "members" && (
                   <MembersList project={selectedProject} />
                 )}
               </div>
@@ -114,6 +114,9 @@ export default function Home() {
           {!isProjectChosed && <p>Choose a project...</p>}
         </Tile>
       </div>
+
+      {/* Показываем попап, если isJoinPopupOpen === true */}
+      {isJoinPopupOpen && <JoinProjectPopup onClose={() => setIsJoinPopupOpen(false)} />}
     </div>
   );
 }
@@ -140,12 +143,12 @@ function MembersList({ project }) {
 }
 
 function Description({ project }) {
-  const formatter = new Intl.DateTimeFormat('pl-PL', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
+  const formatter = new Intl.DateTimeFormat("pl-PL", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
   });
   const deadline = formatter.format(new Date(project.deadline));
   const start = formatter.format(new Date(project.start));
@@ -155,8 +158,8 @@ function Description({ project }) {
         <h4>Name:</h4> <p>{project.name}</p>
       </div>
       <div className="text-row">
-        <h4>Owner:</h4>{' '}
-        <p>{project.creator.firstName + ' ' + project.creator.lastName}</p>
+        <h4>Owner:</h4>{" "}
+        <p>{project.creator.firstName + " " + project.creator.lastName}</p>
       </div>
       <div className="text-row">
         <h4>Start:</h4> <p>{start}</p>
