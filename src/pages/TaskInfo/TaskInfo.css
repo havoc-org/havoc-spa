@@ -88,9 +88,8 @@
 }
 
 .tag-name {
-  font-size: smaller;
+  font-size: medium;
   font-style: regular;
-  margin: 0px;
 }
 
 .task-description {
