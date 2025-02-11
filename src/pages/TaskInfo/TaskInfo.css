@@ -82,6 +82,11 @@
     flex-wrap: wrap;
     gap: 15px;
 }
+.tag-name{
+  font-size: smaller; 
+  font-style: regular;
+  margin: 0px; 
+}
 .task-description {
   background-color: #142653;
   padding: 15px;
