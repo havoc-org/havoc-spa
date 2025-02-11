@@ -1,3 +1,66 @@
+:root[data-theme="dark"] {
+
+  --dark-theme-background: #0a0c32;
+  --dark-theme-main: #142653;
+  --dark-theme-lighter-main: #283A7B;
+  --dark-theme-lightest-main: var(--dark-theme-lighter-main);
+  --dark-theme-highlight-primary: #BBD8EB;
+  --dark-theme-highlight-secondary: #73A5D3;
+  --dark-theme-white: #cee8ef;
+
+  --dark-theme-submit-primary: #1d662f;
+  --dark-theme-submit-secondary: #95dc87;
+
+
+
+
+  --color-background: var(--dark-theme-background);
+  --color-shadow: var(--dark-theme-shadow);
+  --color-main: var(--dark-theme-main);
+  --color-lighter-main: var(--dark-theme-lighter-main);
+  --color-lightest-main: var(--dark-theme-lightest-main);
+  --color-highlight-primary: var(--dark-theme-highlight-primary);
+  --color-highlight-secondary: var(--dark-theme-highlight-secondary);
+  --color-white: var(--dark-theme-white);
+
+  --color-submit-primary: var(--dark-theme-submit-primary);
+  --color-submit-secondary: var(--dark-theme-submit-secondary);
+
+
+}
+
+
+
+:root[data-theme="light"] {
+
+  --light-theme-background: #CAE2ED;
+  --light-theme-shadow: #476a9f;
+  --light-theme-main: #A2C5E5;
+  --light-theme-darker-main: #89a9da;
+  --light-theme-darkest-main: var(--light-theme-darker-main);
+  --light-theme-highlight-primary: #264572;
+  --light-theme-highlight-secondary: #3F4F88;
+  --light-theme-white: #0a0c32;
+
+  --light-theme-submit-primary: #95dc87;
+  --light-theme-submit-secondary: #1d662f;
+
+  --color-background: var(--light-theme-background);
+  --color-shadow: var(--light-theme-shadow);
+  --color-main: var(--light-theme-main);
+  --color-lighter-main: var(--light-theme-darker-main);
+  --color-lightest-main: var(--light-theme-darkest-main);
+  --color-highlight-primary: var(--light-theme-highlight-primary);
+  --color-highlight-secondary: var(--light-theme-highlight-secondary);
+  --color-white: var(--light-theme-white);
+
+  --color-submit-primary: var(--light-theme-submit-primary);
+  --color-submit-secondary: var(--light-theme-submit-secondary);
+
+}
+
+
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -13,35 +76,7 @@
   -moz-osx-font-smoothing: grayscale;
 
 
-  --dark-theme-background: #0a0c32;
-  --dark-theme-main: #142653;
-  --dark-theme-lighter-main: #1a285b;
-  --dark-theme-lightest-main: #283A7B;
-  --dark-theme-highlight-primary: #BBD8EB;
-  --dark-theme-highlight-secondary: #73A5D3;
-  --dark-theme-white: #cee8ef;
-
-  --light-theme-background: #CAE2ED;
-  --light-theme-main: #A2C5E5;
-  --light-theme-darker-main: #89a9da;
-  --light-theme-darkest-main: #6182b4;
-  --light-theme-highlight-primary: #476a9f;
-  --light-theme-highlight-secondary: #3F4F88;
-  --light-theme-white: #0a0c32;
-
-
-  --color-background: #0a0c32;
-  --color-main: #142653;
-  --color-lighter-main: #1a285b;
-  --color-lightest-main: #283A7B;
-  --color-highlight-primary: #BBD8EB;
-  --color-highlight-secondary: #73A5D3;
-  --color-white: #cee8ef;
-
-
 }
-
-
 
 
 body {
@@ -50,6 +85,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  transition: all 0.3s ease;
 }
 
 h1 {
@@ -151,7 +187,7 @@ button img {
     -webkit-box-shadow: inset 0px 0px 50px -19px var(--color-highlight-primary);
     -moz-box-shadow: inset 0px 0px 50px -19px var(--color-highlight-primary);
     box-shadow: inset 0px 0px 50px -19px var(--color-highlight-primary);
-    color: #ffffff;
+    color: var(--color-white);
 
     &::after {
       opacity: 1;
@@ -179,7 +215,7 @@ button img {
 .no-button {
   border-color: #d4776a;
   background: #d4776a;
-  color: #171717;
+  color: var(--color-background);
 }
 
 .a-button {
@@ -203,8 +239,6 @@ button img {
   align-content: flex-start;
 }
 
-.about-flex #video {}
-
 input {
   background-color: var(--color-lightest-main);
   font-size: 1em;
@@ -217,4 +251,25 @@ input::placeholder {
   color: var(--color-highlight-primary);
   font-size: 1em;
   font-weight: 550;
+}
+
+.tab-button {
+  padding: 0.5em;
+
+  border-color: var(--color-highlight-secondary);
+  background: var(--color-highlight-secondary);
+  color: var(--color-main);
+  box-shadow: 0px 4px 0px var(--color-background);
+  border-radius: 0.6em;
+  border-width: 0.2em;
+  border-style: solid;
+}
+
+.tab-button:hover {
+  border-radius: 0.6em;
+  border-width: 0.2em;
+  box-shadow: none;
+  margin: 0.2em;
+  border-style: hidden;
+  transition: cubic-bezier(0.23, 1, 0.32, 1);
 }

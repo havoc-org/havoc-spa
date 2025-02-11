@@ -1,16 +1,15 @@
 .modal {
     font-size: 12px;
-    background: #283a7b;
+    background: var(--color-lightest-main);
     border-radius: 18px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Добавляет тень */
+    box-shadow: 0px 4px 8px var(--color-shadow); 
   }
   .modal:hover{
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4); /* Увеличивает тень при наведении */
+    box-shadow: 0px 6px 12px var(--color-shadow); 
   
   }
   .modal > .header {
     width: 100%;
-    border-bottom: 1px solid gray;
     font-size: 18px;
     text-align: center;
     padding: 5px;
@@ -36,11 +35,11 @@
     right: -10px;
     top: -10px;
     font-size: 24px;
-    background: #283a7b;
+    background: var(--color-lightest-main);
     border-radius: 18px;
     border: 0px;
     outline: none;
-  tabindex: -1; 
+    tabindex: -1; 
   }
   
   .menu {
@@ -56,9 +55,8 @@
     margin: 5px;
     padding: 5px;
     height: 28px;
-    background: #73A5D3;
-    color: black;
-    border-bottom: 1px solid rgb(187, 187, 187);
+    background: var(--color-highlight-secondary);
+    color: var(--color-background);
     border-radius: 10px;
   }
   .menu-item:hover {

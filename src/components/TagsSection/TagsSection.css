@@ -1,73 +1,89 @@
 .tags-section {
-    margin-top: 10px;
-  }
-  
-  .tag-input-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .color-picker {
-    width: 50px;
-    height: 40px;
-    border-radius: 5px;
-    border: 2px solid #BBD8EB;
-    cursor: pointer;
-    background-color: transparent;
-    transition: border-color 0.3s, background-color 0.3s;
-  }
-  
-  .color-picker:hover {
-    border-color: #73A5D3;
-  }
-  
-  .add-tag-button {
-    padding: 10px 18px;
-    border: 2px solid #BBD8EB;
-    border-radius: 5px;
-    background-color: #142653;
-    color: #BBD8EB;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s, border-color 0.3s;
-  }
-  
-  .add-tag-button:hover {
-    background-color: #73A5D3;
-    border-color: #73A5D3;
-    color: #142653;
-  }
-  
-  .tag-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 15px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    max-height: 300px;
-    overflow-y:scroll;
-  }
-  
-  .tag-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 15px;
-    border-radius: 5px;
-    color: #BBD8EB;
-    font-size: 1.1em;
-    transition: background-color 0.3s;
-    background-color: #283A7B;
-  }
-  
-  .tag-item:hover {
-    background-color: #223168;
-  }
-  
-  .tag-name {
-    font-weight: bold;
-    font-size: 1.2em;
-  }
-  
+  margin-top: 10px;
+}
+
+.tag-input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+}
+
+.tag-input-group input {
+  background-color: var(--color-background);
+  transition: all 0.3s ease;
+  color: var(--color-highlight-primary);
+  border-radius: 8px;
+  border: 2px solid var(--color-lighter-main);
+}
+
+.tag-input-group input:focus {
+  border: 2px solid var(--color-highlight-primary);
+  outline: none;
+  box-shadow: 0 0 8px var(--color-highlight-secondary);
+}
+
+.color-picker {
+  width: 50px;
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid var(--color-highlight-primary);
+  cursor: pointer;
+  background-color: transparent;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.color-picker:hover {
+  border-color: var(--color-highlight-secondary);
+}
+
+.add-tag-button {
+  padding: 10px 18px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+  border: none;
+  background-color: var(--color-lighter-main);
+  color: var(--color-highlight-primary);
+
+
+}
+
+.add-tag-button:hover {
+  background-color: var(--color-highlight-secondary);
+  color: var(--color-main);
+}
+
+.tag-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+
+.tag-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: var(--color-highlight-primary);
+  font-size: 1.1em;
+  transition: background-color 0.3s;
+  background-color: var(--color-lighter-main);
+}
+
+.tag-item:hover {
+  background-color: var(--color-lighter-main);
+}
+
+.tag-name {
+  font-weight: bold;
+  font-size: 1.2em;
+}

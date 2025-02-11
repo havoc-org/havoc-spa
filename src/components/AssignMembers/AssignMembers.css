@@ -1,5 +1,5 @@
 .members-section {
-    background-color: #142653;
+    background-color: var(--color-main);
     padding: 20px;
     border-radius: 10px;
     color: #BBD8EB;
@@ -7,6 +7,11 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+  }
+  .assign-input-group input, .assign-input-group select {
+    font-size: 16px;
+    color: var(--color-highlight-primary);
+    background-color: var(--color-background);
   }
   
   .assigned-users-list {
@@ -20,13 +25,13 @@
   }
   
   .assigned-user-item {
-    background-color: #223168;
+    background-color: var(--color-lighter-main);
     padding: 20px;
     border-radius: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #BBD8EB;
+    color: var(--color-higlight-primary);
     font-size: 1.1em;
     width: 100%;
     height: auto;
@@ -46,12 +51,12 @@
   
   .user-email {
     font-size: 1em;
-    color: #AFCDEB;
+    color: var(--color-higlight-secondary);
   }
   
   .user-comment {
     font-style: italic;
-    color: #AFCDEB;
+    color: var(--color-higlight-secondary);
   }
   
   .remove-button {

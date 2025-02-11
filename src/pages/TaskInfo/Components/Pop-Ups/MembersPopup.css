@@ -1,8 +1,8 @@
 .members-container {
-    background-color: #142653;
+    background-color: var(--color-main);
     padding: 20px;
     border-radius: 10px;
-    color: #BBD8EB;
+    color: var(--color-highlight-primary);
     width: 90%;
     display: flex;
     flex-direction: column;

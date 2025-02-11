@@ -11,7 +11,7 @@
   padding: 12px;
 }
 
-.task-title > h2 {
+.task-title>h2 {
   margin: 0px;
 }
 
@@ -27,7 +27,7 @@
   justify-content: space-between;
   gap: 1.5em;
   padding: 20px;
-  background-color: #0d1134;
+  background-color: var(--color-background);
   border-radius: 10px;
 }
 
@@ -44,20 +44,21 @@
 }
 
 .task-name {
-  background-color: #142653;
+  background-color: var(--color-main);
   border: none;
-  color: #bbd8eb;
+  color: var(--color-highlight-primary);
   padding: 10px;
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 25px;
   margin-bottom: 20px;
   width: 100%;
   box-sizing: border-box;
 }
-.delete-button{
+
+.delete-button {
   background-color: #d4776a;
   border: 2px solid #792929;
-  color: #BBD8EB;
+  color: var(--color-highlight-primary);
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 0px;
@@ -68,48 +69,74 @@
   font-size: 14px;
   max-height: 80px;
 }
+
 .tag-list-container {
   display: flex;
   gap: 5px;
   margin-left: 20px;
-  
+
   margin-right: 20px;
 }
-.task-info-tag-list{
+
+.task-info-tag-list {
   list-style: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
 }
-.task-description {
-  background-color: #142653;
+
+.task-description,
+.task-comments {
+  background-color: var(--color-main);
   padding: 15px;
   border-radius: 5px;
   margin-bottom: 20px;
-  color: #bbd8eb;
+  color: var(--color-highlight-primary);
   width: 100%;
   box-sizing: border-box;
 }
 
 .description-input {
-  width: 100%;
-  background-color: #142653;
-  border: none;
-  color: #bbd8eb;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 16px;
-  box-sizing: border-box;
-  margin-top: 10px;
+  margin-bottom: 1.5rem;
+  min-height: 100px;
+  resize: none;
+  font-family: inherit;
+}
+
+.description-input,
+.add-comment,
+.date-picker-section .input-field {
+  transition: all 0.3s ease;
+  width: 98%;
+  background-color: var(--color-background);
+  color: var(--color-highlight-primary);
+  border-radius: 8px;
+  border: 2px solid var(--color-lighter-main);
+}
+
+.description-input:focus,
+.task-name:focus,
+.add-comment:focus,
+.date-picker-section .input-field:focus {
+
+  border: 2px solid var(--color-highlight-primary);
+  outline: none;
+  box-shadow: 0 0 8px var(--color-highlight-secondary);
+
+}
+
+.task-name {
+  transition: all 0.3s ease;
+  border: 2px solid var(--color-main)
 }
 
 .task-files {
-  background-color: #142653;
+  background-color: var(--color-main);
   padding: 15px;
   border-radius: 5px;
   margin-bottom: 20px;
-  color: #bbd8eb;
+  color: var(--color-highlight-primary);
   width: 100%;
   box-sizing: border-box;
   display: flex;
@@ -121,41 +148,45 @@
   justify-content: space-between;
   align-items: center;
   padding: 8px 12px;
-  background-color: #223168;
+  background-color: var(--color-lightest-main);
   border-radius: 5px;
-  color: #BBD8EB;
+  color: var(--color-highlight-primary);
   width: 100%;
-  
+
   margin-top: 10px;
 
   box-sizing: border-box;
 }
-.attachment-info{
-  
+
+.attachment-info {
+
   justify-content: space-between;
   align-items: center;
   display: flex;
   margin-right: 20px;
   width: 50%;
 }
+
 .file-deletion-container {
-  
+
   cursor: pointer;
 }
-.file-deletion-icon{
+
+.file-deletion-icon {
   max-width: 90%;
   max-height: 90%;
 }
-.file-deletion-icon:hover{
+
+.file-deletion-icon:hover {
   opacity: 0.5;
 }
 
 .file-icon {
-  background-color: #283a7b;
+  background-color: var(--color-lightest-main);
   padding: 5px;
   border-radius: 5px;
   margin-right: 10px;
-  color: white;
+  color: var(--color-white);
 }
 
 .files-header {
@@ -172,30 +203,17 @@
   align-self: center;
 }
 
-.task-comments {
-  background-color: #142653;
-  padding: 15px;
-  border-radius: 5px;
-  color: #bbd8eb;
-  width: 100%;
-  box-sizing: border-box;
-}
 
 .add-comment {
-  width: 100%;
   padding: 10px;
   margin-bottom: 15px;
-  border: none;
-  border-radius: 5px;
-  background-color: #283a7b;
-  color: #bbd8eb;
   box-sizing: border-box;
 }
 
 .add-comment-button {
-  background-color: #283a7b;
+  background-color: var(--color-lightest-main);
   border: none;
-  color: #bbd8eb;
+  color: var(--color-highlight-primary);
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
@@ -205,14 +223,14 @@
 }
 
 .add-comment-button:hover {
-  background-color: #73a5d3;
-  color: #142653;
+  background-color: var(--color-highlight-secondary);
+  color: var(--color-main);
 }
 
 .comment {
   margin-top: 10px;
   padding: 10px;
-  background-color: #283a7b;
+  background-color: var(--color-lightest-main);
   border-radius: 5px;
   box-sizing: border-box;
 }
@@ -222,10 +240,10 @@
 }
 
 .sidebar-button {
-  background-color: #283a7b;
+  background-color: var(--color-lightest-main);
   border: none;
   padding: 15px;
-  color: #bbd8eb;
+  color: var(--color-highlight-primary);
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
@@ -234,11 +252,11 @@
 }
 
 .sidebar-button:hover {
-  background-color: #73a5d3;
-  color: #142653;
+  background-color: var(--color-highlight-secondary);
+  color: var(--color-main);
 }
 
-.info-container > h3 {
+.info-container>h3 {
   margin-bottom: 0px;
   margin-left: 15px;
 }
@@ -248,14 +266,14 @@
   flex-direction: column;
   align-items: start;
 }
-.attachments-list > li {
+
+.attachments-list>li {
   width: 95%;
 }
 
 .date-picker-section {
-  background-color: #1c2757;
+  background-color: var(--color-main);
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   padding: 20px;
   margin: 20px 0;
 }
@@ -265,39 +283,42 @@
 }
 
 .date-picker-section h3 {
-  color: #ffffff;
+  color: var(--color-white);
   margin-bottom: 10px;
 }
 
 .date-picker-section .input-field {
-  width: 100%;
+
   padding: 10px;
-  border: 1px solid #3a4e7f;
-  border-radius: 5px;
-  background-color: #283a7b;
-  color: #ffffff;
   font-size: 16px;
 }
 
-.date-picker-section .input-field:focus {
-  outline: none;
-  border-color: #007bff;
-}
+
 
 .save-button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
   font-size: 16px;
   margin-bottom: 15px;
   box-sizing: border-box;
 }
 
-.save-button:hover {
-  background-color: #0056b3;
+.save-button,
+.add-button {
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: var(--color-submit-primary);
+  color: var(--color-submit-secondary);
+  border: solid 2px var(--color-submit-primary);
+}
+
+.save-button:hover,
+.add-button:hover {
+  border: solid 2px var(--color-submit-secondary);
+  color: var(--color-submit-secondary);
+  box-shadow: 0 0 8px var(--color-submit-secondary);
+  background: var(--color-submit-primary);
+  transform: translateY(-2px);
 }
 
 .popup-taskinfo-overlay {
@@ -314,8 +335,8 @@
 }
 
 .popup-taskinfo-content {
-  background-color: #1a2a5a;
-  color: #bbd8eb;
+  background-color: var(--color-main);
+  color: var(--color-highlight-primary);
   padding: 20px;
   border-radius: 5px;
   max-width: 400px;
@@ -326,16 +347,28 @@
   flex-direction: column;
 }
 
+.file-upload-section input {
+  background-color: var(--color-main);
+  color: var(--color-highlight-primary);
+}
+
+.popup-upload-section input:hover {
+  background-color: var(--color-highlight-primary);
+  color: var(--color-main);
+}
+
+
+
 .popup-taskinfo-footer {
   display: flex;
-  justify-content: space-between; /* Разводит кнопки по краям */
-  margin-top: 20px; /* Отступ сверху от содержимого */
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
 .close-button {
-  background-color: #283a7b;
+  background-color: var(--color-lightest-main);
   border: none;
-  color: #bbd8eb;
+  color: var(--color-highlight-primary);
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
@@ -343,21 +376,6 @@
 }
 
 .close-button:hover {
-  background-color: #73a5d3;
-  color: #142653;
+  background-color: var(--color-highlight-secondary);
+  color: var(--color-main);
 }
-
-.add-button {
-  background-color: #007bff;
-  border: none;
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.add-button:hover {
-  background-color: #0056b3;
-}
-
