@@ -87,10 +87,10 @@
 
 }
 
-.tag-name{
-  font-size: smaller; 
+.tag-name {
+  font-size: smaller;
   font-style: regular;
-  margin: 0px; 
+  margin: 0px;
 }
 
 .task-description {
@@ -149,6 +149,20 @@
   flex-direction: column;
 }
 
+.task-comments {
+  padding:15px;
+  background-color: var(--color-main);
+  border-radius: 5px;
+  color: var(--color-highlight-primary);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.task-comments button {
+  width: 20%;
+}
+
 .attachment-item {
   display: flex;
   justify-content: space-between;
@@ -200,6 +214,7 @@
 }
 
 .comments-header {
+  color: var(--color-highlight-primary);
   display: flex;
 }
 
