@@ -1,4 +1,5 @@
 import React from 'react';
+import './AddParticipantForm.css';
 
 export default function AddParticipantForm({
     email,

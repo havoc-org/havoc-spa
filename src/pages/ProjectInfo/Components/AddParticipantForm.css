@@ -1,0 +1,42 @@
+.add-participant-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: #283a7b;
+    border-radius: 8px;
+}
+
+.add-participant-form input, .add-participant-form select{
+    background: #0a0c32;
+    align-self: center;
+    border: 2px solid #283a7b;
+    border-radius: 8px;
+    color: #BBD8EB;
+    transition: all 0.3s ease;
+}
+
+.add-participant-form input:focus, .add-participant-form select:focus { 
+    border: 2px solid #73A5D3;
+    outline: none;
+    border-color: #8dc1d7;
+    box-shadow: 0 0 8px rgba(115, 165, 211, 0.5);
+}
+
+.add-participant-form button {
+    align-self: center;
+    padding: 0.75rem 2rem;
+    background: #142653;
+    color: #73A5D3;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all ease-in-out 0.3s;
+
+}
+
+.add-participant-form button:hover {
+    color: #142653;
+    background-color: #73A5D3;
+}

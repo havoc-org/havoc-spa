@@ -71,21 +71,21 @@
 .submit-button {
     width: 100%;
     padding: 14px;
-    background: #31661d;
-    color: #82c885;
+    background: #1d662f;
+    color: #95dc87;
     border: none;
     border-radius: 8px;
     font-size: 1.1em;
     cursor: pointer;
     transition: all 0.3s ease;
-    border: solid 2px #31661d;
+    border: solid 2px #1d662f;
 }
 
 .submit-button:hover {
-    border: solid 2px #82c885;
-    color: #82c885;
+    border: solid 2px #95dc87;
+    color: #95dc87;
     box-shadow: 0 0 8px rgba(115, 211, 166, 0.5);
-    background: #31661d;
+    background: #1d662f;
     transform: translateY(-2px);
 }
 
@@ -108,7 +108,7 @@
 
 .success-message {
     color: #82c885;
-    background: #134b1788;
+    background: #134b17;
     padding: 1rem;
     border: 2px solid #82c885;
     border-radius: 8px;

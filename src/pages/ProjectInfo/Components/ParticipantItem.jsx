@@ -41,7 +41,7 @@ export default function ParticipantItem({
             )}
 
             <div className="participant-info">
-                <span className="participant-email">{participant.user.email}</span>
+                <span className="participant-email">{participant.user.firstName} {participant.user.lastName}</span>
 
                 {!isEditing && (
                     <span className={`participant-role ${participant.user.role.name.toLowerCase()}`}>
