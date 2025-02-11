@@ -6,6 +6,16 @@
   border-radius: 0.8em;
   padding: 0.5em;
   flex-grow: 1;
+  width: 100%;
+  min-height: 100%;
+}
+
+.tile.login-form-tile {
+  margin: auto;
+  justify-content: center; 
+  padding: 2rem 3rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  width: 40%; 
 }
 .tile2 {
   font-size: smaller;

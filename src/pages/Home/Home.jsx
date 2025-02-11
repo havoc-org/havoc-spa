@@ -20,7 +20,7 @@ export default function Home() {
   const [selectedProject, setSelectedProject] = useState({});
   const [metaData, setMetaData] = useState("description");
   const [searchLoading, setSearchLoading] = useState(false);
-  const [isJoinPopupOpen, setIsJoinPopupOpen] = useState(false); // Состояние попапа
+  const [isJoinPopupOpen, setIsJoinPopupOpen] = useState(false);
   const projectService = useProjectService();
 
   useEffect(() => {
@@ -115,7 +115,7 @@ export default function Home() {
         </Tile>
       </div>
 
-      {/* Показываем попап, если isJoinPopupOpen === true */}
+   
       {isJoinPopupOpen && <JoinProjectPopup onClose={() => setIsJoinPopupOpen(false)} />}
     </div>
   );
