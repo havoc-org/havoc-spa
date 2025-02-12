@@ -18,6 +18,7 @@ const AddStatusPopup = ({ trigger, items,onItemClick  }) => {
 
   return (
     <Popup
+    className='popup-content'
     trigger={trigger}
     position=" top center"  // Позиционирование в месте клика
     closeOnDocumentClick

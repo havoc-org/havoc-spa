@@ -3,6 +3,9 @@
     background: var(--color-lightest-main);
     border-radius: 18px;
   }
+.popup-content{
+  max-width: fit-content;
+}  
  
   .modal > .header {
 
