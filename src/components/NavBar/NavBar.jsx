@@ -165,12 +165,12 @@ function ButtonsNotLoggedIn({ theme, onClickTheme }) {
       </li>
       <li className="nav-link">
         <Link to="/login">
-          <button className="a-button">Sign In</button>
+          <button className="login-button register-button">Sign In</button>
         </Link>
       </li>
       <li className="nav-link">
         <Link to="/register">
-          <button className="yes-button">Sign Up</button>
+          <button className="register-button signup-button">Sign Up</button>
         </Link>
       </li>
     </ul>

@@ -14,7 +14,7 @@
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
-  background-color: #0D1134;
+  background-color: var(--color-background);
   border-radius: 0.8em 0.8em 0em 0em;
   font-size: 1.25em;
 }
@@ -30,18 +30,25 @@
   min-height: 30vmax;
 }
 
-.yes-button{
-  margin-right:20px;
+.yes-button {
+  margin-right: 20px;
+  border-radius: 5px;
+}
+
+.yes-button:hover {
+  color: var(--color-highlight-primary);
+  background-color: var(--color-main);
+  border-color: var(--color-main);
 }
 
 .meta-nav-link {
-  color: #73a5d3;
+  color: var(--color-highlight-secondary);
   flex-grow: 1;
   display: flex;
   flex-grow: 1;
   align-items: center;
   flex-direction: column;
-  background-color: #0D1134;
+  background-color: var(--color-background);
   border-radius: 0.8em 0.8em 0em 0em;
 }
 
@@ -55,7 +62,7 @@
   align-items: center;
   flex-direction: column;
   border-radius: 0.8em 0.8em 0em 0em;
-  background-color: #142653;
+  background-color: var(--color-main);
   font-weight: 600;
 }
 
@@ -72,16 +79,60 @@
   max-height: 30vmax;
 }
 
-.text-row {
+
+.text-row-date {
+  flex-direction: row;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: left;
 }
 
-.searchbar{
-  background-color: #142653;
+.text-row-name {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.searchbar::placeholder{
-  color: #283A7B;
+.text-row-input,
+.text-row-date p {
+
+  pointer-events: none;
+  padding: 10px;
+  color: var(--color-highlight-primary);
+  background-color: var(--color-background);
+  color: var(--color-highlight-primary);
+  border-radius: 8px;
+  border: 2px solid var(--color-lighter-main);
+  font-family: inherit;
+
+}
+
+.hdate {
+  width: 15%;
+}
+
+
+
+
+.text-row-input {
+
+  width: 80%;
+  margin-bottom: 20px;
+  min-height: 100px;
+  resize: none;
+
+}
+
+.hdate {
+  margin-right: 20px;
+}
+
+.searchbar {
+  border-radius: 5px;
+  background-color: var(--color-main);
+}
+
+.searchbar::placeholder {
+  color: var(--color-lighter-main);
 }

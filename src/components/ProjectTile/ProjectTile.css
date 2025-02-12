@@ -1,6 +1,8 @@
 .project-tile {
-  border-radius: 2em;
-  background-color: #283a7b;
+  margin-top: 10px;
+  transition: 0.3ms ease-in-out;
+  border-radius: 15px;
+  background-color: var(--color-lighter-main);
   display: flex;
   flex-direction: row;
   padding: 0.25em 1.25em 0.25em 1.25em;
@@ -9,15 +11,16 @@
 }
 
 .selected {
-  border-radius: 2em;
-  background-color: #bbd8eb;
-  color: #223168;
+  border-radius: 15px;
+  background-color: var(--color-highlight-primary);
+  color: var(--color-lighter-main);
   display: flex;
   flex-direction: row;
   padding: 0.25em 1.25em 0.25em 1.25em;
   align-items: center;
   width: 85%;
 }
+
 
 .date-name {
   display: flex;
@@ -40,13 +43,26 @@
 .project-list-tile {
   padding-bottom: 1.25em;
 }
-.project-button {
-  /* background-color: #587060; */
-  margin-top: 5px; /* отступ сверху на 20px */
-}
+
 .project-button:hover {
-  /*background-color: #587060;*/
-  color: #374ea3;
-  transform: scale(1.2) ; /* Сдвиг вниз на 5px */
+  
+  transform: scale(1.2) ; 
   transition: transform 0.1s ease;
+}
+
+.project-tile:hover {
+  
+  transform: scale(1.05) ; 
+  transition: transform 0.1s ease;
+}
+
+
+.project-enter-button {
+  margin: 5px;
+  color: var(--color-background);
+  transition: 0.3s ease-in-out;
+}
+
+.project-enter-button:hover {
+  right: 5%;
 }

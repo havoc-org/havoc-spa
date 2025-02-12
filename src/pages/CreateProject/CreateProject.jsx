@@ -163,7 +163,7 @@ export default function CreateProject() {
           <select
             value={role}
             onChange={(e) => setRole(e.target.value)}
-            className="role-select"
+            className="role-select-create"
           >
             <option value="Manager">Manager</option>
             <option value="Owner">Owner</option>

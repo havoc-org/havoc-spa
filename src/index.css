@@ -2,6 +2,7 @@
 
   --dark-theme-background: #0a0c32;
   --dark-theme-main: #142653;
+  --dark-theme-shadow: #0a0c32;
   --dark-theme-lighter-main: #283A7B;
   --dark-theme-lightest-main: var(--dark-theme-lighter-main);
   --dark-theme-highlight-primary: #BBD8EB;
@@ -28,13 +29,6 @@
 
 }
 
-input {
-  transition: all 0.3s ease;
-  background-color: var(--color-background);
-  color: var(--color-highlight-primary);
-  border-radius: 8px;
-  border: 2px solid var(--color-lighter-main);
-}
 
 :root[data-theme="light"] {
 
@@ -64,7 +58,22 @@ input {
 
 }
 
+input,
+select {
+  transition: all 0.3s ease;
+  background-color: var(--color-background);
+  color: var(--color-highlight-primary);
+  border-radius: 8px;
+  border: 2px solid var(--color-lighter-main);
+}
 
+input:focus,
+select:focus {
+  border: 2px solid var(--color-highlight-secondary);
+  outline: none;
+  border-color: var(--color-highlight-primary);
+  box-shadow: 0 0 8px var(--color-highlight-secondary);
+}
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -170,6 +179,7 @@ button img {
   }
 }
 
+
 .register-button {
   transition: all 0.5s;
   width: auto;
@@ -203,6 +213,13 @@ button img {
   }
 }
 
+
+.register-btn {
+  &::after {
+    right: 85%;
+  }
+}
+
 .register-button:hover {
   background-color: var(--color-main);
   color: var(--color-highlight-primary);
@@ -218,6 +235,7 @@ button img {
 }
 
 .no-button {
+  border-radius: 5px;
   border-color: #d4776a;
   background: #d4776a;
   color: var(--color-background);
@@ -245,15 +263,14 @@ button img {
 }
 
 input {
-  background-color: var(--color-lightest-main);
+
   font-size: 1em;
-  padding: 0.6em 2em 0.6em 2em;
-  border-style: none;
-  border-radius: 1.875em;
+  padding: 1em 2em 1em 2em;
+
 }
 
 input::placeholder {
-  color: var(--color-highlight-primary);
+
   font-size: 1em;
   font-weight: 550;
 }
@@ -276,5 +293,6 @@ input::placeholder {
   box-shadow: none;
   margin: 0.2em;
   border-style: hidden;
-  transition: cubic-bezier(0.23, 1, 0.32, 1);
+  transform: translateY(2px);
+  box-shadow: 0 0px 0px var(--color-shadow);
 }

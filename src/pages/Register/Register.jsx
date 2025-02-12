@@ -164,7 +164,7 @@ export default function Register() {
         <div className="buttons-wrapper">
           <button
             type="submit"
-            className="yes-button"
+            className="login-button register-button"
             disabled={
               loading ||
               !(
@@ -179,7 +179,7 @@ export default function Register() {
             Sign Up
           </button>
           <Link to="/login">
-            <button className="a-button">Have account? Sign in</button>
+            <button className="signup-button register-button register-btn">Have account? Sign in</button>
           </Link>
         </div>
       </form>

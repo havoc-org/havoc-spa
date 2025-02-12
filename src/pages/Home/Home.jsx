@@ -115,7 +115,7 @@ export default function Home() {
         </Tile>
       </div>
 
-   
+
       {isJoinPopupOpen && <JoinProjectPopup onClose={() => setIsJoinPopupOpen(false)} />}
     </div>
   );
@@ -154,26 +154,29 @@ function Description({ project }) {
   const start = formatter.format(new Date(project.start));
   return (
     <>
-      <div className="text-row">
-        <h4>Name:</h4> <p>{project.name}</p>
+      <div className="text-row-date">
+        <h4 className="hdate">Name:</h4> <p>{project.name}</p>
       </div>
-      <div className="text-row">
-        <h4>Owner:</h4>{" "}
+      <div className="text-row-date">
+        <h4 className="hdate owner">Owner:</h4>{" "}
         <p>{project.creator.firstName + " " + project.creator.lastName}</p>
       </div>
-      <div className="text-row">
-        <h4>Start:</h4> <p>{start}</p>
+      <div className="text-row-date">
+        <h4 className="hdate start">Start:</h4> <p>{start}</p>
       </div>
       {!(project.deadline == undefined || project.deadline == null) && (
-        <div className="text-row">
-          <h4>Deadline:</h4> <p>{deadline}</p>
+        <div className="text-row-date">
+          <h4 className="hdate deadline">Deadline:</h4> <p>{deadline}</p>
         </div>
       )}
-      <div className="text-row">
-        <h4>Status:</h4> <p>{project.projectStatus.name}</p>
+      <div className="text-row-date">
+        <h4 className="hdate status">Status:</h4> <p>{project.projectStatus.name}</p>
       </div>
-      <h4>Description:</h4>
-      <p>{project.description}</p>
+      <div >
+        <h4>Description:</h4>
+        <textarea name="description" className="text-row-input" value={project.description} maxLength="200" rows="4" />
+      </div>
+
     </>
   );
 }

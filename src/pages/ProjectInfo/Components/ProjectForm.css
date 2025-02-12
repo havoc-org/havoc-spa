@@ -1,15 +1,15 @@
 .project-form {
-    background: #142653;
+    background: var(--color-main);
     padding: 2rem;
     border-radius: 12px;
     margin-top: 12px;
     width: 40%;
     flex-shrink: 0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 12px var(--color-shadow);
 }
 
 .project-form h1 {
-    color: #BBD8EB;
+    color: var(--color-highlight-primary);
     margin: 0 0 2rem 0;
     text-align: left;
     font-size: 1.8em;
@@ -24,10 +24,10 @@
 .project-input, 
 .date-group input[type="date"],
 .project-textarea {
-    background: #0a0c32;
-    border: 2px solid #283a7b;
+    background: var(--color-background);
+    border: 2px solid var(--color-lighter-main);
     border-radius: 8px;
-    color: #BBD8EB;
+    color: var(--color-highlight-primary);
     transition: all 0.3s ease;
 }
 
@@ -54,7 +54,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    color: #73A5D3;
+    color: var(--color-highlight-secondary);
     flex: 1;
 }
 
@@ -62,10 +62,10 @@
 
 .date-group input[type="date"]:focus,
 .project-input:focus, .project-textarea:focus {
-    border: 2px solid #73A5D3;
+    border: 2px solid var(--color-highlight-secondary);
     outline: none;
-    border-color: #8dc1d7;
-    box-shadow: 0 0 8px rgba(115, 165, 211, 0.5);
+    border-color: var(--color-highlight-primary);
+    box-shadow: 0 0 8px var(--color-highlight-secondary);
 }
 
 .submit-button {
@@ -90,8 +90,8 @@
 }
 
 .submit-button:disabled {
-    background: #2d4a3d;
-    color: #5a7d6b;
+    background: var(--color-submit-primary);
+    color: var(--color-submit-secondary);
     cursor: not-allowed;
     transform: none;
 }
@@ -107,10 +107,10 @@
 }
 
 .success-message {
-    color: #82c885;
-    background: #134b17;
+    color: var(--color-submit-secondary);
+    background: var(--color-submit-primary);
     padding: 1rem;
-    border: 2px solid #82c885;
+    border: 2px solid var(--color-submit-secondary);
     border-radius: 8px;
     margin: 1rem 0;
     text-align: center;

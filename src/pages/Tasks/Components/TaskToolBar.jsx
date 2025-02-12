@@ -38,7 +38,7 @@ const TaskToolBar = ({ sortValue, setSortValue }) => {
         </div>
         <div className="task-toolbar">
         <Link to="edit">
-            <button className="edit-project">Edit Project</button>
+            <button className="yes-button">Edit Project</button>
           </Link>
           <Exit />
         </div>

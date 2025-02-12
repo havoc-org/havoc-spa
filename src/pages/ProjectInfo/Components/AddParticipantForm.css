@@ -4,39 +4,33 @@
     gap: 1rem;
     margin-bottom: 2rem;
     padding: 1rem;
-    background: #283a7b;
+    background: var(--color-lighter-main);
     border-radius: 8px;
 }
 
 .add-participant-form input, .add-participant-form select{
-    background: #0a0c32;
+    background: var(--color-background);
     align-self: center;
-    border: 2px solid #283a7b;
+    border: 2px solid var(--color-lighter-main);
     border-radius: 8px;
-    color: #BBD8EB;
+    color: var(--color-highlight-primary);
     transition: all 0.3s ease;
 }
 
 .add-participant-form input:focus, .add-participant-form select:focus { 
-    border: 2px solid #73A5D3;
+    border: 2px solid var(--color-highlight-secondary);
     outline: none;
-    border-color: #8dc1d7;
-    box-shadow: 0 0 8px rgba(115, 165, 211, 0.5);
+    border-color: var(--color-highlight-primary);
+    box-shadow: 0 0 8px var(--color-highlight-secondary);
 }
 
 .add-participant-form button {
     align-self: center;
     padding: 0.75rem 2rem;
-    background: #142653;
-    color: #73A5D3;
+    background: var(--color-submit-primary);
+    color: var(--color-submit-secondary);
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: all ease-in-out 0.3s;
-
-}
-
-.add-participant-form button:hover {
-    color: #142653;
-    background-color: #73A5D3;
 }

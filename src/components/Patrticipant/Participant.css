@@ -1,5 +1,17 @@
 .participant {
   display: flex;
+  flex-direction: row;
   width: 90%;
   justify-content: space-between;
+}
+
+.with-role {
+  margin-top: 10px;
+  padding: 10px;
+  color: var(--color-highlight-primary);
+  background-color: var(--color-background);
+  color: var(--color-highlight-primary);
+  border-radius: 8px;
+  border: 2px solid var(--color-lighter-main);
+  font-family: inherit;
 }

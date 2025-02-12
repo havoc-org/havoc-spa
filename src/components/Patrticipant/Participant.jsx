@@ -4,7 +4,7 @@ export default function Participant({ name, surname, type, role }) {
     return (
       <div className="participant with-role">
         <p className="name">{name + ' ' + surname}</p>
-        <p className="role">{role}</p>
+        <p className="name role">{role}</p>
       </div>
     );
   else

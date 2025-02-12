@@ -79,11 +79,11 @@ export default function Login() {
           />
         </div>
         <div className="buttons-wrapper">
-          <button type="submit" className="yes-button" disabled={loading}>
+          <button type="submit" className="login-button register-button" disabled={loading}>
             Login
           </button>
           <Link to="/register">
-            <button className="a-button" disabled={loading}>
+            <button className="signup-button register-button register-btn" disabled={loading}>
               First time? Join us!
             </button>
           </Link>
