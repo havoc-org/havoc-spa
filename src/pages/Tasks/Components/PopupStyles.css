@@ -2,12 +2,8 @@
     font-size: 12px;
     background: var(--color-lightest-main);
     border-radius: 18px;
-    box-shadow: 0px 4px 8px var(--color-shadow); 
   }
-  .modal:hover{
-    box-shadow: 0px 6px 12px var(--color-shadow); 
-  
-  }
+ 
   .modal > .header {
 
     font-size: 18px;

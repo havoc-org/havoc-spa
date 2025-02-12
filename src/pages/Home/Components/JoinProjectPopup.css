@@ -12,6 +12,7 @@
 
 .popup-content {
   background: var(--color-main);
+  border:solid 3px var(--color-lighter-main);
   padding: 20px;
   border-radius: 10px;
   text-align: center;

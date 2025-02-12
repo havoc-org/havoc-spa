@@ -1,5 +1,6 @@
 import React from 'react';
 import './TaskDetails.css';
+import '../../../TaskInfo/TaskInfo.css';
 
 export default function TaskDetails({ taskName, setTaskName, taskStatus, setTaskStatus, statuses, description, setDescription }) {
   return (
@@ -36,10 +37,12 @@ export default function TaskDetails({ taskName, setTaskName, taskStatus, setTask
       <h2>Description</h2>
       <div className="field-group full-width">
         <textarea
-          className="textarea-field"
+          className="description-input"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Enter task description"
+          rows={4}
+          maxLength={200}
         />
       </div>
     </>

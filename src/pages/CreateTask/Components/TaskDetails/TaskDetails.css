@@ -12,14 +12,14 @@
     margin: 12px 0;
     border-radius: 5px;
     border: none;
-    background-color: #0D1134;
-    color: #BBD8EB;
+    background-color: var(--color-background);
+    color: var(--color-highlight-primary);
     box-sizing: border-box;
   }
   
   .input-field::placeholder,
   .textarea-field::placeholder {
-    color: #78849E;
+    color: var(--color-highlight-secondary);
   }
   
   .textarea-field {
@@ -33,7 +33,7 @@
   }
   
   .create-task-form h2 {
-    color: #73A5D3;
+    color: var(--color-highlight-secondary);
     font-size: 1.4em;
     margin-bottom: 15px;
   }
