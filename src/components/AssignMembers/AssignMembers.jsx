@@ -9,7 +9,7 @@ export default function AssignMembers({ assignedUsers, setAssignedUsers, current
     email: p.user.email,
     role: p.user.role.name,
   })) || [];
-  console.log({currentProject});
+
   const [availableUsers, setAvailableUsers] = useState(initialUsers);
   const [selectedUser, setSelectedUser] = useState('');
   const [selectedUserComment, setSelectedUserComment] = useState('');
@@ -57,9 +57,13 @@ export default function AssignMembers({ assignedUsers, setAssignedUsers, current
         <input
           type="text"
           className="input-field"
-          placeholder="Add a comment"
+          placeholder="max 200 characters"
           value={selectedUserComment}
-          onChange={(e) => setSelectedUserComment(e.target.value)}
+          onChange={(e) => {
+            if (e.target.value.length <= 200) {
+              setSelectedUserComment(e.target.value);
+            }
+          }}
         />
         <button className="add-button" onClick={handleAddAssignment}>
           Add
