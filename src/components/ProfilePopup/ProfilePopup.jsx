@@ -149,13 +149,13 @@ export default function ProfilePopup({ user, onClose }) {
 
         {editMode ? (
           <div className="edit-buttons">
-            <button className="save-btn" onClick={handleSave} disabled={updating}>
+            <button className="profile-save-btn" onClick={handleSave} disabled={updating}>
               {updating ? 'Saving...' : 'Save'}
             </button>
-            <button className="cancel-btn" onClick={() => setEditMode(false)}>Cancel</button>
+            <button className="profile-cancel-btn" onClick={() => setEditMode(false)}>Cancel</button>
           </div>
         ) : (
-          <button className="edit-btn" onClick={() => setEditMode(true)}>Edit</button>
+          <button className="profile-edit-btn" onClick={() => setEditMode(true)}>Edit</button>
         )}
 
         {showPasswordForm ? (

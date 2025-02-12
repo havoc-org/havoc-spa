@@ -15,6 +15,6 @@
 }
 
 .success {
-  background-color: hsl(209, 52%, 64%);
-  color: #0d1134;
+  background-color: var(--color-highlight-secondary);
+  color: var(--color-background);
 }

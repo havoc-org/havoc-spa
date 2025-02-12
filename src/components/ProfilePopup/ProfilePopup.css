@@ -2,8 +2,8 @@
     position: fixed;
     top: 50px;
     right: 20px;
-    background: #0c2340;
-    color: white;
+    background: var(--color-main);
+    color: var(--color-white);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -46,20 +46,18 @@
     margin-top: 10px;
 }
 
-.edit-btn,
-.save-btn,
-.cancel-btn {
-    background-color: #4a90e2;
+.profile-edit-btn,
+.profile-cancel-btn {
+    background-color: var(--color-highlight-secondary);
     border: none;
-    color: white;
+    color: var(--color-white);
     padding: 10px;
     cursor: pointer;
     width: 100%;
-    margin-top: 10px;
     border-radius: 5px;
 }
 
-.cancel-btn {
+.profile-cancel-btn {
     background-color: #e74c3c;
 }
 
@@ -89,10 +87,11 @@
     margin-top: 10px;
 }
 
+.profile-save-btn,
 .submit-btn {
-    background-color: #4a90e2;
+    background-color: var(--color-submit-secondary);
     border: none;
-    color: white;
+    color: var(--color-white);
     padding: 10px;
     cursor: pointer;
     width: 100%;
@@ -102,7 +101,7 @@
 .cancel-password-btn {
     background-color: #e74c3c;
     border: none;
-    color: white;
+    color: var(--color-white);
     padding: 10px;
     cursor: pointer;
     width: 100%;
@@ -110,9 +109,9 @@
 }
 
 .reset-password-btn {
-    background-color: #4a90e2;
+    background-color: var( --color-highlight-secondary);
     border: none;
-    color: white;
+    color: var(--color-white);
     padding: 10px;
     cursor: pointer;
     width: 100%;
@@ -127,6 +126,6 @@
     background: none;
     border: none;
     font-size: 18px;
-    color: white;
+    color: var(--color-white);
     cursor: pointer;
 }
