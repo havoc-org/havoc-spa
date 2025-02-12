@@ -61,7 +61,7 @@ export default function JoinProjectPopup({ onClose }) {
         <button className="join-button" onClick={handleJoinProject} disabled={loading}>
           {loading ? "Joining..." : "Join"}
         </button>
-        <button className="close-button" onClick={onClose}>Close</button>
+        <button className="join-close-button" onClick={onClose}>Close</button>
       </div>
     </div>
   );

@@ -11,11 +11,11 @@
 }
 
 .popup-content {
-  background: #1b2a4e;
+  background: var(--color-main);
   padding: 20px;
   border-radius: 10px;
   text-align: center;
-  color: white;
+  color: var(--color-white);
   max-width: 400px;
   width: 100%;
 }
@@ -24,30 +24,30 @@
   width: 90%;
   padding: 10px;
   margin: 10px 0;
-  border: 2px solid #2a3f66;
+  border: 2px solid var(--color-lighter-main);
   border-radius: 5px;
-  background: #2a3f66;
-  color: white;
+  background: var(--color-lighter-main);
+  color: var(--color-white);
 }
 
 .popup-description {
   font-size: 14px;
-  color: #a9b8d9;
+  color: var(--color-highlight-primary);
   margin-bottom: 10px;
 }
 
-.join-button, .close-button {
-  background: #5b88e4;
+.join-button, .join-close-button {
+  background: var(--color-highlight-secondary);
   border: none;
   padding: 10px 15px;
   margin: 5px;
   border-radius: 5px;
-  color: white;
+  color: var(--color-white);
   cursor: pointer;
 }
 
 .join-button:hover {
-  background: #4a76c6;
+  background: var(--color-highlight-secondary);
 }
 
 .error-message {
@@ -57,7 +57,7 @@
 }
 
 .success-message {
-  color: #28a745;
+  color: var(--color-submit-primary);
   font-size: 14px;
   margin-top: 10px;
   font-weight: bold;
