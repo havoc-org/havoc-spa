@@ -28,8 +28,7 @@ export default function CreateTaskContainer() {
   const [errorMessage, setErrorMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  if ( !currentProject.participations || !statuses) {
-    console.log({currentProject});
+  if (!currentProject.participations || !statuses) {
     return <Loading />;
   }
 
@@ -93,12 +92,16 @@ export default function CreateTaskContainer() {
       <div className="create-task-form">
         <TaskDetails
           taskName={taskName}
-          setTaskName={setTaskName}
+          setTaskName={(value) => {
+            if (value.length <= 25) setTaskName(value);
+          }}
           taskStatus={taskStatus}
           setTaskStatus={setTaskStatus}
           statuses={statuses}
           description={description}
-          setDescription={setDescription}
+          setDescription={(value) => {
+            if (value.length <= 200) setDescription(value);
+          }}
         />
         <FileUpload files={files} setFiles={setFiles} />
         <DatePickerSection
