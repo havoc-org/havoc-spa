@@ -71,11 +71,11 @@ export default function ProjectInfoPage() {
 
   const handleDeleteProject = async () => {
     try {
-      await memoizedProjectService.deleteProject(projectId);
-      localStorage.removeItem('currentProjectId');
+      const response = await memoizedProjectService.deleteProject(projectId);
+      console.log(response);
       navigate('/projects');
     } catch (error) {
-      setErrorMessage('Failed to delete project');
+      console.error('Error deleting Project:', error.message);
     }
   };
 
