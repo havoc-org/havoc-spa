@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import useProjectService from '../../hooks/useProjectService';
 import useAuth from '../../hooks/useAuth';
@@ -21,7 +21,8 @@ export default function ProjectInfoPage() {
     name: '',
     description: '',
     startDate: '',
-    deadline: ''
+    deadline: '',
+    inviteCode: '',
   });
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -33,6 +34,9 @@ export default function ProjectInfoPage() {
   const [participants, setParticipants] = useState([]);
   const [emailError, setEmailError] = useState('');
 
+  const memoizedProjectService = useMemo(() => projectService, []);
+  const memoizedParticipationService = useMemo(() => participationService, []);
+
   useEffect(() => {
     async function fetchProject() {
       try {
@@ -42,18 +46,18 @@ export default function ProjectInfoPage() {
           return;
         }
 
-        const projectData = await projectService.getProjectById(projectId);
+        const projectData = await memoizedProjectService.getProjectById(projectId);
         if (projectData) {
           setProjectData({
             name: projectData.name || '',
             description: projectData.description || '',
             startDate: projectData.start ? projectData.start.substring(0, 10) : '',
             deadline: projectData.deadline ? projectData.deadline.substring(0, 10) : '',
-            inviteCode: projectData.inviteCode
+            inviteCode: projectData.inviteCode || '',
           });
         }
 
-        const participantsData = await participationService.getParticipations(projectId);
+        const participantsData = await memoizedParticipationService.getParticipations(projectId);
         setParticipants(participantsData);
       } catch (error) {
         setErrorMessage('Failed to load project information');
@@ -63,11 +67,11 @@ export default function ProjectInfoPage() {
     }
 
     fetchProject();
-  }, [projectId, projectService, participationService]);
+  }, [projectId, memoizedProjectService, memoizedParticipationService]);
 
   const handleDeleteProject = async () => {
     try {
-      await projectService.deleteProject(projectId);
+      await memoizedProjectService.deleteProject(projectId);
       localStorage.removeItem('currentProjectId');
       navigate('/projects');
     } catch (error) {
@@ -92,7 +96,7 @@ export default function ProjectInfoPage() {
 
     setIsUpdating(true);
     try {
-      await projectService.updateProject(projectId, updatedProject);
+      await memoizedProjectService.updateProject(projectId, updatedProject);
       setSuccessMessage('Project updated successfully');
       navigate('/tasks');
     } catch (error) {
@@ -124,8 +128,8 @@ export default function ProjectInfoPage() {
     setEmailError('');
 
     try {
-      await participationService.addParticipation(projectId, [{ projectId, email, role }]);
-      const updatedParticipants = await participationService.getParticipations(projectId);
+      await memoizedParticipationService.addParticipation(projectId, [{ projectId, email, role }]);
+      const updatedParticipants = await memoizedParticipationService.getParticipations(projectId);
       setParticipants(updatedParticipants);
     } catch (error) {
       setParticipants(participants.filter(p => p.user.userId !== tempParticipant.user.userId));
@@ -138,8 +142,8 @@ export default function ProjectInfoPage() {
     setParticipants(participants.filter((p) => p.user.userId !== userId));
 
     try {
-      await participationService.deleteParticipation(projectId, userId);
-      const updatedParticipants = await participationService.getParticipations(projectId);
+      await memoizedParticipationService.deleteParticipation(projectId, userId);
+      const updatedParticipants = await memoizedParticipationService.getParticipations(projectId);
       setParticipants(updatedParticipants);
     } catch (error) {
       setParticipants(originalParticipants);
@@ -161,8 +165,8 @@ export default function ProjectInfoPage() {
     setEditingRole({ userId: null, role: '' });
 
     try {
-      await participationService.updateParticipationRole(projectId, userId, editingRole.role);
-      const freshParticipants = await participationService.getParticipations(projectId);
+      await memoizedParticipationService.updateParticipationRole(projectId, userId, editingRole.role);
+      const freshParticipants = await memoizedParticipationService.getParticipations(projectId);
       setParticipants(freshParticipants);
     } catch (error) {
       const revertedParticipants = participants.map(p =>
