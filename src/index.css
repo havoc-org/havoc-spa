@@ -26,10 +26,15 @@
   --color-submit-primary: var(--dark-theme-submit-primary);
   --color-submit-secondary: var(--dark-theme-submit-secondary);
 
-
 }
 
-
+input {
+  transition: all 0.3s ease;
+  background-color: var(--color-background);
+  color: var(--color-highlight-primary);
+  border-radius: 8px;
+  border: 2px solid var(--color-lighter-main);
+}
 
 :root[data-theme="light"] {
 
