@@ -9,17 +9,17 @@
   
   }
   .modal > .header {
-    width: 100%;
+
     font-size: 18px;
     text-align: center;
     padding: 5px;
   }
   .modal > .content {
-    width: 100%;
+ 
     padding: 10px 5px;
   }
   .modal > .actions {
-    width: 100%;
+
     padding: 10px 5px;
     margin: auto;
     
@@ -43,7 +43,7 @@
   }
   
   .menu {
-    width: 200px;
+
     display: flex;
     flex-direction: column;
   }
@@ -51,14 +51,17 @@
     margin: 3px;
   }
   .menu-item {
-    cursor: pointer;
-    margin: 5px;
-    padding: 5px;
-    height: 28px;
-    background: var(--color-highlight-secondary);
-    color: var(--color-background);
-    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background: var(--color-main);
+    border-radius: 8px;
+    box-shadow: 0 8px 0px 0px var(--color-shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+    min-height: 40px;
   }
   .menu-item:hover {
-    color: #2980b9;
+    transform: translateY(2px);
+    box-shadow: 0 0px 0px var(--color-shadow);
   }  
