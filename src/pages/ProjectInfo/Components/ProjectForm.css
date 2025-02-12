@@ -81,6 +81,7 @@
     border: solid 2px var(--color-submit-primary);
 }
 
+
 .submit-button:hover {
     border: solid 2px var(--color-submit-secondary);
     color: var(--color-submit-secondary);
@@ -96,9 +97,22 @@
     transform: none;
 }
 
+.delete {
+    color: #d37373;
+    background: #531432;
+    border: 2px solid #d37373;
+}
+
+.delete:hover {
+    border: solid 2px #d37373;
+    color: #d37373;
+    box-shadow: 0 0 8px #d37373;
+    background: #531432;
+}
+
 .error-message {
     color: #d37373;
-    background: #53143288;
+    background: #531432;
     padding: 1rem;
     border: 2px solid #d37373;
     border-radius: 8px;

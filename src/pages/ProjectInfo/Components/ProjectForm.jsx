@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ProjectForm.css';
 
 export default function ProjectForm({
@@ -7,13 +7,23 @@ export default function ProjectForm({
   handleSubmit,
   errorMessage,
   successMessage,
-  isUpdating
+  isUpdating,
+  onDelete
 }) {
   const handleChange = (e) => {
     setProjectData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
     }));
+  };
+
+  const [isDeleteConfirmVisible, setIsDeleteConfirmVisible] = useState(false);
+
+  const handleDeleteClick = () => setIsDeleteConfirmVisible(true);
+  const cancelDelete = () => setIsDeleteConfirmVisible(false);
+  const confirmDelete = () => {
+    setIsDeleteConfirmVisible(false);
+    onDelete?.();
   };
 
   return (
@@ -71,6 +81,32 @@ export default function ProjectForm({
         >
           {isUpdating ? 'Loading...' : 'Update Project'}
         </button>
+
+        {isDeleteConfirmVisible && (
+          <div className="confirmation-modal">
+            <div className="modal-content">
+              <p>Are you sure you want to delete this project?</p>
+              <div className="modal-buttons">
+                <button className="confirm-btn-popup" onClick={confirmDelete}>
+                  Yes
+                </button>
+                <button className="cancel-btn-popup" onClick={cancelDelete}>
+                  No
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="delete-section">
+          <button
+            type="button"
+            className="submit-button delete"
+            onClick={handleDeleteClick}
+          >
+            Delete Project
+          </button>
+        </div>
       </form>
     </div>
   );
