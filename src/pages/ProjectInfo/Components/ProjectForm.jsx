@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ProjectForm.css';
 
 export default function ProjectForm({
@@ -10,6 +11,8 @@ export default function ProjectForm({
   isUpdating,
   onDelete
 }) {
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setProjectData(prev => ({
       ...prev,
@@ -26,13 +29,21 @@ export default function ProjectForm({
     onDelete?.();
   };
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    handleSubmit();
+    navigate('/tasks');
+    window.location.reload();
+
+  };
+
   return (
     <div className="project-form">
       <h1>Edit Project</h1>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       {successMessage && <p className="success-message">{successMessage}</p>}
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleFormSubmit}>
         <input
           name="name"
           className="project-input"

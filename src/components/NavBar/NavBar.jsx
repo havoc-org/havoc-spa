@@ -7,7 +7,10 @@ import ProfilePopup from '../ProfilePopup/ProfilePopup';
 export default function NavBar() {
   const { user, logout } = useContext(AuthContext);
   const [showPopup, setShowPopup] = useState(false);
-  const [theme, setTheme] = useState('dark'); // Начальная тема
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme || 'dark';
+  });
 
   const Buttons = user?.token ? ButtonsLoggedIn : ButtonsNotLoggedIn;
 
@@ -15,8 +18,19 @@ export default function NavBar() {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+  }, []);
+
   const toggleTheme = () => {
-    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+    setTheme(prev => {
+      const newTheme = prev === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('theme', newTheme);
+      return newTheme;
+    });
   };
 
   return (
@@ -51,7 +65,6 @@ export default function NavBar() {
   );
 }
 
-// Иконка темы (луна/солнце)
 const ThemeIcon = ({ theme }) => (
   <svg
     className="navbar-button"

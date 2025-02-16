@@ -102,6 +102,7 @@ export default function Register() {
             id="email"
             label="Email"
             setOutsideData={setEmail}
+            maxLength="100"
             setOutsideValidationState={setValidEmail}
             validationFunc={(e) =>
               emailRegex.test(e) && !emailListRef.current.includes(e)
@@ -116,6 +117,7 @@ export default function Register() {
             type="text"
             id="name"
             label="Name"
+            maxLength="50"
             setOutsideData={setName}
             setOutsideValidationState={setValidName}
             validationFunc={(e) => e.length > 0}
@@ -127,6 +129,7 @@ export default function Register() {
             type="text"
             id="surname"
             label="Surname"
+            maxLength="50"
             setOutsideData={setSurname}
             setOutsideValidationState={setValidSurname}
             validationFunc={(e) => e.length > 0}
@@ -138,6 +141,7 @@ export default function Register() {
             type="password"
             id="password"
             label="Password"
+            maxLength="128"
             setOutsideData={setPassword}
             setOutsideValidationState={setValidPassword}
             validationFunc={(e) => pwdRegex.test(e)}
@@ -152,6 +156,7 @@ export default function Register() {
             type="password"
             id="confirm-password"
             label="Confirm password"
+            maxLength="128"
             setOutsideValidationState={setValidMatch}
             setOutsideData={setMatchPassword}
             validationFunc={(e) => validMatchCheck(e) === 0}

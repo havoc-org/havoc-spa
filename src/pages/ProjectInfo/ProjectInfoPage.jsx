@@ -213,8 +213,14 @@ export default function ProjectInfoPage() {
   );
 
   function Exit() {
+    const handleExitClick = (e) => {
+      e.preventDefault();
+      navigate('/tasks', { replace: true });
+      window.location.reload();
+    };
+
     return (
-      <Link replace to="/tasks">
+      <Link onClick={handleExitClick}>
         <img className="buttons" src={exitButton} alt="Exit Project" />
       </Link>
     );

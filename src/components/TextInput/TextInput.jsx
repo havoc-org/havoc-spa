@@ -12,6 +12,7 @@ export default function TextInput({
   id,
   autoComplete,
   type,
+  maxLength
 }) {
   const [validData, setValidData] = useState(false);
   const [dataFocus, setDataFocus] = useState(false);
@@ -46,6 +47,7 @@ export default function TextInput({
         aria-describedby={id + '-instruction'}
         autoComplete={autoComplete}
         required
+        maxLength={maxLength}
         onInput={(e) => {
           setData(e.target.value);
           if (setOutsideData) setOutsideData(e.target.value);
