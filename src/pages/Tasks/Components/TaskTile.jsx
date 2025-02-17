@@ -47,7 +47,7 @@ const TaskTile = ({ task, index }) => {
         {typeof icon === "string" ? (
           <img className="task-icon" src={icon} alt="task icon" />
         ) : (
-          <div className="task-icon">{icon}</div> // Если это компонент, рендерим его
+          <div className="task-icon">{icon}</div>
         )}
         <p className="name">{info}</p>
       </div>
