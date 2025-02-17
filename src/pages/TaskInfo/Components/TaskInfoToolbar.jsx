@@ -20,7 +20,7 @@ const ExitIcon = () => (
 
 
 
-const TaskInfoToolbar = ({ task, handleDeleteTask }) => {
+const TaskInfoToolbar = ({ task, handleDeleteTask,HandleTagDelete }) => {
 
   const perm = useProject();
   if (perm.isDeveloper()) {
@@ -34,7 +34,7 @@ const TaskInfoToolbar = ({ task, handleDeleteTask }) => {
       <div className="task-toolbar">
         <Exit />
 
-        <TagsTile task={task} />
+        <TagsTile task={task}/>
         <button className="delete-button" onClick={handleDeleteTask}>Delete task</button>
       </div>
     );

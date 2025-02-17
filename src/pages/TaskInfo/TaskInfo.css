@@ -87,9 +87,21 @@
 
 }
 
-.tag-name {
+.task-info-tag-name {
   font-size: medium;
-  font-style: regular;
+  margin: 0px;
+  
+  align-self: center;
+}
+.small-icon{
+  width: 20px;
+  height: 20px; 
+  margin-left: 20px ;
+  align-self: center;
+}
+
+.small-icon:hover{
+  opacity: 0.5;
 }
 
 .task-description {
