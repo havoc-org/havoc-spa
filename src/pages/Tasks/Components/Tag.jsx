@@ -1,5 +1,6 @@
 import React from 'react';
 
+import trashCanIcon from '../../../assets/trash-can.svg';
 // Функция для вычисления яркости цвета
 const getBrightness = (color) => {
   if (!color) return 255; // Если цвета нет, считаем, что фон светлый

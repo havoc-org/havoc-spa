@@ -1,5 +1,6 @@
 import React from 'react';
 
+import trashCanIcon from '../../../assets/trash-can.svg';
 // Функция для вычисления яркости цвета
 const getBrightness = (color) => {
   if (!color) return 255; // Если цвета нет, считаем, что фон светлый
@@ -22,7 +23,8 @@ const getBrightness = (color) => {
   return (r * 0.299 + g * 0.587 + b * 0.114);
 };
 
-const Tag = ({ backgroundColor, text }) => {
+const Tag = ({ tag, OnDelete }) => {
+  const backgroundColor = tag.colorHex;
   const brightness = getBrightness(backgroundColor);
   const textColor = brightness < 128 ? 'white' : 'black'; // Если яркость < 128 — считаем цвет тёмным
 
@@ -33,11 +35,19 @@ const Tag = ({ backgroundColor, text }) => {
     backgroundColor: backgroundColor || 'transparent',
     color: textColor, // Цвет текста
     borderRadius: '30px',
+    maxHeight: '35px',
   };
 
-  const displayText = text.length > 10 ? `${text.slice(0, 10)}...` : text;
-
-  return <p style={style} className='name'>#{displayText}</p>;
+  const displayText = tag.name.length > 10 ? `${tag.name.slice(0, 10)}...` : tag.name;
+  console.log(tag);
+  return (
+  <div className='task-info-tag-name' style={style}>
+  <span>{tag.name}</span>
+     {OnDelete && (
+        <img className="small-icon" onClick={() => {OnDelete(tag.tagId);}} src={trashCanIcon} alt="trashCan" />
+      )}
+  </div>
+  );
 };
 
 export default Tag;

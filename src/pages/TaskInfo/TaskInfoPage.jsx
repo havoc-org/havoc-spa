@@ -10,7 +10,6 @@ import AttachmentsList from './Components/AttachmentsList.jsx';
 import Comments from './Components/Comments.jsx';
 import TaskInfoToolbar from './Components/TaskInfoToolbar.jsx';
 import DatePickerSection from '../../components/DatePickerSection/DatePickerSection';
-
 import MembersPopup from './Components/Pop-Ups/MembersPopup.jsx';
 import TagPopup from './Components/Pop-Ups/TagPopup.jsx';
 import FilePopup from './Components/Pop-Ups/FilePopup.jsx';
@@ -136,7 +135,7 @@ const TaskInfoPage = () => {
   return (
     <div>
       
-      <TaskInfoToolbar task={task} handleDeleteTask={handleDeleteTask} />
+      <TaskInfoToolbar task={task} handleDeleteTask={handleDeleteTask}/>
       <div className="task-page">
         <div className="task-main">
           <input
