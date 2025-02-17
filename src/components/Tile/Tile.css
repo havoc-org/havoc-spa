@@ -32,6 +32,7 @@
   width: 85%;
 }
 
-.last-mod {
+.last-mod, .proj-name {
   margin-right: 15%;
+  color: var(--color-highlight-primary)
 }

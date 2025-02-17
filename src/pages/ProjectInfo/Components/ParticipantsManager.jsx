@@ -1,7 +1,7 @@
 import React from 'react';
 import AddParticipantForm from './AddParticipantForm';
 import ParticipantItem from './ParticipantItem';
-import InvitationLink from './InvitationLink'; 
+import InvitationLink from './InvitationLink';
 import './ParticipantsManager.css';
 
 export default function ParticipantsManager({
@@ -22,7 +22,6 @@ export default function ParticipantsManager({
     const sortedParticipants = [...participants].sort((a, b) => {
         const aIsCurrent = a.user.userId === user?.id;
         const bIsCurrent = b.user.userId === user?.id;
-
         if (aIsCurrent && !bIsCurrent) return -1;
         if (!aIsCurrent && bIsCurrent) return 1;
         return 0;
@@ -41,7 +40,7 @@ export default function ParticipantsManager({
                 onAdd={onAddParticipant}
             />
 
-            <InvitationLink inviteCode={inviteCode}/>
+            <InvitationLink inviteCode={inviteCode} />
 
             <div className="participants-list">
                 {sortedParticipants.map(participant => (
