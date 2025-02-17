@@ -13,9 +13,11 @@ import DatePickerSection from '../../components/DatePickerSection/DatePickerSect
 import MembersPopup from './Components/Pop-Ups/MembersPopup.jsx';
 import TagPopup from './Components/Pop-Ups/TagPopup.jsx';
 import FilePopup from './Components/Pop-Ups/FilePopup.jsx';
+import MembersList from './Components/MembersList.jsx';
 
 const TaskInfoPage = () => {
   const projectContext = useProject();
+  const isDeveloper=projectContext.isDeveloper();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -132,6 +134,7 @@ const TaskInfoPage = () => {
     return <div>Loading...</div>;
   }
 
+  console.log({ task });
   return (
     <div>
       
@@ -175,24 +178,38 @@ const TaskInfoPage = () => {
         </div>
 
         <div className="task-sidebar">
-          <button
-            className="sidebar-button"
-            onClick={() => setShowMembersPopup(true)}
-          >
-            Members
-          </button>
-          <button
-            className="sidebar-button"
-            onClick={() => setShowTagPopup(true)}
-          >
-            Tags
-          </button>
-          <button
-            className="sidebar-button"
-            onClick={() => setShowFilePopup(true)}
-          >
-            Files
-          </button>
+        {!isDeveloper ? (
+            <>
+              <button
+                className="sidebar-button"
+                onClick={() => setShowMembersPopup(true)}
+              >
+                Members
+              </button>
+              <button
+                className="sidebar-button"
+                onClick={() => setShowTagPopup(true)}
+              >
+                Add tags
+              </button>
+              <button
+                className="sidebar-button"
+                onClick={() => setShowFilePopup(true)}
+              >
+                Add files
+              </button>
+            </>
+          ) : (
+            <>
+            <button
+                className="sidebar-button"
+                onClick={() => setShowFilePopup(true)}
+              >
+                Add files
+              </button>
+            <MembersList assignments={task.assignments} /> 
+            </>
+          )}
         </div>
       </div>
 
@@ -213,7 +230,7 @@ const TaskInfoPage = () => {
         />
       )}
 
-      {showTagPopup && (
+      { showTagPopup && (
         <TagPopup
           projectId={projectContext.currentProject.projectId}
           setShowTagPopup={setShowTagPopup}
