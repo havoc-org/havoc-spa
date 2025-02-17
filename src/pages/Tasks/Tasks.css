@@ -41,6 +41,12 @@
 .name{
   font-size: medium;
   margin: 0px;
+  color: var(--color-highlight-primary);
+  margin-left: 3px;
+}
+
+.tasktile-icon {
+  color: var(--color-highlight-primary);
 }
 
 

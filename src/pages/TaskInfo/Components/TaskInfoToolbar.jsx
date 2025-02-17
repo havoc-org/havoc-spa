@@ -7,9 +7,9 @@ import TagsTile from './TagsTile.jsx';
 
 const ExitIcon = () => (
   <svg
-    className="navbar-button"
-    width="24"
-    height="24"
+    className="taskbar-button"
+    width="40"
+    height="40"
     viewBox="0 0 40 40"
     fill="currentColor"
   >
@@ -44,9 +44,7 @@ const TaskInfoToolbar = ({ task, handleDeleteTask,HandleTagDelete }) => {
 function Exit() {
   return (
     <Link replace={true} to="/tasks">
-      <button className="tab-button">
         <ExitIcon />
-      </button>
     </Link>
   );
 }
