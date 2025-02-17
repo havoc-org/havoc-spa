@@ -133,7 +133,7 @@ button:disabled {
 }
 
 .user-item {
-  background-color: var(--color-highlight-primary);
+  background-color: var(--color-lighter-main);
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;

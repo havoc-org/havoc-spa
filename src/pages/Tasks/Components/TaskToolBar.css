@@ -1,0 +1,14 @@
+
+.taskbar-button {
+    text-align: center;
+    color: var(--color-highlight-primary); 
+    background-color:var(--color-lighter-main);
+    border-radius: 15px;
+    padding: 5px;
+    transition: 0.3ms ease-in-out;
+  }
+
+  .taskbar-button:hover {
+    color: var(--color-lighter-main); 
+    background-color:var(--color-highlight-primary);
+  }
