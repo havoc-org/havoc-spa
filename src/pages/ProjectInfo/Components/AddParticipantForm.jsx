@@ -44,7 +44,7 @@ export default function AddParticipantForm({
         <div className="add-participant-form">
             <input
                 type="email"
-                placeholder="Enter email.."
+                placeholder="Enter email..."
                 value={email}
                 onChange={handleEmailChange}
             />

@@ -70,7 +70,7 @@ export default function Home() {
       <div className="projects-view">
         <Tile className="project-list-tile">
           <div className="column-names">
-            <h4 className="project-name">Project</h4>
+            <h4 className="proj-name">Project</h4>
             <h4 className="last-mod">Last modified</h4>
           </div>
           <div className="project-list-wrapper">
