@@ -42,7 +42,15 @@
   flex-direction: column;
   gap: 10px;
 }
-
+.assigned-updated-users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  padding: 0;
+  margin-top: 15px;
+  list-style: none;
+}
 .task-name {
   background-color: var(--color-main);
   border: none;
@@ -200,11 +208,15 @@
 
 .file-deletion-container {
   cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .file-deletion-icon {
   max-width: 90%;
-  max-height: 90%;
+  max-height: 80%;
+  margin-top: 10px;
 }
 
 .file-deletion-icon:hover {
@@ -251,6 +263,21 @@
   font-size: 16px;
   margin-top: 10px;
   box-sizing: border-box;
+}
+.file-download-icon {
+  max-width: 52px;
+  max-height: 45px;
+  align-self: center;
+  margin-right: 20px;
+  border-radius: 15px; /* Ensure the border is rounded */
+  
+  cursor: pointer;
+  background-color: transparent; /* Add background color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+
+}
+.file-download-icon:hover {
+  opacity: 0.5;
 }
 
 .add-comment-button:hover {
