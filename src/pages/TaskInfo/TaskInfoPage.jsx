@@ -200,7 +200,15 @@ const TaskInfoPage = () => {
               </button>
             </>
           ) : (
+            <>
+            <button
+                className="sidebar-button"
+                onClick={() => setShowFilePopup(true)}
+              >
+                Add files
+              </button>
             <MembersList assignments={task.assignments} /> 
+            </>
           )}
         </div>
       </div>
