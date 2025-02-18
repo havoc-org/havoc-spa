@@ -31,9 +31,9 @@ export default function ProjectForm({
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    handleSubmit();
+    handleSubmit(e);
     navigate('/tasks');
-    window.location.reload();
+   // window.location.reload();
 
   };
 
