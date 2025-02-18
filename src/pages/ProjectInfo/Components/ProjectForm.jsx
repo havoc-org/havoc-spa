@@ -29,11 +29,11 @@ export default function ProjectForm({
     onDelete?.();
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    handleSubmit(e);
+    await handleSubmit(e);
     navigate('/tasks');
-   // window.location.reload();
+    window.location.reload();
 
   };
 

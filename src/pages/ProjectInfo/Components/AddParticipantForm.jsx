@@ -21,7 +21,7 @@ export default function AddParticipantForm({
         if (!emailRegex.test(newEmail)) {
             setLocalError('Invalid email');
         } else if (emailListRef.current.includes(newEmail)) {
-            setLocalError('Email is already in use');
+            setLocalError('This user is already in the project');
         } else {
             setLocalError('');
         }
