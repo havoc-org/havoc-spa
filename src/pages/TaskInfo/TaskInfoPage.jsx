@@ -158,7 +158,7 @@ const TaskInfoPage = () => {
             setDeadline={setDeadline}
             className="task-info-datepicker"
           />
-
+          {!isDeveloper && (
           <button
             className={`save-button ${hasChanges ? 'active' : 'disabled'}`}
             onClick={handleSaveChanges}
@@ -166,6 +166,7 @@ const TaskInfoPage = () => {
           >
             Save Changes
           </button>
+        )}
 
           <AttachmentsList
             files={taskFiles}
