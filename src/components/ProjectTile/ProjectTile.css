@@ -1,4 +1,5 @@
 .project-tile {
+  
   margin-top: 10px;
   transition: 0.3ms ease-in-out;
   border-radius: 15px;
@@ -19,6 +20,10 @@
   padding: 0.25em 1.25em 0.25em 1.25em;
   align-items: center;
   width: 85%;
+}
+
+.selected .name {
+  color: var(--color-lighter-main);
 }
 
 

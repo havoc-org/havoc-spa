@@ -1,11 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import createButton from '../../../assets/AddNewTask.svg';
+import React, { useState } from 'react';
 import useProject from '../../../hooks/useProject';
 import { left } from '@cloudinary/url-gen/qualifiers/textAlignment';
 import './TaskToolBar.css';
-
-
+import useParticipationService from '../../../hooks/useParticipationService';
+import { useNavigate, Link } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth.js';
 
 const ExitIcon = () => (
   <svg className='taskbar-button' width="43" height="43" viewBox="0 0 47 46" fill="currentColor">
@@ -24,13 +23,18 @@ const TaskToolBar = ({ sortValue, setSortValue }) => {
   const handleSortChange = (event) => {
     setSortValue(event.target.value);
   };
-  const perm = useProject();
 
+  const perm = useProject();
   if (perm.isDeveloper()) {
     return (
       <div className="task-toolbar">
-        <Sort sortValue={sortValue} handleSortChange={handleSortChange} />
-        <Exit />
+        <div style={{ display: "flex" }}>
+          <Sort sortValue={sortValue} handleSortChange={handleSortChange} />
+        </div>
+        <div className="task-toolbar">
+          <Leave />
+          <Exit />
+        </div>
       </div>
     );
   } else if (perm.isManager()) {
@@ -40,7 +44,10 @@ const TaskToolBar = ({ sortValue, setSortValue }) => {
           <Create />
           <Sort sortValue={sortValue} handleSortChange={handleSortChange} />
         </div>
-        <Exit />
+        <div className="task-toolbar">
+          <Leave />
+          <Exit />
+        </div>
       </div>
     );
   }
@@ -55,8 +62,10 @@ const TaskToolBar = ({ sortValue, setSortValue }) => {
           <Link to="edit">
             <button className="yes-button">Edit Project</button>
           </Link>
+          <Leave />
           <Exit />
         </div>
+
       </div>
     );
   }
@@ -82,6 +91,63 @@ function Exit() {
     </Link>
   );
 }
+
+function Leave() {
+
+  const navigate = useNavigate();
+  const participationService = useParticipationService();
+  const storedId = localStorage.getItem('currentProjectId');
+  const projectId = storedId ? JSON.parse(storedId) : null;
+  const { user } = useAuth();
+  const [showConfirmLeave, setShowConfirmLeave] = useState(false);
+
+  const handleLeaveProject = async () => {
+    try {
+      await participationService.deleteParticipation(projectId, user.id);
+      console.log("Successfully left the project");
+      window.location.reload();
+    } catch (error) {
+      console.error("Error leaving project:", error);
+    }
+  };
+
+  const confirmLeave = () => {
+    setShowConfirmLeave(false);
+    navigate('/projects');
+    handleLeaveProject();
+  };
+
+  const cancelLeave = () => {
+    setShowConfirmLeave(false);
+  };
+
+  const openConfirm = (e) => {
+    e.preventDefault();
+    setShowConfirmLeave(true);
+  };
+
+  return (
+    <div>
+      {showConfirmLeave && (
+        <div className="confirmation-modal">
+          <div className="modal-content">
+            <p>Are you sure you want to leave this project?</p>
+            <div className="modal-buttons">
+              <button className="confirm-btn-popup" onClick={confirmLeave}>Yes</button>
+              <button className="cancel-btn-popup" onClick={cancelLeave}>No</button>
+            </div>
+          </div>
+        </div>
+      )}
+      <Link>
+        <button className="yes-button" onClick={openConfirm}>
+          Leave Project
+        </button>
+      </Link>
+    </div>
+  );
+}
+
 function Create() {
   return (
     <div >

@@ -137,9 +137,13 @@ export default function ProjectInfoPage() {
       const result = await memoizedParticipationService.addParticipation(projectId, [{ projectId, email, role }]);
       const updatedParticipants = await memoizedParticipationService.getParticipations(projectId);
       setParticipants(updatedParticipants);
-      if(result.message) {
+      if (result.message == 'User not found') {
         setEmailError(result.message);
-      } 
+      } else if (result.message.includes('This participation already exists')) {
+        setEmailError('This user is already in the project');
+      } else if (result.message) {
+        setEmailError(result.message)
+      }
     } catch (error) {
       setParticipants(participants.filter(p => p.user.userId !== tempParticipant.user.userId));
       setEmailError(error.message);
@@ -223,7 +227,8 @@ export default function ProjectInfoPage() {
 
   function Exit() {
     return (
-      <Link replace to="/tasks">
+      <Link onClick={() =>
+        (window.location.href = '/tasks')}>
         <ExitIcon />
       </Link>
     );

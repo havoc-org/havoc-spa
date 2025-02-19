@@ -66,8 +66,11 @@ export default function CreateProject() {
     setIsLoading(true);
     try {
       const response = await projectService.createProject(newProject);
-      if (response.status === 400) {
-        setErrorMessage('Failed to create project. Please check the input data.');
+      if (response.message == 'User not found') {
+        setErrorMessage('One or more users not found');
+        return;
+      } else if (response.message) {
+        setErrorMessage(response.message);
         return;
       }
       console.log('Project created successfully', response);
@@ -195,7 +198,7 @@ export default function CreateProject() {
           ))}
         </div>
       </div>
-      <Exit/>
+      <Exit />
     </div>
   );
 

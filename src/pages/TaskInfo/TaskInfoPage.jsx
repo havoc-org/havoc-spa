@@ -117,6 +117,10 @@ const TaskInfoPage = () => {
       deadline: deadline || null,
     };
     try {
+      if (deadline && startDate && new Date(deadline) < new Date(startDate)) {
+        alert('Deadline cannot be before Start Date.');
+        return;
+      }
       const response = await taskService.editTask(updatedTask);
       if (response) {
         console.log('Task updated successfully:', response);
@@ -145,11 +149,11 @@ const TaskInfoPage = () => {
             type="text"
             className="task-name"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setName(e.target.value.slice(0, 25))}
           />
           <Description
             description={description}
-            setDescription={setDescription}
+            setDescription={(val) => setDescription(val.slice(0, 200))}
           />
           <DatePickerSection
             startDate={startDate}

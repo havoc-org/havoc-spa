@@ -19,6 +19,8 @@ export default function ProfilePopup({ user, onClose }) {
   const [passwordError, setPasswordError] = useState('');
   const [passwordSuccess, setPasswordSuccess] = useState(false);
 
+  const pwdRegex = /^(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
+
   useEffect(() => {
     async function fetchUserData() {
       try {
@@ -84,6 +86,12 @@ export default function ProfilePopup({ user, onClose }) {
       return;
     }
 
+    if (!pwdRegex.test(newPassword)) {
+      setPasswordError('Password must be 8-20 characters and include at least one special character.');
+      setPasswordUpdating(false);
+      return;
+    }
+
     try {
       await userService.updateUserPass(oldPassword, newPassword);
       setPasswordSuccess(true);
@@ -113,7 +121,6 @@ export default function ProfilePopup({ user, onClose }) {
     <div className="profile-popup-container">
       <div className="profile-popup" ref={popupRef}>
         <button className="close-btn" onClick={onClose}>✖</button>
-
         <h2>Personal Profile</h2>
 
         <div className="profile-field">

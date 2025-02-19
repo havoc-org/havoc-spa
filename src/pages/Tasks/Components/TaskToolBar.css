@@ -7,7 +7,6 @@
     padding: 5px;
     transition: 0.3ms ease-in-out;
   }
-
   .taskbar-button:hover {
     color: var(--color-lighter-main); 
     background-color:var(--color-highlight-primary);

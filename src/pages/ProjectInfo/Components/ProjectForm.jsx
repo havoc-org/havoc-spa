@@ -29,9 +29,9 @@ export default function ProjectForm({
     onDelete?.();
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    handleSubmit();
+    await handleSubmit(e);
     navigate('/tasks');
     window.location.reload();
 
