@@ -65,7 +65,12 @@ export default function CreateProject() {
 
     setIsLoading(true);
     try {
+      
       const response = await projectService.createProject(newProject);
+      if (deadline && startDate && new Date(deadline) < new Date(startDate)) {
+        setErrorMessage('Deadline cannot be before Start Date.');
+        return;
+      }
       if (response.message == 'User not found') {
         setErrorMessage('One or more users not found');
         return;
@@ -128,6 +133,7 @@ export default function CreateProject() {
             placeholder="* Name:"
             value={projectName}
             onChange={(e) => setProjectName(e.target.value)}
+            maxLength={25}
           />
         </label>
         <label>
@@ -136,6 +142,7 @@ export default function CreateProject() {
             className="create-project-input"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            maxLength={200}
           />
         </label>
         <div className="date-inputs">

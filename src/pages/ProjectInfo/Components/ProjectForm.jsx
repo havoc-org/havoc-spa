@@ -31,11 +31,16 @@ export default function ProjectForm({
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    await handleSubmit(e);
+
+    const success = await handleSubmit(e);
+
+    if (!success) return;
+
     navigate('/tasks');
     window.location.reload();
+};
 
-  };
+
 
   return (
     <div className="project-form">

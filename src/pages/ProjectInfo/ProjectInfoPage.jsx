@@ -93,6 +93,13 @@ export default function ProjectInfoPage() {
       return;
     }
 
+    
+    if (projectData.deadline && projectData.startDate && new Date(projectData.deadline) < new Date(projectData.startDate)) {
+      setErrorMessage('Deadline cannot be before Start Date.');
+      return;
+    }
+
+
     const updatedProject = {
       name: projectData.name,
       description: projectData.description || null,
@@ -100,9 +107,12 @@ export default function ProjectInfoPage() {
       deadline: projectData.deadline ? `${projectData.deadline}T23:59:59Z` : null,
     };
 
+
     setIsUpdating(true);
     try {
-      await memoizedProjectService.updateProject(projectId, updatedProject);
+      const response = await memoizedProjectService.updateProject(projectId, updatedProject);
+
+
       setSuccessMessage('Project updated successfully');
       navigate('/tasks');
     } catch (error) {
@@ -133,21 +143,18 @@ export default function ProjectInfoPage() {
     setEmail('');
     setEmailError('');
 
-    try {
-      const result = await memoizedParticipationService.addParticipation(projectId, [{ projectId, email, role }]);
-      const updatedParticipants = await memoizedParticipationService.getParticipations(projectId);
-      setParticipants(updatedParticipants);
-      if (result.message == 'User not found') {
-        setEmailError(result.message);
-      } else if (result.message.includes('This participation already exists')) {
-        setEmailError('This user is already in the project');
-      } else if (result.message) {
-        setEmailError(result.message)
-      }
-    } catch (error) {
-      setParticipants(participants.filter(p => p.user.userId !== tempParticipant.user.userId));
-      setEmailError(error.message);
+
+    const result = await memoizedParticipationService.addParticipation(projectId, [{ projectId, email, role }]);
+    const updatedParticipants = await memoizedParticipationService.getParticipations(projectId);
+    setParticipants(updatedParticipants);
+    if (result.message == 'User not found') {
+      setEmailError(result.message);
+    } else if (result.message.includes('This participation already exists')) {
+      setEmailError('This user is already in the project');
+    } else if (result.message) {
+      setEmailError('sadasd')
     }
+
   };
 
   const handleRemoveParticipant = async (userId) => {
@@ -158,6 +165,7 @@ export default function ProjectInfoPage() {
       await memoizedParticipationService.deleteParticipation(projectId, userId);
       const updatedParticipants = await memoizedParticipationService.getParticipations(projectId);
       setParticipants(updatedParticipants);
+      window.location.reload();
     } catch (error) {
       setParticipants(originalParticipants);
     }
