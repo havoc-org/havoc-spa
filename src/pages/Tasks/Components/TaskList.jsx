@@ -53,15 +53,17 @@ const TaskList = ({ tasks }) => {
         );
 
         return (
-          <Droppable
-            key={status.taskStatusId}
-            droppableId={String(status.taskStatusId)}
-          >
-            {(provided) => (
-              <div ref={provided.innerRef} {...provided.droppableProps}>
-                <Tile className="status-section">
-                  <h2>{status.name}</h2>
+          <Tile className="status-section">
+                <h2>{status.name}</h2>
+                  <Droppable
+                  
+                  key={status.taskStatusId}
+                  droppableId={String(status.taskStatusId)}
+                  >
+                    {(provided) => (
+                      <div className="droppable-area" ref={provided.innerRef} {...provided.droppableProps}>
                   {tasksForStatus.map((task, index) => (
+                    
                     <TaskTile
                       key={task.taskId}
                       task={task}
@@ -69,10 +71,10 @@ const TaskList = ({ tasks }) => {
                       />
                   ))}
                   {provided.placeholder}
-                </Tile>
               </div>
             )}
           </Droppable>
+          </Tile>
         );
       })}
 

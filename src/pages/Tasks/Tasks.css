@@ -48,7 +48,10 @@
 .tasktile-icon {
   color: var(--color-highlight-primary);
 }
-
+.droppable-area{
+  height: 100%;
+  width: 100%;
+}
 
 
 .task-container{
@@ -56,8 +59,11 @@
   border-radius: 2em;
   background-color: var(--color-lightest-main);
   padding: 0.17em 0.83em 0.17em 0.83em;
-  margin: 13px;
-  width: 85%;
+  /* margin: 13px;
+  width: 85%; */
+  margin-top: 13px;
+  margin-bottom: 13px;
+  min-width: 177px;
 }
 
 .add-image-container{
